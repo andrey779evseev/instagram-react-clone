@@ -1,0 +1,97 @@
+.stories_list {
+  width: 100%;
+  border: 1px solid #DBDBDB;
+  height: 112px;
+  padding: 17px 0 12px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  .slider_arrow_container {
+    user-select: none;
+    position: absolute;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s ease;
+    top: 37px;
+    visibility: hidden;
+    opacity: 0;
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    &.left {
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 50%;
+      left: 0;
+      .slider_arrow {
+        transform: rotate(180deg);
+      }
+      .slider_arrow {
+        margin-top: -2px;
+        margin-left: -2px;
+      }
+    }
+    &.right {
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 50%;
+      right: 0;
+      .slider_arrow {
+        margin-top: 4px;
+        margin-left: 2px;
+      }
+    }
+  }
+  
+  .scrollable {
+    display: flex;
+    position: relative;
+    transition: left .5s ease-in-out, right .5s ease-in-out;
+    position: absolute;
+    .story_item {
+      width: 80px;
+      height: 82px;
+      min-width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      &:first-child {
+        margin-left: 14px;
+      }
+      
+      &:not(:last-child) {
+        margin-right: 14px;
+      }
+  
+      .story_img_wrapper {
+        border: double 2.5px transparent;
+        border-radius: 50px;
+        background-image: linear-gradient(white, white),linear-gradient(to bottom, #DE0046, #F7A34B);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        width: fit-content;
+        .story_image {
+          border-radius: 50%;
+          border: 2.5px solid #fff;
+          height: 56px;
+          width: 56px;
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+      
+      .story_name {
+        font-size: 12px;
+        line-height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 82px;
+      }
+    }
+  }
+}

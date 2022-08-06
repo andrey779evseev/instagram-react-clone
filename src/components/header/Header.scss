@@ -1,0 +1,15 @@
+.header_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  border-bottom: 1px solid #DBDBDB;
+  .header_container {
+    width: 935px;
+    display: flex;
+    align-items: center;
+    .header_icon:not(:last-child) {
+      margin-right: 22px;
+    }
+  }
+}
