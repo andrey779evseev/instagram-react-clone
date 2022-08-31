@@ -1,15 +1,60 @@
+
 .header_wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 50px;
-  border-bottom: 1px solid #DBDBDB;
+  height: 60px;
+  border-bottom: 1px solid $gray10;
   .header_container {
-    width: 935px;
+    width: 924px;
     display: flex;
     align-items: center;
-    .header_icon:not(:last-child) {
-      margin-right: 22px;
+    .header_icon_container {
+      height: 24px;
+      width: 24px;
+      cursor: pointer;
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+      .header_icon {
+        height: 24px;
+        width: 24px;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        &.home {
+          background-image: url('@assets/icons/header-icons/links/home-icon.svg');
+        }
+        &.messenger {
+          background-image: url('@assets/icons/header-icons/links/messenger-icon.svg');
+        }
+        &.plus {
+          background-image: url('@assets/icons/header-icons/links/plus-icon.svg');
+        }
+        &.compass {
+          background-image: url('@assets/icons/header-icons/links/compass-icon.svg');
+        }
+        &.heart {
+          background-image: url('@assets/icons/header-icons/links/heart-icon.svg');
+        }
+      }
+      &.active {
+        &.profile {
+          height: fit-content;
+          width: fit-content;
+          border: 1px solid $dark;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 1px;
+        }
+        .header_icon {
+          &.home {
+            background-image: url('@assets/icons/header-icons/links/home-icon-active.svg');
+          }
+        }
+      }
     }
   }
 }

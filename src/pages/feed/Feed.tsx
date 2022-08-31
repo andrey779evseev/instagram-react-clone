@@ -1,15 +1,16 @@
-import Stories from '../../components/stories/Stories'
+import RightPanel from '@components/right-panel/RightPanel'
+import Posts from '../../components/posts/Posts'
+import StoriesMiniaturesList from '../../components/stories-miniatures/StoriesMiniaturesList'
 import './Feed.scss'
 
 const Feed: React.FC = () => {
   return (
-    <div className="flex">
-      <div className="main_content">
-        <Stories/>
+    <div className='flex'>
+      <div className='main_content'>
+        <StoriesMiniaturesList/>
+        <Posts/>
       </div>
-      <div className="account_info">
-
-      </div>
+      <RightPanel/>
     </div>
   )
 }

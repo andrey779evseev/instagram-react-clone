@@ -1,0 +1,39 @@
+.screen {
+  height: 580px;
+  width: 380px;
+  background-size: cover;
+  background-position: center center;
+  background-image: url('@assets/icons/login/screens/bg.png');
+  background-repeat: no-repeat;
+  position: relative;
+  .screen_content {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
+    top: 24px;
+    right: 28.7px;
+    height: 494px;
+    width: 231px;
+    z-index: 1;
+    &.active {
+      transition: opacity 1.5s ease-in, visibility 1.5s ease-in;
+      opacity: 1;
+      visibility: visible;
+    }
+    &.sc_1 {
+      background-image: url('@assets/icons/login/screens/1.png');
+    }
+    &.sc_2 {
+      background-image: url('@assets/icons/login/screens/2.png');
+    }
+    &.sc_3 {
+      background-image: url('@assets/icons/login/screens/3.png');
+    }
+    &.sc_4 {
+      background-image: url('@assets/icons/login/screens/4.png');
+    }
+  }
+}

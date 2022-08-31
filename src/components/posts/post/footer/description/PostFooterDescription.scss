@@ -1,0 +1,17 @@
+
+.description_container {
+  display: flex;
+  align-items: center;
+  .description_text {
+    
+    margin-left: 8px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .more_btn {
+    color: $gray50;
+    cursor: pointer;
+  }
+}

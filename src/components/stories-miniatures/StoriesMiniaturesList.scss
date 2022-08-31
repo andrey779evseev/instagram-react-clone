@@ -1,0 +1,57 @@
+
+.stories_list {
+  width: 100%;
+  border: 1px solid $gray20;
+  height: 112px;
+  padding: 17px 0 12px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  .slider_arrow_container {
+    user-select: none;
+    position: absolute;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s ease;
+    top: 37px;
+    visibility: hidden;
+    opacity: 0;
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    &.left {
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 50%;
+      left: 0;
+      .slider_arrow {
+        transform: rotate(180deg);
+      }
+      .slider_arrow {
+        margin-top: -2px;
+        margin-left: -2px;
+      }
+    }
+    &.right {
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 50%;
+      right: 0;
+      .slider_arrow {
+        margin-top: 4px;
+        margin-left: 2px;
+      }
+    }
+  }
+  
+  .scrollable {
+    display: flex;
+    position: relative;
+    transition: left .5s ease-in-out, right .5s ease-in-out;
+    position: absolute;
+  }
+}
