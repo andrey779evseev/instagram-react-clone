@@ -5,18 +5,16 @@ import PostMiniature from './PostMiniature'
 const TriplePost = memo((props: {
   item: PostMiniatureResponse[],
   size: number,
-  index: number
 }) => {
   const {
     item,
-    size,
-    index
+    size
   } = props
   return (
-    <div className='flex gap-[29px] mb-[29px] last:mb-0'>
-      <PostMiniature item={item[0]} size={size} index={index}/>
-      <PostMiniature item={item[1]} size={size} index={index}/>
-      <PostMiniature item={item[2]} size={size} index={index}/>
+    <div className='triple_post flex gap-[29px] mb-[29px]'>
+      <PostMiniature item={item[0]} size={size}/>
+      <PostMiniature item={item[1]} size={size}/>
+      <PostMiniature item={item[2]} size={size}/>
     </div>
   )
 })

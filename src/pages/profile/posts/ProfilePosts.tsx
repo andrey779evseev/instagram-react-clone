@@ -3,6 +3,7 @@ import { PostService } from '@api/services/post/PostService'
 import If from '@components/common/if/If'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
+import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
@@ -37,23 +38,15 @@ const ProfilePosts = () => {
     return arr
   }, [flatPosts])
 
-  const loader = useMemo(() => {
-    return (
-      <If condition={isFetchingNextPage}>
-        <div className='w-full flex justify-center my-3'>
-          <LittleLoading color='cobalt' />
-        </div>
-      </If>
-    )
-  }, [isFetchingNextPage])
+  const windowHeight = useMemo(() => window.innerHeight - 60, [window.innerHeight])
 
   return (
     <If condition={!isLoading}>
       <InfinityList
         Item={TriplePost}
         onBottom={hasNextPage ? fetchNextPage : undefined}
-        loader={loader}
-        height={600}
+        loader={isFetchingNextPage ? <Spinner/> : undefined}
+        height={windowHeight}
         itemHeight={290}
         items={tripledFlatPosts}
         additionalItemsCount={3}

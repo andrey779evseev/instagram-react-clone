@@ -1,5 +1,5 @@
 import {AccountService} from '@api/services/account/AccountService'
-import Preloader from '@components/common/preloader/Preloader'
+import PagePreloader from '@components/common/preloader/Preloader'
 import User from '@models/user/User'
 import {CredentialsAtom} from '@store/atoms/AuthenticationAtom'
 import {useQueryClient} from '@tanstack/react-query'
@@ -42,7 +42,7 @@ const AuthorizationGuard = (props: PropsType) => {
   }, [])
 
   if(isLoading)
-    return <Preloader full/>
+    return <PagePreloader full/>
   
   return <>{children}</>
 }

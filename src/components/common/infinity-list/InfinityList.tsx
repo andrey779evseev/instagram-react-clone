@@ -33,7 +33,7 @@ const InfinityList = memo(<T extends object>(props: PropsType<T>) => {
     paddingForItem = 0
   } = props
   const bottomAnchor = useRef(null)
-  const { scrollTop, ref } = useScrollTop()
+  const { scrollTop } = useScrollTop(true)
 
   useEffect(() => {
     const observer = new IntersectionObserver(bottomAnchorCallback, {
@@ -57,56 +57,61 @@ const InfinityList = memo(<T extends object>(props: PropsType<T>) => {
 
   const totalHeight = items.length * itemHeight + (items.length - 1) * paddingForItem
 
-  let startNode = Math.max(0, Math.floor(scrollTop / itemHeight) - additionalItemsCount)
+  let startNode = useMemo(() => Math.min(Math.max(0, Math.floor(scrollTop / itemHeight) - additionalItemsCount), items.length - (2 * additionalItemsCount + 1)), 
+  [scrollTop, itemHeight, additionalItemsCount])
 
-  let visibleNodeCount = Math.ceil(height / itemHeight) + 2 * additionalItemsCount
-  visibleNodeCount = Math.min(items.length - startNode, visibleNodeCount)
+  let visibleNodeCount = useMemo(() => {
+    const value = Math.ceil(height / itemHeight) + 2 * additionalItemsCount
+    return Math.min(items.length - startNode, value)
+  },
+  [height, itemHeight, additionalItemsCount, items, startNode])
 
-  const offsetY = startNode * itemHeight + startNode * paddingForItem
+  const offsetY = useMemo(() => startNode * itemHeight + startNode * paddingForItem, 
+  [startNode, itemHeight, paddingForItem])
 
   const visibleChildren = useMemo(
-    () =>
-      new Array(visibleNodeCount).fill(null).map((_, index) => {
+    () => new Array(visibleNodeCount).fill(null).map((_, index) => {
         const item = items[startNode + index]
-        const id = generateUniqueId()
         return (
           <Item
-            key={id}
+            key={index}
             item={item}
             size={itemHeight}
-            index={startNode + index}
           />
         )
       }),
-    [startNode, visibleNodeCount, Item]
+    [startNode, visibleNodeCount, Item, items]
   )
 
   return (
-    <div
-      style={{ height }}
-      className='overflow-auto mr-[-15px]'
-      ref={ref as any}
-    >
-      <div
-        className='overflow-hidden will-change-transform relative'
-        style={{ height: totalHeight }}
-      >
+    // <div
+    // ref={ref as any}
+      // style={{ height }}
+      // className='overflow-auto mr-[-15px]'
+      // >
+      <>
         <div
-          className='will-change-transform'
-          style={{ transform: `translateY(${offsetY}px)` }}
+          className='will-change-transform relative'
+          style={{ height: totalHeight }}
         >
-          {visibleChildren}
-          <div className="relative">
-            <div 
-              className='absolute bottom-0 left-0 w-full pt-60'
-              ref={bottomAnchor}
-            >
-              {loader ?? <></>}
+          <div
+            className='will-change-transform'
+            style={{ transform: `translateY(${offsetY}px)` }}
+          >
+            {visibleChildren}
+            <div className="relative">
+              <div 
+                className='absolute bottom-0 left-0 w-full pt-96'
+                ref={bottomAnchor}
+              />
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="mt-6">
+          {loader ?? <></>}
+        </div>
+      </>
+    // </div>
   )
 })
 

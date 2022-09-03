@@ -6,7 +6,7 @@ type PropsType = {
   full?: boolean
 }
 
-const Preloader = memo((props: PropsType) => {
+const PagePreloader = memo((props: PropsType) => {
   const {full = false} = props
   const [isShow, setIsShow] = useState(false)
   useState(() => {
@@ -20,4 +20,4 @@ const Preloader = memo((props: PropsType) => {
   )
 })
 
-export default Preloader
+export default PagePreloader
