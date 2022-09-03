@@ -7,7 +7,7 @@ type PropsType = {
   isSmall?: boolean
 }
 
-const ImageBox: React.FC<PropsType> = memo((props) => {
+const ImageBox = memo((props: PropsType) => {
   const {image, isSmall = false} = props
   return (
     <div className={`gradient_wrapper ${isSmall ? 'small' : ''}`}>

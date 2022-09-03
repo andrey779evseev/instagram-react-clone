@@ -16,7 +16,7 @@ import {useNavigate} from 'react-router-dom'
 import {useGoogleLogout} from 'react-google-login'
 import './CurrentUser.scss'
 
-const CurrentUser: React.FC = () => {
+const CurrentUser = () => {
   const { data: user } = useQuery(['user'], AccountService.GetUser)
   const qc = useQueryClient()
   const setCredentials = useUpdateAtom(CredentialsAtom)

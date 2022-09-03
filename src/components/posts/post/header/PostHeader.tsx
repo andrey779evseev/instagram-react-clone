@@ -8,7 +8,7 @@ type PropsType = {
   authorName: string
 }
 
-const PostHeader: React.FC<PropsType> = memo((props) => {
+const PostHeader = memo((props: PropsType) => {
   const {authorAvatar, authorName} = props
   return (
     <div className='post_header'>

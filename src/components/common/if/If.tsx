@@ -6,7 +6,7 @@ type PropsType = {
   condition: boolean
 }
 
-const If: React.FC<PropsType> = memo((props) => {
+const If = memo((props: PropsType) => {
   const {
     children,
     condition

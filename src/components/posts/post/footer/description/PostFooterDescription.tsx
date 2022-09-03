@@ -1,7 +1,7 @@
 import './PostFooterDescription.scss'
 
 
-const PostFooterDescription: React.FC = () => {
+const PostFooterDescription = () => {
   return (
     <div className='description_container'>
       <div className='author_name'>terrylucas</div>

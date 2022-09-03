@@ -5,10 +5,14 @@ import {useQuery} from '@tanstack/react-query'
 import {useNavigate} from 'react-router-dom'
 import './ProfileHeader.scss'
 import settingsIcon from '@assets/icons/common/settings-icon.svg'
+import { Skeleton } from '@mui/material'
+import If from '@components/common/if/If'
+import TextParser from '@components/common/text-parser/TextParser'
 
 
-const ProfileHeader: React.FC = () => {
+const ProfileHeader = () => {
   const {data: user} = useQuery(['user'], AccountService.GetUser)
+  const {data: stats, isLoading} = useQuery(['stats'], AccountService.GetStats)
   const navigate = useNavigate()
 
   const goToEditProfile = () => {
@@ -29,22 +33,29 @@ const ProfileHeader: React.FC = () => {
             </Button>
             <img src={settingsIcon} className='ml-6 w-6 h-6' />
           </div>
-          <div className="flex items-center">
-            <div className='text-base'>
-              <span className='font-medium'>{0} </span>
-              posts
+          <If condition={isLoading}>
+            <Skeleton variant='text' sx={{fontSize: '16px'}} />
+          </If>
+          <If condition={!isLoading}>
+            <div className="flex items-center">
+              <div className='text-base'>
+                <span className='font-medium'>{stats?.PostsCount} </span>
+                posts
+              </div>
+              <div className='text-base ml-10'>
+                <span className='font-medium'>{stats?.FollowersCount} </span>
+                followers
+              </div>
+              <div className='text-base ml-10'>
+                <span className='font-medium'>{stats?.FollowingCount} </span>
+                following
+              </div>
             </div>
-            <div className='text-base ml-10'>
-              <span className='font-medium'>{0} </span>
-              followers
-            </div>
-            <div className='text-base ml-10'>
-              <span className='font-medium'>{0} </span>
-              following
-            </div>
-          </div>
+          </If>
           <div className="mt-6 font-medium text-base">{user?.Name}</div>
-          <div className="text-base">{user?.Description}</div>
+          <div className="text-base">
+            <TextParser text={user!.Description}/>
+          </div>
         </div>
       </div>
     </div>

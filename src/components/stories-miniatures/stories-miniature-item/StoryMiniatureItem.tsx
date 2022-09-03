@@ -7,7 +7,7 @@ type PropsType = {
   story: StoryMiniatureModel
 }
 
-const StoryMiniatureItem: React.FC<PropsType> = memo((props) => {
+const StoryMiniatureItem = memo((props: PropsType) => {
   const {story} = props
   return (
     <div className='story_item'>

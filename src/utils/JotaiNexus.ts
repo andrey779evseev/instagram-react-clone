@@ -29,7 +29,7 @@ export function useAtomCallbackSafe<Result, Arg>(
 let _get!: Getter;
 let _set!: Setter;
 
-const JotaiNexus: React.FC = () => {
+const JotaiNexus = () => {
   const initReader = useAtomCallbackSafe(async (get, set) => {
     _get = get;
     _set = set;

@@ -6,7 +6,7 @@ type PropsType = {
   full?: boolean
 }
 
-const Preloader: React.FC<PropsType> = memo((props) => {
+const Preloader = memo((props: PropsType) => {
   const {full = false} = props
   const [isShow, setIsShow] = useState(false)
   useState(() => {

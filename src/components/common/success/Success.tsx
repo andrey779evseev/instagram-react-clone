@@ -6,7 +6,7 @@ type PropsType = {
   message: string | string[]
 }
 
-const Success: React.FC<PropsType> = memo((props) => {
+const Success = memo((props: PropsType) => {
   const {message} = props
   if(!message || message === '')
     return <></>

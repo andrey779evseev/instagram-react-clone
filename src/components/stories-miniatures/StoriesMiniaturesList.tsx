@@ -5,7 +5,7 @@ import stories from './stories.json'
 import StoryMiniatureItem from './stories-miniature-item/StoryMiniatureItem'
 
 
-const StoriesMiniaturesList: React.FC = () => {
+const StoriesMiniaturesList = () => {
   const [onScreenFullyCount] = useState(5)
   const [leftScroll, setLeftScroll] = useState(0)
 

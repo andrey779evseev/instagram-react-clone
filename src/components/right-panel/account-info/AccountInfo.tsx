@@ -4,7 +4,7 @@ import Avatar from '../../common/avatar/Avatar'
 import './AccountInfo.scss'
 
 
-const AccountInfo: React.FC = () => {
+const AccountInfo = () => {
   const {data:user} = useQuery(['user'], AccountService.GetUser)
   return (
     <div className='flex items-center'>

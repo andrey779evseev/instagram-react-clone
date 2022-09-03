@@ -10,7 +10,7 @@ type PropsType = {
   minimalistic?: boolean
 }
 
-const Textarea: React.FC<PropsType> = memo((props) => {
+const Textarea = memo((props: PropsType) => {
   const {
     value,
     setValue,

@@ -3,7 +3,7 @@ import emojiIcon from '@assets/icons/post/emoji-icon.svg'
 import {useMemo, useState} from 'react'
 
 
-const AddCommentForm: React.FC = () => {
+const AddCommentForm = () => {
   const [commentText, setCommentText] = useState('')
   const isAvaliablePost = useMemo(() => commentText !== '', [commentText])
   return (

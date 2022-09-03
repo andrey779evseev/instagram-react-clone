@@ -3,7 +3,7 @@ import ChangeAuthorizationBtn from '@components/common/change-authorization-btn/
 import DownloadApplication from '@components/common/download-application/DownloadApplication'
 
 
-const Registration: React.FC = () => {
+const Registration = () => {
   return (
     <div className='py-5'>
       <RegistrationCard/>

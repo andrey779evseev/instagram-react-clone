@@ -3,7 +3,7 @@ import suggestions from './suggestions.json'
 import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
 
 
-const Suggestions: React.FC = () => {
+const Suggestions = () => {
   return (
     <div className='flex flex-col mt-6 mb-2'>
       <div className='flex items-center justify-between mb-2'>

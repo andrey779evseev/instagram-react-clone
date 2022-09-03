@@ -14,7 +14,7 @@ type PropsType = {
   children?: JSX.Element
 }
 
-const SettingsForm: React.FC<PropsType> = memo((props) => {
+const SettingsForm = memo((props: PropsType) => {
   const {items, children} = props
   const isAvatar = (item: SettingsFormItem) => {
     return item.Type === EnumSettingsFormItemType.AvatarWithEdit ||

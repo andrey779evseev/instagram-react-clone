@@ -24,7 +24,7 @@ instance.interceptors.response.use(res => {
 const getConfig = async (params: SendParams): Promise<AxiosRequestConfig | undefined> => {
   const config: AxiosRequestConfig = {
     headers: {
-    }
+    },
   }
   if(!params.WithToken && !params.IsFile) return undefined
   const token = await readAtom(AccessTokenAtom)
@@ -32,6 +32,8 @@ const getConfig = async (params: SendParams): Promise<AxiosRequestConfig | undef
     config.headers!.Authorization = `Bearer ${token}`
   if(params.IsFile)
     config.headers!['content-type'] = 'multipart/form-data'
+  if(params.QueryParams !== null)
+    config.params = params.QueryParams
   return config
 }
 

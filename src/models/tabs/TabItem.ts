@@ -3,7 +3,7 @@ export default class TabItem {
     if(obj)
       Object.assign(this, obj)
   }
-  Id!: number
   Name: string = ''
-  Element!: JSX.Element
+  Route: string = ''
+  Icon?: string
 }

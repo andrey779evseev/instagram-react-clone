@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import './PhoneScreens.scss'
 
 
-const PhoneScreens: React.FC = () => {
+const PhoneScreens = () => {
   let [currentImageIndex, setCurrentImageIndex] = useState(1)
   useEffect(() => {
     const interval = setInterval(() => {

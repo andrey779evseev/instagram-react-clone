@@ -3,7 +3,7 @@ import './RightPanel.scss'
 import Suggestions from './suggestions/Suggestions'
 
 
-const RightPanel: React.FC = () => {
+const RightPanel = () => {
   return (
     <div className='right_panel'>
       <AccountInfo/>

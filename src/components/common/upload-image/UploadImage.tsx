@@ -7,7 +7,7 @@ type PropsType = {
   uploadImage: (file: File) => void
 }
 
-const UploadImage: React.FC<PropsType> = memo((props) => {
+const UploadImage = memo((props: PropsType) => {
   const {
     children,
     uploadImage

@@ -12,7 +12,7 @@ type PropsType = {
   error?: string
 }
 
-const Input: React.FC<PropsType> = memo((props) => {
+const Input = memo((props: PropsType) => {
   const {
     value,
     setValue,

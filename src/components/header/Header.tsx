@@ -5,7 +5,7 @@ import CurrentUser from '@components/header/current-user/CurrentUser'
 import {NavLink, useLocation} from 'react-router-dom'
 
 
-const Header: React.FC = () => {
+const Header = () => {
   const path = useLocation().pathname
   const isProfilePage = path.includes('/profile')
   const isSettingsPage = path.includes('settings')

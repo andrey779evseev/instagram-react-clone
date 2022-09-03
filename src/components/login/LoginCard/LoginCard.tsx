@@ -15,7 +15,7 @@ import {useMemo, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import './LognCard.scss'
 
-const LoginCard: React.FC = () => {
+const LoginCard = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errMsg, setErrMsg] = useState('')

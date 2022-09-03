@@ -2,7 +2,7 @@ import './SettingsSidebarMeta.scss'
 import metaLogo from '@assets/icons/settings/meta-logo.svg'
 
 
-const SettingsSidebarMeta: React.FC = () => {
+const SettingsSidebarMeta = () => {
   return (
     <div className="meta_info">
       <img src={metaLogo} alt=""/>

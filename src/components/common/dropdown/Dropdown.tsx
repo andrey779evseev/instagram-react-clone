@@ -11,7 +11,7 @@ type PropsType = {
   minWidth?: number
 }
 
-const Dropdown: React.FC<PropsType> = memo((props) => {
+const Dropdown = memo((props: PropsType) => {
   const {children, items, minWidth = 230} = props
   const [visible, setVisible] = useState(false)
   const clickOutsideRef = useClickOutside(() => setVisible(false))

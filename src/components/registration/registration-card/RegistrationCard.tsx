@@ -17,7 +17,7 @@ import {SaveToLocalStorage} from '@utils/LocalStorage'
 import useDebounce from '@hooks/UseDebounce'
 
 
-const RegistrationCard: React.FC = () => {
+const RegistrationCard = () => {
   const setCredentials = useUpdateAtom(CredentialsAtom)
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')

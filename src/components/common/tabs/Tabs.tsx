@@ -1,39 +1,47 @@
 import TabItem from '@models/tabs/TabItem'
-import {memo, useMemo, useState} from 'react'
+import {memo, useEffect, useMemo, useState} from 'react'
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import If from '../if/If'
 import './Tabs.scss'
 
 
 type PropsType = {
   items: TabItem[]
-  initialActive?: number
+  initialActive?: string
 }
 
-const Tabs: React.FC<PropsType> = memo((props) => {
+const Tabs = memo((props: PropsType) => {
   const {
     items, 
-    initialActive = items[0].Id
+    initialActive = items[0].Route
   } = props
-  const [active, setActive] = useState(initialActive)
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const element = useMemo(() => {
-    return items.find(x => x.Id === active)?.Element
-  }, [items, active])
+  useEffect(() => {
+    if(items && !items.some(x => location.pathname.includes(x.Route)))
+      navigate(initialActive)
+  }, []) 
 
   return (
     <div className="tabs_wrapper">
-      <div className='tabs_container flex'>
+      <div className='tabs_container'>
         {items.map(tab => (
-          <div 
-            key={tab.Id} 
-            className={`tab_item ${tab.Id === active && 'active'}`}
+          <NavLink 
+            to={tab.Route}
+            key={tab.Route} 
+            className={`tab_item`}
           >
+            <If condition={!!tab.Icon}>
+              <img src={tab.Icon} />
+            </If>
             <span className='text-xs font-medium'>
               {tab.Name}
             </span>
-          </div>
+          </NavLink>
         ))}
       </div>
-      {element}
+      <Outlet/>
     </div>
   )
 })

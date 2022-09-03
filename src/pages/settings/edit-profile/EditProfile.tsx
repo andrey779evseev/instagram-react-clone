@@ -8,7 +8,7 @@ import {useEffect, useMemo, useState} from 'react'
 import './EditProfile.scss'
 
 
-const EditProfile: React.FC = () => {
+const EditProfile = () => {
   const {data:user} = useQuery(['user'], AccountService.GetUser)
   const qc = useQueryClient()
   const [avatar, setAvatar] = useState('')

@@ -2,6 +2,7 @@ import {customFetch} from '@api/services/BaseService'
 import {EnumHttpMethod} from '@api/common/EnumHttpMethod'
 import User from '@models/user/User'
 import UpdateUserRequest from '@api/services/account/models/requests/UpdateUserRequest'
+import UserStatsResponse from './models/responses/UserStatsResponse'
 
 export namespace AccountService {
   const controllerName = 'account'
@@ -32,6 +33,12 @@ export namespace AccountService {
       Method: EnumHttpMethod.Get,
       Path: `${controllerName}/check-nickname/${value}`,
       WithToken: false
+    })
+  }
+  export const GetStats = () => {
+    return customFetch<UserStatsResponse>({
+      Method: EnumHttpMethod.Get,
+      Path: `${controllerName}/get-stats`
     })
   }
 }

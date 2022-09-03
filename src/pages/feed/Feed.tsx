@@ -1,14 +1,13 @@
 import RightPanel from '@components/right-panel/RightPanel'
-import Posts from '../../components/posts/Posts'
+import FeedPosts from '../../components/posts/FeedPosts'
 import StoriesMiniaturesList from '../../components/stories-miniatures/StoriesMiniaturesList'
-import './Feed.scss'
 
-const Feed: React.FC = () => {
+const Feed = () => {
   return (
     <div className='flex'>
-      <div className='main_content'>
+      <div className='mr-7 w-[470px]'>
         <StoriesMiniaturesList/>
-        <Posts/>
+        <FeedPosts/>
       </div>
       <RightPanel/>
     </div>

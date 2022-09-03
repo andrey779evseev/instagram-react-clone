@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import {memo, useMemo} from 'react'
 import './Avatar.scss'
 import defaultAvatar from '@assets/icons/common/default-avatar.jpg'
 
@@ -16,7 +16,7 @@ type PropsType = {
   size?: EnumAvatarSize
 }
 
-const Avatar: React.FC<PropsType> = (props) => {
+const Avatar = memo((props: PropsType) => {
   const {
     src, 
     size = EnumAvatarSize.Large
@@ -29,7 +29,7 @@ const Avatar: React.FC<PropsType> = (props) => {
   return (
     <div className={`avatar ${size}`} style={{backgroundImage: `url('${avatar}')`}}></div>
   )
-}
+})
 
 
 export default Avatar

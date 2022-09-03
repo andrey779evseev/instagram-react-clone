@@ -9,7 +9,7 @@ type PropsType = {
   likesCount: number
 }
 
-const PostFooter: React.FC<PropsType> = memo((props) => {
+const PostFooter = memo((props: PropsType) => {
   const { likesCount } = props
   return (
     <div className='post_footer'>

@@ -8,6 +8,7 @@ import EditProfile from '@pages/settings/edit-profile/EditProfile'
 import ChangePassword from '@pages/settings/change-password/ChangePassword'
 import SettingsLayout from '@layouts/SettingsLayout'
 import Profile from '@pages/profile/Profile'
+import ProfilePosts from '@pages/profile/posts/ProfilePosts'
 
 
 const router: RouteObject[] = [
@@ -43,7 +44,13 @@ const router: RouteObject[] = [
       },
       {
         path: '/profile',
-        element: <Profile/>
+        element: <Profile/>,
+        children: [
+          {
+            path: 'posts',
+            element: <ProfilePosts/>
+          }
+        ]
       }
     ]
   },

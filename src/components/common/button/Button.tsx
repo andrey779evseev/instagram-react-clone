@@ -17,7 +17,7 @@ type PropsType = {
   theme?: EnumButtonTheme
 }
 
-const Button: React.FC<PropsType> = memo((props) => {
+const Button = memo((props: PropsType) => {
   const {
     children,
     onClick,

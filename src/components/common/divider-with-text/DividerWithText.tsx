@@ -6,7 +6,7 @@ type PropsType = {
   text: string
 }
 
-const DividerWithText: React.FC<PropsType> = memo((props) => {
+const DividerWithText = memo((props: PropsType) => {
   const {text} = props
   return (
     <div className="divider_with_text">

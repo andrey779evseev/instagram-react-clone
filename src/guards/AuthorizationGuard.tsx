@@ -13,7 +13,7 @@ type PropsType = {
   children?: JSX.Element
 }
 
-const AuthorizationGuard: React.FC<PropsType> = (props) => {
+const AuthorizationGuard = (props: PropsType) => {
   const {children} = props
   const credentials = useAtomValue(CredentialsAtom)
   let navigate = useNavigate();

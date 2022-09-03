@@ -3,7 +3,7 @@ import './Search.scss'
 import searchIcon from '@assets/icons/header-icons/search-icon.svg'
 
 
-const Search: React.FC = () => {
+const Search = () => {
   const [value, setValue] = useState('')
   const [isInputFocused, setIsInputFocused] = useState(false)
   const inputRef = useRef(null)

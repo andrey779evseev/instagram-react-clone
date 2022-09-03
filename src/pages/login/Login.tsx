@@ -4,7 +4,7 @@ import DownloadApplication from '@components/common/download-application/Downloa
 import PhoneScreens from '@components/login/PhoneScreens/PhoneScreens'
 
 
-const Login: React.FC = () => {
+const Login = () => {
   return (
     <div className="flex">
       <PhoneScreens/>

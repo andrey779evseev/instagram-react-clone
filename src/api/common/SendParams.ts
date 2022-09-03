@@ -10,4 +10,5 @@ export default class SendParams {
   Req?: any = null
   WithToken?: boolean = true
   IsFile?: boolean = false
+  QueryParams?: any
 }

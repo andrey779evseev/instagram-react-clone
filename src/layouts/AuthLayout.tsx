@@ -1,7 +1,7 @@
 import {Outlet} from 'react-router-dom'
 
 
-const AuthLayout: React.FC = () => {
+const AuthLayout = () => {
   return (
     <main className='w-full h-full min-h-screen flex items-center justify-center py-8'>
       <Outlet/>

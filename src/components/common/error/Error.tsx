@@ -6,7 +6,7 @@ type PropsType = {
   error: string | string[]
 }
 
-const Error: React.FC<PropsType> = memo((props) => {
+const Error = memo((props: PropsType) => {
   const {error} = props
   if(!error || error === '')
     return <></>

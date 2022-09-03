@@ -5,7 +5,7 @@ type PropsType = {
   color?: string
 }
 
-const LittleLoading: React.FC<PropsType> = memo((props) => {
+const LittleLoading = memo((props: PropsType) => {
   const {color = 'gray'} = props
 
   return (

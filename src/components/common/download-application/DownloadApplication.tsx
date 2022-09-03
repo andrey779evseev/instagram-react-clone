@@ -1,7 +1,7 @@
 import googlePlayBadge from '@assets/icons/common/google-play-badge.png'
 import appStoreBadge from '@assets/icons/common/app-store-badge.svg'
 
-const DownloadApplication: React.FC = () => {
+const DownloadApplication = () => {
   return (
     <div className='w-full flex flex-col items-center'>
       <div className="download_tip">Download the application</div>

@@ -14,7 +14,7 @@ type PropsType = {
   setIsLoading: Function
 }
 
-const GoogleSignInBtn: React.FC<PropsType> = memo((props) => {
+const GoogleSignInBtn = memo((props: PropsType) => {
   const {setIsLoading} = props
   const setCredentials = useUpdateAtom(CredentialsAtom)
   const navigate = useNavigate()

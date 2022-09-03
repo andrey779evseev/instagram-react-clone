@@ -1,11 +1,12 @@
 import './ChangeAuthorizationBtn.scss'
 import {NavLink} from 'react-router-dom'
+import { memo } from 'react'
 
 type PropsType = {
   signIn?: boolean
 }
 
-const ChangeAuthorizationBtn: React.FC<PropsType> = (props) => {
+const ChangeAuthorizationBtn = memo((props: PropsType) => {
   const {signIn = false} = props
   return (
     <div className='change_authorization_btn'>
@@ -20,6 +21,6 @@ const ChangeAuthorizationBtn: React.FC<PropsType> = (props) => {
       </div>
     </div>
   )
-}
+})
 
 export default ChangeAuthorizationBtn

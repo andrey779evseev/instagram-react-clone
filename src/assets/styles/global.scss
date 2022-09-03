@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import './variables.scss';
 @tailwind base;
 @tailwind components;
@@ -25,7 +25,7 @@ main {
 }
 
 .content {
-  width: fit-content;
+  width: 928px;
   padding: 30px 0;
   height: 100%;
 }

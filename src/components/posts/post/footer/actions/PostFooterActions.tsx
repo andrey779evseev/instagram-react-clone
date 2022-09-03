@@ -5,7 +5,7 @@ import shareIcon from '@assets/icons/post/share-icon.svg'
 import bookmarkIcon from '@assets/icons/post/bookmark-icon.svg'
 
 
-const PostFooterActions: React.FC = () => {
+const PostFooterActions = () => {
   return (
     <div className='post_actions'>
       <div className='left_action_btns'>

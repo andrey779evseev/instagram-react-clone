@@ -11,7 +11,7 @@ import {useMemo, useState} from 'react'
 import './ChangePassword.scss'
 
 
-const ChangePassword: React.FC = () => {
+const ChangePassword = () => {
   const {data:user} = useQuery(['user'], AccountService.GetUser)
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
