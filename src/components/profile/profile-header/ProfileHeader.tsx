@@ -4,9 +4,9 @@ import Button, {EnumButtonTheme} from '@components/common/button/Button'
 import {useQuery} from '@tanstack/react-query'
 import {useNavigate} from 'react-router-dom'
 import settingsIcon from '@assets/icons/common/settings-icon.svg'
-import { Skeleton } from '@mui/material'
 import If from '@components/common/if/If'
 import TextParser from '@components/common/text-parser/TextParser'
+import Skeleton from '@components/common/skeleton/Skeleton'
 
 
 const ProfileHeader = () => {
@@ -33,7 +33,7 @@ const ProfileHeader = () => {
             <img src={settingsIcon} className='ml-6 w-6 h-6' />
           </div>
           <If condition={isLoading}>
-            <Skeleton variant='text' sx={{fontSize: '16px'}} />
+            <Skeleton variant='text' style={{fontSize: '16px'}} />
           </If>
           <If condition={!isLoading}>
             <div className="flex items-center">

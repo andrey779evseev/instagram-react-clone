@@ -6,7 +6,7 @@
   width: fit-content;
   height: fit-content;
   min-height: 10px;
-  background: #ffffff;
+  background: $white;
   -webkit-filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.08));
   transition: transform 0.2s ease-out, max-height 0.2s ease-out,
     opacity 0.2s ease-out, visibility 0.2s ease-out;
@@ -27,7 +27,7 @@
     width: 0;
     z-index: -1;
     height: 0;
-    border-bottom: solid 15px #fff;
+    border-bottom: solid 15px $white;
     border-left: solid 15px transparent;
     border-right: solid 15px transparent;
   }

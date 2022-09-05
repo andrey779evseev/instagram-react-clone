@@ -1,10 +1,8 @@
 import { memo } from 'react'
 import s from './Spinner.module.scss'
 
-type PropsType = {}
 
-const Spinner: React.FC<PropsType> = memo(props => {
-  const {} = props
+const Spinner = () => {
   return (
     <div className='w-full h-fit flex justify-center'>
       <div className={s.lds_spinner}>
@@ -23,6 +21,6 @@ const Spinner: React.FC<PropsType> = memo(props => {
       </div>
     </div>
   )
-})
+}
 
 export default Spinner

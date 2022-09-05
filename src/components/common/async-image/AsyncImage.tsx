@@ -1,5 +1,5 @@
-import { Skeleton } from '@mui/material'
 import { memo, useEffect, useMemo, useState } from 'react'
+import Skeleton from '../skeleton/Skeleton'
 
 type PropsType = {
   width: number
