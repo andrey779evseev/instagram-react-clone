@@ -1,0 +1,14 @@
+.post_action_btn_icon {
+  margin: 0 8px;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}

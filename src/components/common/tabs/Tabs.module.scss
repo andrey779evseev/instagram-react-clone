@@ -16,7 +16,7 @@
       img {
         margin-right: 10px;
       }
-      &.active {
+      &:global.active {
         position: relative;
         &:before {
           content: '';

@@ -24,6 +24,9 @@
         background-repeat: no-repeat;
         &.home {
           background-image: url('@assets/icons/header-icons/links/home-icon.svg');
+          &.active {
+            background-image: url('@assets/icons/header-icons/links/home-icon-active.svg');
+          }
         }
         &.messenger {
           background-image: url('@assets/icons/header-icons/links/messenger-icon.svg');
@@ -48,11 +51,6 @@
           justify-content: center;
           align-items: center;
           padding: 1px;
-        }
-        .header_icon {
-          &.home {
-            background-image: url('@assets/icons/header-icons/links/home-icon-active.svg');
-          }
         }
       }
     }

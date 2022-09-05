@@ -1,4 +1,4 @@
-import './Preloader.scss'
+import s from './Preloader.module.scss'
 import {memo, useState} from 'react'
 import preloaderIcon from '@assets/icons/preloader/preloader-icon.svg'
 
@@ -13,9 +13,9 @@ const PagePreloader = memo((props: PropsType) => {
     setTimeout(() => setIsShow(true), 100)
   })
   return (
-    <div className={`preloader_container ${full ? 'full' : ''}`}>
-      <img src={preloaderIcon} className='bg_icon'/>
-      <div className={`preloader_icon ${isShow ? 'show' : 'preview'}`}></div>
+    <div className={`${s.preloader_container} ${full && s.full}`}>
+      <img src={preloaderIcon} className={s.bg_icon}/>
+      <div className={`${s.preloader_icon} ${isShow && 'show'}`}></div>
     </div>
   )
 })

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import './PhoneScreens.scss'
+import s from './PhoneScreens.module.scss'
 
 
 const PhoneScreens = () => {
@@ -11,11 +11,11 @@ const PhoneScreens = () => {
     return () => clearInterval(interval)
   })
   return (
-    <div className='screen'>
-      <div className={`screen_content sc_1 ${currentImageIndex === 1 ? 'active' : ''}`}></div>
-      <div className={`screen_content sc_2 ${currentImageIndex === 2 ? 'active' : ''}`}></div>
-      <div className={`screen_content sc_3 ${currentImageIndex === 3 ? 'active' : ''}`}></div>
-      <div className={`screen_content sc_4 ${currentImageIndex === 4 ? 'active' : ''}`}></div>
+    <div className={s.screen}>
+      <div className={`${s.screen_content} ${s.sc_1} ${currentImageIndex === 1 && s.active}`}></div>
+      <div className={`${s.screen_content} ${s.sc_2} ${currentImageIndex === 2 && s.active}`}></div>
+      <div className={`${s.screen_content} ${s.sc_3} ${currentImageIndex === 3 && s.active}`}></div>
+      <div className={`${s.screen_content} ${s.sc_4} ${currentImageIndex === 4 && s.active}`}></div>
     </div>
   )
 }

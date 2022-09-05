@@ -1,5 +1,5 @@
 import {ChangeEvent, memo} from 'react'
-import './UploadImage.scss'
+import s from './UploadImage.module.scss'
 
 
 type PropsType = {
@@ -19,14 +19,14 @@ const UploadImage = memo((props: PropsType) => {
   }
 
   return (
-    <div className='upload_image_container'>
+    <div className={s.upload_image_container}>
       <input
         type="file"
         accept="image/*"
         onChange={upload}
-        className='upload_image_input'
+        className={s.upload_image_input}
       />
-      <div className="upload_image_content">
+      <div className={s.upload_image_content}>
         {children}
       </div>
     </div>

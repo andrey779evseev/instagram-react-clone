@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import './SettingsForm.scss'
+import s from './SettingsForm.module.scss'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
 import UploadImage from '@components/common/upload-image/UploadImage'
@@ -40,29 +40,29 @@ const SettingsForm = memo((props: PropsType) => {
     return item.Type === EnumSettingsFormItemType.Heading
   }
   return (
-    <div className='settings_form'>
+    <div className={s.settings_form}>
       {
         items.map((item, i) => (
-          <div className={`form_row ${item.MarginBottom} ${!item.PaddingForTitle && '!items-center'}`} key={i}>
-            <div className={`label_column ${!item.PaddingForTitle && 'without_margin'}`}>
+          <div className={`${s.form_row} ${item.MarginBottom} ${!item.PaddingForTitle && '!items-center'}`} key={i}>
+            <div className={`${s.label_column} ${!item.PaddingForTitle && s.without_margin}`}>
               <If condition={isAvatar(item)}>
                 <Avatar src={item.Value} size={EnumAvatarSize.Big}/>
               </If>
               <If condition={isShowLabel(item)}>
-                <div className="label_name">
+                <div className={s.label_name}>
                   {item.Label}
                 </div>
               </If>
             </div>
-            <div className="data_column">
+            <div className={s.data_column}>
               <If condition={isAvatar(item)}>
-                <div className="avatar_data">
-                  <div className="avatar_data_user_name">
+                <div className={s.avatar_data}>
+                  <div className={s.avatar_data_user_name}>
                     {item.Label}
                   </div>
                   <If condition={!isAvatarWithoutEdit(item)}>
                     <UploadImage uploadImage={item.SetValue as (file: File) => void}>
-                      <span className="avatar_data_change_photo">
+                      <span className={s.avatar_data_change_photo}>
                         Change profile photo
                         <span className="ml-2">
                           <If condition={item.IsLoading}>
@@ -86,7 +86,7 @@ const SettingsForm = memo((props: PropsType) => {
                 />
               </If>
               <If condition={isDescription(item)}>
-                <div className="data_description" dangerouslySetInnerHTML={{__html: item.Value!}}></div>
+                <div className={s.data_description} dangerouslySetInnerHTML={{__html: item.Value!}}></div>
               </If>
               <If condition={isTextarea(item)}>
                 <Textarea
@@ -97,7 +97,7 @@ const SettingsForm = memo((props: PropsType) => {
                 />
               </If>
               <If condition={isHeading(item)}>
-                <div className="sub_heading">
+                <div className={s.sub_heading}>
                   {item.Value}
                 </div>
               </If>
@@ -106,9 +106,9 @@ const SettingsForm = memo((props: PropsType) => {
         ))
       }
       <If condition={!!children}>
-        <div className="form_row">
-          <div className="label_column"></div>
-          <div className="data_column">
+        <div className={s.form_row}>
+          <div className={s.label_column}></div>
+          <div className={s.data_column}>
             {children}
           </div>
         </div>

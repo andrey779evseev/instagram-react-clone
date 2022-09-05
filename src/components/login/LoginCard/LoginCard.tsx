@@ -13,7 +13,7 @@ import {AxiosError} from 'axios'
 import {useUpdateAtom} from 'jotai/utils'
 import {useMemo, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import './LognCard.scss'
+
 
 const LoginCard = () => {
   const [email, setEmail] = useState('')
@@ -51,8 +51,8 @@ const LoginCard = () => {
   }
 
   return (
-    <div className='login_card'>
-      <div className="login_card_content">
+    <div className='border border-gray10 py-6 px-10'>
+      <div className="flex flex-col items-center">
         <img src={instagramLogo} className='w-[183px] h-[57px] mb-6'/>
         <div className="mb-3.5 w-full">
           <Input
@@ -79,7 +79,7 @@ const LoginCard = () => {
         <Error error={errMsg}/>
         <DividerWithText text='OR'/>
         <GoogleSignInBtn setIsLoading={setIsLoading}/>
-        <div className="forgot_password">
+        <div className="text-cobalt text-xs mt-5">
           You forgot the password?
         </div>
       </div>

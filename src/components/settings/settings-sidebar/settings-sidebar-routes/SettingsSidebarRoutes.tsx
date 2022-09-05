@@ -1,14 +1,14 @@
 import {NavLink} from 'react-router-dom'
-import './SettingsSidebarRoutes.scss'
+import s from './SettingsSidebarRoutes.module.scss'
 
 
 const SettingsSidebarRoutes = () => {
   return (
-    <div className="sidebar_routes_container">
-      <NavLink to='edit-profile' className='sidebar_route'>
+    <div className={s.sidebar_routes_container}>
+      <NavLink to='edit-profile' className={s.sidebar_route}>
         Edit profile
       </NavLink>
-      <NavLink to='change-password' className='sidebar_route'>
+      <NavLink to='change-password' className={s.sidebar_route}>
         Change password
       </NavLink>
     </div>

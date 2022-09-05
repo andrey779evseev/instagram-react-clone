@@ -1,5 +1,5 @@
 import {memo, useState} from 'react'
-import './Dropdown.scss'
+import s from './Dropdown.module.scss'
 import DropdownItem from '@models/dropdown/DropdownItem'
 import useClickOutside from '@hooks/UseClickOutside'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
@@ -24,18 +24,18 @@ const Dropdown = memo((props: PropsType) => {
   return (
     <div className='relative' ref={clickOutsideRef}>
       <div onClick={() => setVisible(!visible)}>{children}</div>
-        <div className={`dropdown_container ${visible ? 'visible' : ''}`} style={{minWidth: minWidth + 'px'}}>
-          <div className='triangle'></div>
+        <div className={`${s.dropdown_container} ${visible && s.visible}`} style={{minWidth: minWidth + 'px'}}>
+          <div className={s.triangle}></div>
           <div className='flex flex-col'>
             {items.map((item, i) => (
-              <div key={i} className='item_wrapper'>
+              <div key={i} className={s.item_wrapper}>
                 {item.IsDivider ?
-                  <div className='dropdown_divider'></div> :
-                  <div className='item' onClick={() => callback(item)}>
+                  <div className={s.dropdown_divider}></div> :
+                  <div className={s.item} onClick={() => callback(item)}>
                     <If condition={!!item.Image}>
                       <img src={item.Image} className='mr-2.5'/>
                     </If>
-                    <div className='dropdown_item_title'>
+                    <div className={s.dropdown_item_title}>
                       {item.Name}
                       <If condition={item.IsLoading}>
                         <LittleLoading/>

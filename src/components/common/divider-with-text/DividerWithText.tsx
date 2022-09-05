@@ -1,5 +1,4 @@
 import {memo} from 'react'
-import './DividerWithText.scss'
 
 
 type PropsType = {
@@ -9,10 +8,10 @@ type PropsType = {
 const DividerWithText = memo((props: PropsType) => {
   const {text} = props
   return (
-    <div className="divider_with_text">
-      <div className="line"></div>
-      <div className='text'>{text}</div>
-      <div className="line"></div>
+    <div className="flex items-center w-full mt-3 mb-[15px]">
+      <div className='h-px w-full bg-gray10'></div>
+      <div className='my-[6px] mx-[18px]'>{text}</div>
+      <div className="h-px w-full bg-gray10"></div>
     </div>
   )
 })

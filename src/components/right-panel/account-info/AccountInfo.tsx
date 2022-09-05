@@ -1,7 +1,6 @@
 import {AccountService} from '@api/services/account/AccountService'
 import {useQuery} from '@tanstack/react-query'
 import Avatar from '../../common/avatar/Avatar'
-import './AccountInfo.scss'
 
 
 const AccountInfo = () => {
@@ -13,7 +12,7 @@ const AccountInfo = () => {
         <div className="font-semibold">{user?.Nickname}</div>
         <div className="text-gray50">{user?.Name}</div>
       </div>
-      <div className="switch_btn">Switch</div>
+      <div className="ml-auto text-cobalt font-bold text-xs cursor-pointer">Switch</div>
     </div>
   )
 }

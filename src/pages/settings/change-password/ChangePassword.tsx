@@ -8,7 +8,6 @@ import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {AxiosError} from 'axios'
 import {useMemo, useState} from 'react'
-import './ChangePassword.scss'
 
 
 const ChangePassword = () => {
@@ -107,7 +106,7 @@ const ChangePassword = () => {
   }
 
   return (
-    <div className='change_password_container'>
+    <div className='px-16 py-8 w-full h-full'>
       <SettingsForm items={items}>
         <div>
           <Button

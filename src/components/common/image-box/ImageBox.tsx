@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import './ImageBox.scss'
+import s from './ImageBox.module.scss'
 
 
 type PropsType = {
@@ -10,10 +10,10 @@ type PropsType = {
 const ImageBox = memo((props: PropsType) => {
   const {image, isSmall = false} = props
   return (
-    <div className={`gradient_wrapper ${isSmall ? 'small' : ''}`}>
+    <div className={`${s.gradient_wrapper} ${isSmall && s.small}`}>
         <div
           style={{ backgroundImage: `url('${image}')` }}
-          className='image_with_border'
+          className={s.image_with_border}
         />
       </div>
   )

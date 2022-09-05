@@ -8,7 +8,7 @@ import {useUpdateAtom} from 'jotai/utils'
 import {memo, useEffect, useState} from 'react'
 import {useGoogleLogin} from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
-import './GoogleSignInBtn.scss'
+import s from './GoogleSignInBtn.module.scss'
 
 type PropsType = {
   setIsLoading: Function
@@ -72,8 +72,8 @@ const GoogleSignInBtn = memo((props: PropsType) => {
   })
 
   return (
-    <div className='google_sign_in_btn' onClick={login}>
-      <img src={googleLogo} className='logo'/>
+    <div className={s.google_sign_in_btn} onClick={login}>
+      <img src={googleLogo} className={s.logo}/>
       Continue with google
     </div>
   )

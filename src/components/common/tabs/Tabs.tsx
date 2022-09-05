@@ -1,8 +1,8 @@
 import TabItem from '@models/tabs/TabItem'
-import {memo, useEffect, useMemo, useState} from 'react'
+import { memo, useEffect } from 'react'
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import If from '../if/If'
-import './Tabs.scss'
+import s from './Tabs.module.scss'
 
 
 type PropsType = {
@@ -24,13 +24,13 @@ const Tabs = memo((props: PropsType) => {
   }, []) 
 
   return (
-    <div className="tabs_wrapper">
-      <div className='tabs_container'>
+    <div className={s.tabs_wrapper}>
+      <div className={s.tabs_container}>
         {items.map(tab => (
           <NavLink 
             to={tab.Route}
             key={tab.Route} 
-            className={`tab_item`}
+            className={s.tab_item}
           >
             <If condition={!!tab.Icon}>
               <img src={tab.Icon} />

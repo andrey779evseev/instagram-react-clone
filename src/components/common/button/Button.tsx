@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import './Button.scss'
+import s from './Button.module.scss'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 
 
@@ -33,7 +33,7 @@ const Button = memo((props: PropsType) => {
   }
   return (
     <button
-      className={`button ${disabled ? 'disabled' : ''} ${theme}`}
+      className={`${s.button} ${disabled && s.disabled} ${s[theme]}`}
       style={{width}}
       onClick={click}
     >

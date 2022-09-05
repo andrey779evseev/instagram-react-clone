@@ -1,4 +1,3 @@
-import './FeedPosts.scss'
 import posts from './posts.json'
 import FeedPost from './post/FeedPost'
 

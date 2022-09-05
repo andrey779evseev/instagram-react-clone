@@ -1,4 +1,4 @@
-import './StoriesMiniaturesList.scss'
+import s from './StoriesMiniaturesList.module.scss'
 import sliderArrow from '@assets/icons/header-icons/slider-arrow.svg'
 import {useMemo, useState} from 'react'
 import stories from './stories.json'
@@ -36,20 +36,20 @@ const StoriesMiniaturesList = () => {
   }
 
   return (
-    <div className='stories_list'>
-      <div className={`slider_arrow_container left ${hasLeftScroll ? 'show' : ''}`} onClick={scrollToLeft}>
-        <img src={sliderArrow} className='slider_arrow' />
+    <div className={s.stories_list}>
+      <div className={`${s.slider_arrow_container} ${s.left} ${hasLeftScroll && 'show'}`} onClick={scrollToLeft}>
+        <img src={sliderArrow} className={s.slider_arrow} />
       </div>
       <div 
-        className='scrollable' 
+        className={s.scrollable} 
         style={{
           left: -leftScroll + 'px'
         }}
       >
         {stories.map((story, i) => <StoryMiniatureItem story={story} key={i}/>)}
       </div>
-      <div className={`slider_arrow_container right ${hasRightScroll ? 'show' : ''}`} onClick={scrollToRight}>
-        <img src={sliderArrow} className='slider_arrow' />
+      <div className={`${s.slider_arrow_container} ${s.right} ${hasRightScroll && 'show'}`} onClick={scrollToRight}>
+        <img src={sliderArrow} className={s.slider_arrow} />
       </div>
     </div>
   )

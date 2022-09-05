@@ -1,4 +1,4 @@
-import './Textarea.scss'
+import s from './Textarea.module.scss'
 import {memo, useMemo, useState} from 'react'
 
 type PropsType = {
@@ -28,7 +28,7 @@ const Textarea = memo((props: PropsType) => {
       rows={rows}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      className={`textarea ${isError && 'with_error'} ${minimalistic && 'minimalistic'}`}
+      className={`${s.textarea} ${isError && s.with_error} ${minimalistic && s.minimalistic}`}
       placeholder={placeholder}
       onBlur={() => setIsTouched(true)}
     />

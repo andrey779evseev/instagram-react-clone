@@ -1,5 +1,4 @@
 import {memo} from 'react'
-import './Error.scss'
 
 
 type PropsType = {
@@ -14,13 +13,13 @@ const Error = memo((props: PropsType) => {
     <div className='mt-2.5'>
       {
         typeof error === 'string' ?
-        <div className='error_text'>
+        <div className='w-full text-red text-center text-xs mt-[10px] px-5'>
           {error}
         </div> :
         <>
           {
             error.map((err, i) => (
-              <div className='error_text without_margin' key={err}>
+              <div className='w-full text-red text-center text-xs mt-[10px] px-5 !m-0' key={err}>
                 {i + 1}) {err}
               </div>
             ))

@@ -14,7 +14,8 @@ import {useUpdateAtom} from 'jotai/utils'
 import {useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useGoogleLogout} from 'react-google-login'
-import './CurrentUser.scss'
+
+
 
 const CurrentUser = () => {
   const { data: user } = useQuery(['user'], AccountService.GetUser)

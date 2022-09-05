@@ -1,4 +1,3 @@
-import './Suggestions.scss'
 import suggestions from './suggestions.json'
 import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
 

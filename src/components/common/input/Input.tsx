@@ -1,4 +1,4 @@
-import './Input.scss'
+import s from './Input.module.scss'
 import {memo, useMemo, useState} from 'react'
 import Error from '@components/common/error/Error'
 
@@ -32,7 +32,7 @@ const Input = memo((props: PropsType) => {
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className={`input ${isError && 'with_error'} ${minimalistic && 'minimalistic'}`}
+        className={`${s.input} ${isError && s.with_error} ${minimalistic && s.minimalistic}`}
         placeholder={placeholder}
         onBlur={() => setIsTouched(true)}
       />

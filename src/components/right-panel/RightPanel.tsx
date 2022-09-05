@@ -1,11 +1,10 @@
 import AccountInfo from './account-info/AccountInfo'
-import './RightPanel.scss'
 import Suggestions from './suggestions/Suggestions'
 
 
 const RightPanel = () => {
   return (
-    <div className='right_panel'>
+    <div className='pt-[18px] w-[292px] flex flex-col'>
       <AccountInfo/>
       <Suggestions/>
     </div>

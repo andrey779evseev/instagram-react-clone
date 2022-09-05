@@ -15,15 +15,6 @@
   &:hover {
     background: $gray20;
   }
-  .google_overelay_button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0 !important;
-    z-index: -1;
-  }
   .logo {
     position: absolute;
     top: 6px;

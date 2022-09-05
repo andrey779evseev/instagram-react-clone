@@ -5,5 +5,7 @@ export default class PostMiniatureResponse {
   }
   Id: string = ''
   Photo: string = ''
-  PostedAt!: string
+  PostedAt: string = ''
+  LikesCount: number = 0
+  CommentsCount: number = 0
 }

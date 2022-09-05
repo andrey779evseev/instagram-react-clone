@@ -5,7 +5,6 @@ import useDebounce from '@hooks/UseDebounce'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import {useEffect, useMemo, useState} from 'react'
-import './EditProfile.scss'
 
 
 const EditProfile = () => {
@@ -174,7 +173,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className='edit_profile_container'>
+    <div className='w-full h-full py-8 pr-[150px] pl-20'>
       <SettingsForm items={items}>
         <div className="flex mt-[29px] justify-between items-center">
           <Button

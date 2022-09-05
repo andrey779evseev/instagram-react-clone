@@ -1,4 +1,4 @@
-import './RegistrationCard.scss'
+import s from './RegistrationCard.module.scss'
 import instagramLogo from '@assets/icons/common/instagram-logo.svg'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import DividerWithText from '@components/common/divider-with-text/DividerWithText'
@@ -70,29 +70,29 @@ const RegistrationCard = () => {
   }
   
   return (
-    <div className="registration_card">
+    <div className={s.registration_card}>
       <img src={instagramLogo} className="w-[183px] h-[57px] mb-3"/>
-      <div className="registration_description">
+      <div className={s.registration_description}>
         Sign up to see photos and videos of your friends.
       </div>
       <GoogleSignInBtn setIsLoading={setIsLoading}/>
       <DividerWithText text="OR"/>
-      <div className="form_container">
-        <div className="input_container">
+      <div className={s.form_container}>
+        <div className={s.input_container}>
           <Input
             value={email}
             setValue={setEmail}
             placeholder="Email"
           />
         </div>
-        <div className="input_container">
+        <div className={s.input_container}>
           <Input
             value={fullName}
             setValue={setFullName}
             placeholder="Full name"
           />
         </div>
-        <div className="input_container">
+        <div className={s.input_container}>
           <Input
             value={nickname}
             setValue={setNickname}
@@ -100,7 +100,7 @@ const RegistrationCard = () => {
             error={validNickname === false ? 'This nickname is already taken' : ''}
           />
         </div>
-        <div className="input_container">
+        <div className={s.input_container}>
           <Input
             value={password}
             setValue={setPassword}
@@ -117,7 +117,7 @@ const RegistrationCard = () => {
         Sign Up
       </Button>
       <Error error={errMsg}/>
-      <div className="registration_license">
+      <div className={s.registration_license}>
         By signing up, you agree to our Terms, Data Policy and Cookies Policy.
       </div>
     </div>

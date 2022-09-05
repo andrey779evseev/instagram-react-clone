@@ -1,4 +1,3 @@
-import './PostFooter.scss'
 import addDotsToNumber from '@utils/AddDotsToNumber'
 import {memo} from 'react'
 import AddCommentForm from './add-comment-form/AddCommentForm'
@@ -12,13 +11,13 @@ type PropsType = {
 const PostFooter = memo((props: PropsType) => {
   const { likesCount } = props
   return (
-    <div className='post_footer'>
-      <div className='post_info'>
+    <div className='border border-gray20 border-t-0'>
+      <div className='p-4'>
         <PostFooterActions/>
-        <div className='likes_count'>{addDotsToNumber(likesCount)} likes</div>
+        <div className='font-bold'>{addDotsToNumber(likesCount)} likes</div>
         <PostFooterDescription />
-        <div className='show_all_comments_btn'>View all 100 comments</div>
-        <div className='post_date'>1 hour ago</div>
+        <div className='text-gray50 cursor-pointer mt-1'>View all 100 comments</div>
+        <div className='text-[10px] text-gray50 uppercase mt-1'>1 hour ago</div>
       </div>
       <AddCommentForm/>
     </div>

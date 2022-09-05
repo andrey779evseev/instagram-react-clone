@@ -1,5 +1,4 @@
 import useScrollTop from '@hooks/UseScrollTop'
-import generateUniqueId from '@utils/UniqueId'
 import {
   ElementType,
   memo,
@@ -55,63 +54,58 @@ const InfinityList = memo(<T extends object>(props: PropsType<T>) => {
     [onBottom]
   )
 
-  const totalHeight = items.length * itemHeight + (items.length - 1) * paddingForItem
+  const totalHeight =
+    items.length * itemHeight + (items.length - 1) * paddingForItem
 
-  let startNode = useMemo(() => Math.min(Math.max(0, Math.floor(scrollTop / itemHeight) - additionalItemsCount), items.length - (2 * additionalItemsCount + 1)), 
-  [scrollTop, itemHeight, additionalItemsCount])
+  let startNode = useMemo(
+    () =>
+      Math.min(
+        Math.max(0, Math.floor(scrollTop / itemHeight) - additionalItemsCount),
+        items.length - (2 * additionalItemsCount + 1)
+      ),
+    [scrollTop, itemHeight, additionalItemsCount]
+  )
 
   let visibleNodeCount = useMemo(() => {
     const value = Math.ceil(height / itemHeight) + 2 * additionalItemsCount
     return Math.min(items.length - startNode, value)
-  },
-  [height, itemHeight, additionalItemsCount, items, startNode])
+  }, [height, itemHeight, additionalItemsCount, items, startNode])
 
-  const offsetY = useMemo(() => startNode * itemHeight + startNode * paddingForItem, 
-  [startNode, itemHeight, paddingForItem])
+  const offsetY = useMemo(
+    () => startNode * itemHeight + startNode * paddingForItem,
+    [startNode, itemHeight, paddingForItem]
+  )
 
   const visibleChildren = useMemo(
-    () => new Array(visibleNodeCount).fill(null).map((_, index) => {
+    () =>
+      new Array(visibleNodeCount).fill(null).map((_, index) => {
         const item = items[startNode + index]
-        return (
-          <Item
-            key={index}
-            item={item}
-            size={itemHeight}
-          />
-        )
+        return <Item key={index} item={item} size={itemHeight} />
       }),
     [startNode, visibleNodeCount, Item, items]
   )
 
   return (
-    // <div
-    // ref={ref as any}
-      // style={{ height }}
-      // className='overflow-auto mr-[-15px]'
-      // >
-      <>
+    <>
+      <div
+        className='will-change-transform relative'
+        style={{ height: totalHeight }}
+      >
         <div
-          className='will-change-transform relative'
-          style={{ height: totalHeight }}
+          className='will-change-transform'
+          style={{ transform: `translateY(${offsetY}px)` }}
         >
-          <div
-            className='will-change-transform'
-            style={{ transform: `translateY(${offsetY}px)` }}
-          >
-            {visibleChildren}
-            <div className="relative">
-              <div 
-                className='absolute bottom-0 left-0 w-full pt-96'
-                ref={bottomAnchor}
-              />
-            </div>
+          {visibleChildren}
+          <div className='relative'>
+            <div
+              className='absolute bottom-0 left-0 w-full pt-96'
+              ref={bottomAnchor}
+            />
           </div>
         </div>
-        <div className="mt-6">
-          {loader ?? <></>}
-        </div>
-      </>
-    // </div>
+      </div>
+      <div className='mt-6'>{loader ?? <></>}</div>
+    </>
   )
 })
 

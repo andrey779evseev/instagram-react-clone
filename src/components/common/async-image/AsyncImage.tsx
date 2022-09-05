@@ -5,43 +5,63 @@ type PropsType = {
   width: number
   height: number
   url: string
+  rounded?: boolean
 }
 
-const AsyncImage = memo((props: PropsType) => {
+const AsyncImage = (props: PropsType) => {
   const {
     width,
     height,
-    url
+    url,
+    rounded = false
   } = props
   const [src, setSrc] = useState('')
 
+  
+  
   useEffect(() => {
     const img = new Image()
     img.onload = () => {
-     setSrc(url)
+      setSrc(url)
+    }
+    img.onerror = () => {
+      setSrc('')
     }
     img.src = url
-  }, [])
+  }, [url])
 
-  const size = useMemo(() => {
+  useEffect(() => {
+    if(src !== url)
+      setSrc(url)
+  }, [src])
+
+  const styles = useMemo(() => {
     return {
       height: height + 'px',
-      width: width + 'px'
+      width: width + 'px',
+      minheight: height + 'px',
+      minwidth: width + 'px',
+      borderRadius: rounded ? '50%' : ''
     }
   }, [width, height])
 
   return (
-    <div style={size}>
+    <div style={styles}>
       {
         src ?
         <div 
           className='bg-center bg-cover' 
-          style={{backgroundImage: `url('${src}')`, ...size}}
+          style={{backgroundImage: `url('${src}')`, ...styles}}
         /> :
-        <Skeleton variant='rectangular' width={width} height={height}/>
+        <Skeleton 
+          variant={rounded ? 'circular' : 'rectangular'} 
+          width={width} 
+          height={height}
+          animation='wave'
+        />
       }
     </div>
   )
-})
+}
 
-export default AsyncImage
+export default memo(AsyncImage)
