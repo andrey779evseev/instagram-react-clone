@@ -7,7 +7,7 @@ type PropsType = {
    children?: JSX.Element,
    height?: number | string,
    style?: object,
-   variant: string | 'circular' | 'rectangular' | 'rounded' | 'text',
+   variant: 'circular' | 'rectangular' | 'rounded' | 'text',
    width?: number | string,
 }
 

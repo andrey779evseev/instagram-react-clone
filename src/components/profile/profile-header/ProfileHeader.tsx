@@ -4,9 +4,9 @@ import Button, {EnumButtonTheme} from '@components/common/button/Button'
 import {useQuery} from '@tanstack/react-query'
 import {useNavigate} from 'react-router-dom'
 import settingsIcon from '@assets/icons/common/settings-icon.svg'
-import If from '@components/common/if/If'
 import TextParser from '@components/common/text-parser/TextParser'
 import Skeleton from '@components/common/skeleton/Skeleton'
+import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 
 
 const ProfileHeader = () => {
@@ -21,21 +21,43 @@ const ProfileHeader = () => {
   return (
     <div className='flex justify-center'>
       <div className="flex items-center">
-        <Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge}/>
+        <SkeletonWrapper
+          condition={isLoading}
+          skeleton={<Skeleton variant='circular' width={150} height={150}/>}
+        >
+          <Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge}/>
+        </SkeletonWrapper>
         <div className="ml-[100px]">
           <div className="flex items-center mb-6">
-            <div className='text-[28px] whitespace-nowrap mr-5 font-light'>
-              {user?.Nickname}
-            </div>
-            <Button theme={EnumButtonTheme.Secondary} onClick={goToEditProfile}>
-              Edit Profile
-            </Button>
-            <img src={settingsIcon} className='ml-6 w-6 h-6' />
+            <SkeletonWrapper
+              condition={isLoading}
+              skeleton={<Skeleton variant='text' style={{fontSize: '28px'}} />}
+              className='mr-5'
+            >
+              <div className='text-[28px] whitespace-nowrap font-light'>
+                {user?.Nickname}
+              </div>
+            </SkeletonWrapper>
+            <SkeletonWrapper
+              condition={isLoading}
+              skeleton={<Skeleton variant='rounded' width={153} height={30}/>}
+            >
+              <Button theme={EnumButtonTheme.Secondary} onClick={goToEditProfile}>
+                Edit Profile
+              </Button>
+            </SkeletonWrapper>
+            <SkeletonWrapper
+              condition={isLoading}
+              skeleton={<Skeleton variant='rounded' width={24} height={24}/>}
+              className='ml-6'
+            >
+              <img src={settingsIcon} className='w-6 h-6' />
+            </SkeletonWrapper>
           </div>
-          <If condition={isLoading}>
-            <Skeleton variant='text' style={{fontSize: '16px'}} />
-          </If>
-          <If condition={!isLoading}>
+          <SkeletonWrapper
+            skeleton={<Skeleton variant='text' style={{fontSize: '16px'}} />}
+            condition={isLoading}
+          >
             <div className="flex items-center">
               <div className='text-base'>
                 <span className='font-medium'>{stats?.PostsCount} </span>
@@ -50,11 +72,22 @@ const ProfileHeader = () => {
                 following
               </div>
             </div>
-          </If>
-          <div className="mt-6 font-medium text-base">{user?.Name}</div>
-          <div className="text-base">
-            <TextParser text={user!.Description}/>
-          </div>
+          </SkeletonWrapper>
+          <SkeletonWrapper
+            condition={isLoading}
+            skeleton={<Skeleton variant='text' style={{fontSize: '16px'}}/>}
+            className='mt-6'
+          >
+            <div className="font-medium text-base">{user?.Name}</div>
+          </SkeletonWrapper>
+          <SkeletonWrapper
+            condition={isLoading}
+            skeleton={<Skeleton variant='text' style={{fontSize: '16px'}}/>}
+          >
+            <div className="text-base">
+              <TextParser text={user!.Description}/>
+            </div>
+          </SkeletonWrapper>
         </div>
       </div>
     </div>

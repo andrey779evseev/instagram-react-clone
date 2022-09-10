@@ -41,18 +41,22 @@ const ProfilePosts = () => {
   const windowHeight = useMemo(() => window.innerHeight - 60, [window.innerHeight])
 
   return (
-    <If condition={!isLoading}>
-      <InfinityList
-        Item={TriplePost}
-        onBottom={hasNextPage ? fetchNextPage : undefined}
-        loader={isFetchingNextPage ? <Spinner/> : undefined}
-        height={windowHeight}
-        itemHeight={290}
-        items={tripledFlatPosts}
-        additionalItemsCount={3}
-        paddingForItem={29}
-      />
-    </If>
+    <>
+      {
+        isLoading ?
+        <Spinner/> :
+        <InfinityList
+          Item={TriplePost}
+          onBottom={hasNextPage ? fetchNextPage : undefined}
+          loader={isFetchingNextPage ? <Spinner/> : undefined}
+          height={windowHeight}
+          itemHeight={290}
+          items={tripledFlatPosts}
+          additionalItemsCount={3}
+          paddingForItem={29}
+        />
+      }
+    </>
   )
 }
 

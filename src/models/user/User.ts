@@ -10,4 +10,5 @@ export default class User {
   Avatar: string = ''
   Description: string = ''
   Gender: string = ''
+  GoogleId?: string = ''
 }

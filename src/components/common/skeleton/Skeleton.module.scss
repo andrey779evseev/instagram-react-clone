@@ -35,6 +35,7 @@
     border-radius: 4px;
     &:empty:before {
       content: '\\00a0';
+      color: transparent;
     };
   }
   &.circular {
@@ -51,7 +52,7 @@
       max-width: fit-content;
     }
     &.without_height {
-      height: auto;
+      height: 100%;
     }
   }
   &.pulse {

@@ -34,18 +34,24 @@ export const queryClient = new QueryClient({
   }
 })
 
-const root = createRoot(document.getElementById('root') as HTMLDivElement);
+let container: HTMLElement | null = null;
 
-root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <JotaiNexus/>
-      <HistoryRouter history={history}>
-        <AuthorizationGuard>
-          <App />
-        </AuthorizationGuard>
-      </HistoryRouter>
-    </QueryClientProvider>
-  </React.StrictMode>
-)
+document.addEventListener('DOMContentLoaded', function() {
+  if (!container) {
+    container = document.getElementById('root') as HTMLElement;
+    const root = createRoot(container)
+    root.render(
+      <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <JotaiNexus/>
+          <HistoryRouter history={history}>
+            <AuthorizationGuard>
+              <App />
+            </AuthorizationGuard>
+          </HistoryRouter>
+        </QueryClientProvider>
+      </React.StrictMode>
+    );
+  }
+});

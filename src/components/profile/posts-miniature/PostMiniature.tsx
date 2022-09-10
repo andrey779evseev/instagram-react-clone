@@ -1,7 +1,7 @@
 import PostMiniatureResponse from '@api/services/post/models/responses/PostMiniatureResponse'
 import { memo, useState } from 'react'
 import likeIcon from '@assets/icons/post/miniature/heart-icon.svg'
-import commentIcon from '@assets/icons/post/miniature/message-icon.svg'
+import commentIcon from '@assets/icons/post/miniature/comment-icon.svg'
 import s from './PostMiniature.module.scss'
 
 

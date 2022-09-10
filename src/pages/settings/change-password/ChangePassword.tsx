@@ -7,7 +7,8 @@ import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {AxiosError} from 'axios'
-import {useMemo, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 const ChangePassword = () => {
@@ -17,6 +18,7 @@ const ChangePassword = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [errMsg, setErrMsg] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
+  const navigate = useNavigate()
   const changePasswordMutation = useMutation(AuthService.ChangePassword, {
     onSuccess: () => {
       setOldPassword('')
@@ -31,6 +33,11 @@ const ChangePassword = () => {
       setErrMsg(error.response?.data as string)
     }
   })
+
+  useEffect(() => {
+    if(!!user?.GoogleId)
+      navigate('/settings/edit-profile')
+  }, [user])
 
   const items: SettingsFormItem[] = useMemo(() => {
     return [
