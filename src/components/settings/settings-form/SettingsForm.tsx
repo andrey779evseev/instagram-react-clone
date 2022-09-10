@@ -14,7 +14,7 @@ type PropsType = {
   children?: JSX.Element
 }
 
-const SettingsForm = memo((props: PropsType) => {
+const SettingsForm = (props: PropsType) => {
   const {items, children} = props
   const isAvatar = (item: SettingsFormItem) => {
     return item.Type === EnumSettingsFormItemType.AvatarWithEdit ||
@@ -115,6 +115,6 @@ const SettingsForm = memo((props: PropsType) => {
       </If>
     </div>
   )
-})
+}
 
-export default SettingsForm
+export default memo(SettingsForm)

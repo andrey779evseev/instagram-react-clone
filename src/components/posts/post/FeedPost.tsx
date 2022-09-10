@@ -7,7 +7,7 @@ type PropsType = {
   post: PostModel
 }
 
-const FeedPost = memo((props: PropsType) => {
+const FeedPost = (props: PropsType) => {
   const {post} = props
   return (
     <div className='flex w-full h-fit flex-col post_container mt-2 last:mb-2'>
@@ -16,7 +16,7 @@ const FeedPost = memo((props: PropsType) => {
       <PostFooter likesCount={post.LikesCount}/>
     </div>
   )
-})
+}
 
 
-export default FeedPost
+export default memo(FeedPost)

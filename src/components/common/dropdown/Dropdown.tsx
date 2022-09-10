@@ -11,7 +11,7 @@ type PropsType = {
   minWidth?: number
 }
 
-const Dropdown = memo((props: PropsType) => {
+const Dropdown = (props: PropsType) => {
   const {children, items, minWidth = 230} = props
   const [visible, setVisible] = useState(false)
   const clickOutsideRef = useClickOutside(() => setVisible(false))
@@ -49,7 +49,7 @@ const Dropdown = memo((props: PropsType) => {
         </div>
     </div>
   )
-})
+}
 
 
-export default Dropdown
+export default memo(Dropdown)

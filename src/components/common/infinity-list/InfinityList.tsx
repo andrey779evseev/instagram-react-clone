@@ -20,7 +20,7 @@ type PropsType<T> = {
   paddingForItem?: number
 }
 
-const InfinityList = memo(<T extends object>(props: PropsType<T>) => {
+const InfinityList = <T extends object>(props: PropsType<T>) => {
   const {
     Item,
     height,
@@ -107,6 +107,6 @@ const InfinityList = memo(<T extends object>(props: PropsType<T>) => {
       <div className='mt-6'>{loader ?? <></>}</div>
     </>
   )
-})
+}
 
-export default InfinityList
+export default memo(InfinityList)

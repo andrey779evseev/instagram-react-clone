@@ -5,7 +5,7 @@ type PropsType = {
   color?: 'white' | 'gray' | 'cobalt'
 }
 
-const LittleLoading = memo((props: PropsType) => {
+const LittleLoading = (props: PropsType) => {
   const {color = 'gray'} = props
 
   return (
@@ -16,6 +16,6 @@ const LittleLoading = memo((props: PropsType) => {
       <div></div>
     </div>
   )
-})
+}
 
-export default LittleLoading
+export default memo(LittleLoading)

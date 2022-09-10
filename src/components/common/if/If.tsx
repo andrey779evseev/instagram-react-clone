@@ -6,7 +6,7 @@ type PropsType = {
   condition: boolean
 }
 
-const If = memo((props: PropsType) => {
+const If = (props: PropsType) => {
   const {
     children,
     condition
@@ -16,6 +16,6 @@ const If = memo((props: PropsType) => {
       {condition && children}
     </>
   )
-})
+}
 
-export default If
+export default memo(If)

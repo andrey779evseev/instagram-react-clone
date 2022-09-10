@@ -17,7 +17,7 @@ type PropsType = {
   theme?: EnumButtonTheme
 }
 
-const Button = memo((props: PropsType) => {
+const Button = (props: PropsType) => {
   const {
     children,
     onClick,
@@ -40,6 +40,6 @@ const Button = memo((props: PropsType) => {
       {isLoading ? <LittleLoading color='white'/> : children}
     </button>
   )
-})
+}
 
-export default Button
+export default memo(Button)

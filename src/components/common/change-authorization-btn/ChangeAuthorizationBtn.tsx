@@ -5,7 +5,7 @@ type PropsType = {
   signIn?: boolean
 }
 
-const ChangeAuthorizationBtn = memo((props: PropsType) => {
+const ChangeAuthorizationBtn = (props: PropsType) => {
   const {signIn = false} = props
   return (
     <div className='flex-center w-full h-16 rounded-sm border border-gray10'>
@@ -20,6 +20,6 @@ const ChangeAuthorizationBtn = memo((props: PropsType) => {
       </div>
     </div>
   )
-})
+}
 
-export default ChangeAuthorizationBtn
+export default memo(ChangeAuthorizationBtn)

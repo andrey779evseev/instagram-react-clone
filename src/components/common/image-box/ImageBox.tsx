@@ -7,7 +7,7 @@ type PropsType = {
   isSmall?: boolean
 }
 
-const ImageBox = memo((props: PropsType) => {
+const ImageBox = (props: PropsType) => {
   const {image, isSmall = false} = props
   return (
     <div className={`${s.gradient_wrapper} ${isSmall && s.small}`}>
@@ -17,7 +17,7 @@ const ImageBox = memo((props: PropsType) => {
         />
       </div>
   )
-})
+}
 
 
-export default ImageBox
+export default memo(ImageBox)

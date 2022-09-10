@@ -10,7 +10,7 @@ type PropsType = {
   initialActive?: string
 }
 
-const Tabs = memo((props: PropsType) => {
+const Tabs = (props: PropsType) => {
   const {
     items, 
     initialActive = items[0].Route
@@ -44,6 +44,6 @@ const Tabs = memo((props: PropsType) => {
       <Outlet/>
     </div>
   )
-})
+}
 
-export default Tabs
+export default memo(Tabs)

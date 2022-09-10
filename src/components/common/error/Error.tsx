@@ -5,7 +5,7 @@ type PropsType = {
   error: string | string[]
 }
 
-const Error = memo((props: PropsType) => {
+const Error = (props: PropsType) => {
   const {error} = props
   if(!error || error === '')
     return <></>
@@ -28,7 +28,7 @@ const Error = memo((props: PropsType) => {
       }
     </div>
   )
-})
+}
 
 
-export default Error
+export default memo(Error)

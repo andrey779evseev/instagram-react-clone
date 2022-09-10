@@ -7,7 +7,7 @@ type PropsType = {
   story: StoryMiniatureModel
 }
 
-const StoryMiniatureItem = memo((props: PropsType) => {
+const StoryMiniatureItem = (props: PropsType) => {
   const {story} = props
   return (
     <div className={s.story_item}>
@@ -15,6 +15,6 @@ const StoryMiniatureItem = memo((props: PropsType) => {
       <div className={s.story_name}>{story.Name}</div>
     </div>
   )
-})
+}
 
-export default StoryMiniatureItem
+export default memo(StoryMiniatureItem)

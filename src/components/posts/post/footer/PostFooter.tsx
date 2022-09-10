@@ -8,7 +8,7 @@ type PropsType = {
   likesCount: number
 }
 
-const PostFooter = memo((props: PropsType) => {
+const PostFooter = (props: PropsType) => {
   const { likesCount } = props
   return (
     <div className='border border-gray20 border-t-0'>
@@ -22,6 +22,6 @@ const PostFooter = memo((props: PropsType) => {
       <AddCommentForm/>
     </div>
   )
-})
+}
 
-export default PostFooter
+export default memo(PostFooter)

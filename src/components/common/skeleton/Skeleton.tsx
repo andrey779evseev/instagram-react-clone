@@ -11,7 +11,7 @@ type PropsType = {
    width?: number | string,
 }
 
-const Skeleton = memo((props: PropsType) => {
+const Skeleton = (props: PropsType) => {
   const {
     animation = 'pulse',
     height,
@@ -41,6 +41,6 @@ const Skeleton = memo((props: PropsType) => {
       }
     />
   )
-})
+}
 
-export default Skeleton
+export default memo(Skeleton)

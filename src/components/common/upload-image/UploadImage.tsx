@@ -7,7 +7,7 @@ type PropsType = {
   uploadImage: (file: File) => void
 }
 
-const UploadImage = memo((props: PropsType) => {
+const UploadImage = (props: PropsType) => {
   const {
     children,
     uploadImage
@@ -31,6 +31,6 @@ const UploadImage = memo((props: PropsType) => {
       </div>
     </div>
   )
-})
+}
 
-export default UploadImage
+export default memo(UploadImage)

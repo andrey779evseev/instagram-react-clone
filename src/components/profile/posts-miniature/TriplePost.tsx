@@ -2,7 +2,7 @@ import PostMiniatureResponse from '@api/services/post/models/responses/PostMinia
 import { memo } from 'react'
 import PostMiniature from './PostMiniature'
 
-const TriplePost = memo((props: {
+const TriplePost = (props: {
   item: PostMiniatureResponse[],
   size: number,
 }) => {
@@ -17,6 +17,6 @@ const TriplePost = memo((props: {
       <PostMiniature item={item[2]} size={size}/>
     </div>
   )
-})
+}
 
-export default TriplePost
+export default memo(TriplePost)

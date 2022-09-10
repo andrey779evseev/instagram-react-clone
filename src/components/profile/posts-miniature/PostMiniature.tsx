@@ -10,7 +10,7 @@ type PropsType = {
   size: number
 }
 
-const PostMiniature = memo((props: PropsType) => {
+const PostMiniature = (props: PropsType) => {
   const { 
     item: post, 
     size 
@@ -43,7 +43,7 @@ const PostMiniature = memo((props: PropsType) => {
       </div>
     </div>
   )
-})
+}
 
 
-export default PostMiniature
+export default memo(PostMiniature)

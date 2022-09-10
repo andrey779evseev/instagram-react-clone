@@ -5,7 +5,7 @@ type PropsType = {
   text: string
 }
 
-const DividerWithText = memo((props: PropsType) => {
+const DividerWithText = (props: PropsType) => {
   const {text} = props
   return (
     <div className="flex items-center w-full mt-3 mb-[15px]">
@@ -14,6 +14,6 @@ const DividerWithText = memo((props: PropsType) => {
       <div className="h-px w-full bg-gray10"></div>
     </div>
   )
-})
+}
 
-export default DividerWithText
+export default memo(DividerWithText)

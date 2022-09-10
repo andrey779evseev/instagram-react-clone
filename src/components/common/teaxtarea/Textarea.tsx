@@ -10,7 +10,7 @@ type PropsType = {
   minimalistic?: boolean
 }
 
-const Textarea = memo((props: PropsType) => {
+const Textarea = (props: PropsType) => {
   const {
     value,
     setValue,
@@ -33,6 +33,6 @@ const Textarea = memo((props: PropsType) => {
       onBlur={() => setIsTouched(true)}
     />
   )
-})
+}
 
-export default Textarea
+export default memo(Textarea)

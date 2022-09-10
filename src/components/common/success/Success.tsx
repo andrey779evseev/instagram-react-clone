@@ -5,7 +5,7 @@ type PropsType = {
   message: string | string[]
 }
 
-const Success = memo((props: PropsType) => {
+const Success = (props: PropsType) => {
   const {message} = props
   if(!message || message === '')
     return <></>
@@ -16,7 +16,7 @@ const Success = memo((props: PropsType) => {
       </div>
     </div>
   )
-})
+}
 
 
-export default Success
+export default memo(Success)

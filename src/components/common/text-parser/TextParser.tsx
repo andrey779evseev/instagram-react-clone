@@ -6,7 +6,7 @@ type PropsType = {
   withNewLines?: boolean
 }
 
-const TextParser = memo((props: PropsType) => {
+const TextParser = (props: PropsType) => {
   const {
     text,
     withNewLines = true
@@ -19,6 +19,6 @@ const TextParser = memo((props: PropsType) => {
   return (
     <div dangerouslySetInnerHTML={{__html: innerText}}/>
   )
-})
+}
 
-export default TextParser
+export default memo(TextParser)

@@ -7,7 +7,7 @@ type PropsType = {
   authorName: string
 }
 
-const PostHeader = memo((props: PropsType) => {
+const PostHeader = (props: PropsType) => {
   const {authorAvatar, authorName} = props
   return (
     <div className='bg-white w-full flex items-center justify-between px-4 py-[9px] border border-gray10'>
@@ -18,7 +18,7 @@ const PostHeader = memo((props: PropsType) => {
       <img src={moreIcon} className='cursor-pointer hover:bg-gray-50 transition-all'/>
     </div>
   )
-})
+}
 
 
-export default PostHeader
+export default memo(PostHeader)

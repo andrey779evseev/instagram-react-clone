@@ -12,7 +12,7 @@ type PropsType = {
   error?: string
 }
 
-const Input = memo((props: PropsType) => {
+const Input = (props: PropsType) => {
   const {
     value,
     setValue,
@@ -39,6 +39,6 @@ const Input = memo((props: PropsType) => {
       <Error error={error}/>
     </div>
   )
-})
+}
 
-export default Input
+export default memo(Input)

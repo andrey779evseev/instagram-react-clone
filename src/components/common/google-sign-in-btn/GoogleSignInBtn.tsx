@@ -14,7 +14,7 @@ type PropsType = {
   setIsLoading: Function
 }
 
-const GoogleSignInBtn = memo((props: PropsType) => {
+const GoogleSignInBtn = (props: PropsType) => {
   const {setIsLoading} = props
   const setCredentials = useUpdateAtom(CredentialsAtom)
   const navigate = useNavigate()
@@ -77,6 +77,6 @@ const GoogleSignInBtn = memo((props: PropsType) => {
       Continue with google
     </div>
   )
-})
+}
 
-export default GoogleSignInBtn
+export default memo(GoogleSignInBtn)

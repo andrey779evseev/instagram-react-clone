@@ -16,7 +16,7 @@ type PropsType = {
   size?: EnumAvatarSize
 }
 
-const Avatar = memo((props: PropsType) => {
+const Avatar = (props: PropsType) => {
   const {
     src, 
     size = EnumAvatarSize.Large
@@ -46,7 +46,7 @@ const Avatar = memo((props: PropsType) => {
       <AsyncImage height={imgSize} width={imgSize} url={avatar} rounded/>
     </>
   )
-})
+}
 
 
-export default Avatar
+export default memo(Avatar)
