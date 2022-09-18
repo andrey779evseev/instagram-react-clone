@@ -34,8 +34,8 @@ const Skeleton = (props: PropsType) => {
       }
       style={
         {
-          height: height && `${height}px`,
-          width: width && `${width}px`,
+          height: typeof height === 'number' ? `${height}px` : height,
+          width: width === 'string' ? `${width}px` : width,
           ...style,
         }
       }

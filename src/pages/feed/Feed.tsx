@@ -6,7 +6,7 @@ import StoriesMiniaturesList from '../../components/stories-miniatures/StoriesMi
 const Feed = () => {
   return (
     <div className='flex'>
-      {/* <DetailPost/> */}
+      <DetailPost/>
       <div className='mr-7 w-[470px]'>
         <StoriesMiniaturesList/>
         <FeedPosts/>

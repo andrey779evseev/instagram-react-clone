@@ -1,4 +1,4 @@
-import { ElementType, memo } from 'react'
+import { memo } from 'react'
 
 
 type PropsType = {
@@ -16,7 +16,7 @@ const SkeletonWrapper = (props: PropsType) => {
     className
   } = props
   return (
-    <div className={className}>
+    <div className={`${className} w-full h-full`}>
       {
         !condition ?
         children :

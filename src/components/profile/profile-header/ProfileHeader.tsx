@@ -42,7 +42,7 @@ const ProfileHeader = () => {
               condition={isLoading}
               skeleton={<Skeleton variant='rounded' width={153} height={30}/>}
             >
-              <Button theme={EnumButtonTheme.Secondary} onClick={goToEditProfile}>
+              <Button theme={EnumButtonTheme.Secondary} onClick={goToEditProfile} width='max-content'>
                 Edit Profile
               </Button>
             </SkeletonWrapper>
@@ -59,15 +59,15 @@ const ProfileHeader = () => {
             condition={isLoading}
           >
             <div className="flex items-center">
-              <div className='text-base'>
+              <div className='text-base whitespace-nowrap'>
                 <span className='font-medium'>{stats?.PostsCount} </span>
                 posts
               </div>
-              <div className='text-base ml-10'>
+              <div className='text-base ml-10 whitespace-nowrap'>
                 <span className='font-medium'>{stats?.FollowersCount} </span>
                 followers
               </div>
-              <div className='text-base ml-10'>
+              <div className='text-base ml-10 whitespace-nowrap'>
                 <span className='font-medium'>{stats?.FollowingCount} </span>
                 following
               </div>

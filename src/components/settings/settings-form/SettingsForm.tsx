@@ -7,6 +7,8 @@ import LittleLoading from '@components/common/little-loading/LittleLoading'
 import Input from '@components/common/input/Input'
 import Textarea from '@components/common/teaxtarea/Textarea'
 import If from '@components/common/if/If'
+import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
+import Skeleton from '@components/common/skeleton/Skeleton'
 
 
 type PropsType = {
@@ -58,7 +60,12 @@ const SettingsForm = (props: PropsType) => {
               <If condition={isAvatar(item)}>
                 <div className={s.avatar_data}>
                   <div className={s.avatar_data_user_name}>
-                    {item.Label}
+                    <SkeletonWrapper
+                      condition={!item.Label}
+                      skeleton={<Skeleton variant='text'/>}
+                    >
+                      <span>{item.Label}</span>
+                    </SkeletonWrapper>
                   </div>
                   <If condition={!isAvatarWithoutEdit(item)}>
                     <UploadImage uploadImage={item.SetValue as (file: File) => void}>

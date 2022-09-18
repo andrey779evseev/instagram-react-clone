@@ -1,6 +1,7 @@
 import ImageBox from '@components/common/image-box/ImageBox'
 import moreIcon from '@assets/icons/post/more-icon.svg'
 import {memo} from 'react'
+import MoreIcon from '@components/common/icons/MoreIcon'
 
 type PropsType = {
   authorAvatar: string
@@ -15,7 +16,9 @@ const PostHeader = (props: PropsType) => {
         <ImageBox image={authorAvatar} isSmall={true}/>
         <span className='ml-4'>{authorName}</span>
       </div>
-      <img src={moreIcon} className='cursor-pointer hover:bg-gray-50 transition-all'/>
+      <div className='cursor-pointer hover:bg-gray10 transition-all rounded-sm'>
+        <MoreIcon/>
+      </div>
     </div>
   )
 }

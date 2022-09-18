@@ -46,9 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <ReactQueryDevtools initialIsOpen={false} />
           <JotaiNexus/>
           <HistoryRouter history={history}>
-            <AuthorizationGuard>
-              <App />
-            </AuthorizationGuard>
+            <App />
           </HistoryRouter>
         </QueryClientProvider>
       </React.StrictMode>

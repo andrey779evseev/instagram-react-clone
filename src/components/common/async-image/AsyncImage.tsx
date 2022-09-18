@@ -27,11 +27,12 @@ const AsyncImage = (props: PropsType) => {
     img.onerror = () => {
       setSrc('')
     }
+    img.referrerPolicy = 'no-referrer'
     img.src = url
   }, [url])
 
   useEffect(() => {
-    if(src !== url)
+    if(src !== '' && src !== url)
       setSrc(url)
   }, [src])
 

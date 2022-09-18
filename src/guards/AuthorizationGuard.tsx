@@ -1,20 +1,15 @@
-import {AccountService} from '@api/services/account/AccountService'
-import PagePreloader from '@components/common/preloader/Preloader'
+import { AccountService } from '@api/services/account/AccountService'
+import Preloader from '@components/common/page-preloader/PagePreloader'
 import User from '@models/user/User'
-import {CredentialsAtom} from '@store/atoms/AuthenticationAtom'
-import {useQueryClient} from '@tanstack/react-query'
-import {SaveToLocalStorage} from '@utils/LocalStorage'
-import {useAtomValue} from 'jotai'
-import {useEffect, useState} from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
+import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
+import { useQueryClient } from '@tanstack/react-query'
+import { SaveToLocalStorage } from '@utils/LocalStorage'
+import { useAtomValue } from 'jotai'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 
-type PropsType = {
-  children?: JSX.Element
-}
-
-const AuthorizationGuard = (props: PropsType) => {
-  const {children} = props
+const AuthorizationGuard = () => {
   const credentials = useAtomValue(CredentialsAtom)
   let navigate = useNavigate();
   const isLoginPage = useLocation().pathname.includes('login')
@@ -31,6 +26,7 @@ const AuthorizationGuard = (props: PropsType) => {
       (async () => {
         await qc.prefetchQuery(['user'], AccountService.GetUser)
         const user = qc.getQueryData<User>(['user'])
+        console.log('prefetch user', user);
         if(user) {
           SaveToLocalStorage('email', user.Email)
           if(isLoginPage || isRegistrationPage)
@@ -42,9 +38,9 @@ const AuthorizationGuard = (props: PropsType) => {
   }, [])
 
   if(isLoading)
-    return <PagePreloader full/>
+    return <Preloader/>
   
-  return <>{children}</>
+  return <Outlet/>
 }
 
 export default AuthorizationGuard
