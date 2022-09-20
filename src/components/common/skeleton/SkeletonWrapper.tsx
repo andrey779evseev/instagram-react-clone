@@ -1,12 +1,11 @@
-import { memo } from 'react'
+import { memo, PropsWithChildren } from 'react'
 
 
-type PropsType = {
+type PropsType = PropsWithChildren<{
   condition: boolean
   skeleton: React.ReactElement
-  children: JSX.Element
   className?: string
-}
+}>
 
 const SkeletonWrapper = (props: PropsType) => {
   const {

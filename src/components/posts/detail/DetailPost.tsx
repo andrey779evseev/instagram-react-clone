@@ -1,5 +1,5 @@
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
-import MoreIcon from '@components/common/icons/MoreIcon'
+import MoreIcon from '@components/common/assets/icons/MoreIcon'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import useWindowSize from '@hooks/UseWindowSize'

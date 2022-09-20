@@ -33,9 +33,13 @@ const Tabs = (props: PropsType) => {
             className={s.tab_item}
           >
             <If condition={!!tab.Icon}>
-              <img src={tab.Icon} />
+              {
+                typeof tab.Icon === 'string' ?
+                <img src={tab.Icon} /> :
+                <tab.Icon/>
+              }
             </If>
-            <span className='text-xs font-medium'>
+            <span className='text-xs font-medium ml-2'>
               {tab.Name}
             </span>
           </NavLink>

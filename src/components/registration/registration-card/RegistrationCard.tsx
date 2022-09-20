@@ -1,5 +1,4 @@
 import s from './RegistrationCard.module.scss'
-import instagramLogo from '@assets/icons/common/instagram-logo.svg'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import DividerWithText from '@components/common/divider-with-text/DividerWithText'
 import Input from '@components/common/input/Input'
@@ -15,6 +14,7 @@ import {useMutation, useQuery} from '@tanstack/react-query'
 import {AccountService} from '@api/services/account/AccountService'
 import {SaveToLocalStorage} from '@utils/LocalStorage'
 import useDebounce from '@hooks/UseDebounce'
+import InstagramTitle from '@components/common/assets/InstagramTitle'
 
 
 const RegistrationCard = () => {
@@ -71,7 +71,7 @@ const RegistrationCard = () => {
   
   return (
     <div className={s.registration_card}>
-      <img src={instagramLogo} className="w-[183px] h-[57px] mb-3"/>
+      <InstagramTitle width={183} height={57} className='mb-3'/>
       <div className={s.registration_description}>
         Sign up to see photos and videos of your friends.
       </div>

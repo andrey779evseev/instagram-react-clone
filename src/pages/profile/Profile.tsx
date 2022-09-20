@@ -1,14 +1,14 @@
+import TableIcon from '@components/common/assets/icons/TableIcon'
 import Tabs from '@components/common/tabs/Tabs'
 import ProfileHeader from '@components/profile/profile-header/ProfileHeader'
 import TabItem from '@models/tabs/TabItem'
-import tableIcon from '@assets/icons/profile/table-icon.svg'
 import { useMemo } from 'react'
 
 
 const Profile = () => {
   const tabs = useMemo(() => {
     return [
-      new TabItem({Name: 'posts', Route: 'posts', Icon: tableIcon})
+      new TabItem({Name: 'posts', Route: 'posts', Icon: TableIcon})
     ]
   }, [])
   

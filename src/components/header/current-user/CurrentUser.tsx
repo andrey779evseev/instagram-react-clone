@@ -1,7 +1,5 @@
 import {AccountService} from '@api/services/account/AccountService'
 import {AuthService} from '@api/services/auth/AuthService'
-import profileIcon from '@assets/icons/header-icons/profile-icon.svg'
-import settingsIcon from '@assets/icons/common/settings-icon.svg'
 import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
 import Dropdown from '@components/common/dropdown/Dropdown'
 import DropdownItem from '@models/dropdown/DropdownItem'
@@ -14,6 +12,8 @@ import {useUpdateAtom} from 'jotai/utils'
 import {useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useGoogleLogout} from 'react-google-login'
+import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
+import ProfileIcon from '@components/common/assets/icons/ProfileIcon'
 
 
 
@@ -48,12 +48,12 @@ const CurrentUser = () => {
   const dropdownItems = useMemo(
     () => [
       new DropdownItem({
-        Image: profileIcon,
+        Image: ProfileIcon,
         Name: 'Profile',
         Callback: openProfile
       }),
       new DropdownItem({
-        Image: settingsIcon,
+        Image: SettingsIcon,
         Name: 'Settings',
         Callback: openSettings
       }),

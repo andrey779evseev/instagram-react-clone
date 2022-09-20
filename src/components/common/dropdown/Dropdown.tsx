@@ -1,15 +1,14 @@
-import {memo, useState} from 'react'
+import {memo, PropsWithChildren, useState} from 'react'
 import s from './Dropdown.module.scss'
 import DropdownItem from '@models/dropdown/DropdownItem'
 import useClickOutside from '@hooks/UseClickOutside'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 import If from '@components/common/if/If'
 
-type PropsType = {
-  children: JSX.Element
+type PropsType = PropsWithChildren<{
   items: DropdownItem[]
   minWidth?: number
-}
+}>
 
 const Dropdown = (props: PropsType) => {
   const {children, items, minWidth = 230} = props
@@ -33,7 +32,11 @@ const Dropdown = (props: PropsType) => {
                   <div className={s.dropdown_divider}></div> :
                   <div className={s.item} onClick={() => callback(item)}>
                     <If condition={!!item.Image}>
-                      <img src={item.Image} className='mr-2.5'/>
+                      {
+                        typeof item.Image === 'string' ?
+                        <img src={item.Image} className='mr-2.5'/> :
+                        <item.Image className='mr-2.5'/>
+                      }
                     </If>
                     <div className={s.dropdown_item_title}>
                       {item.Name}

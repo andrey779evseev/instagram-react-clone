@@ -1,8 +1,8 @@
 import PostMiniatureResponse from '@api/services/post/models/responses/PostMiniatureResponse'
 import { memo, useState } from 'react'
-import likeIcon from '@assets/icons/post/miniature/heart-icon.svg'
-import commentIcon from '@assets/icons/post/miniature/comment-icon.svg'
 import s from './PostMiniature.module.scss'
+import HeartFilledIcon from '@components/common/assets/icons/HeartFilledIcon'
+import CommentIcon from '@components/common/assets/icons/CommentIcon'
 
 
 type PropsType = {
@@ -29,13 +29,13 @@ const PostMiniature = (props: PropsType) => {
       />
       <div className={`${s.post_miniature_hover} ${isVisibleHover && 'show'}`}>
         <span className='mr-8 flex items-center'>
-          <img src={likeIcon} />
+          <HeartFilledIcon/>
           <span className='ml-2'>
             {post.LikesCount}
           </span>
         </span>
         <span className='flex items-center'>
-          <img src={commentIcon} />
+          <CommentIcon/>
           <span className='ml-2'>
             {post.CommentsCount}
           </span>

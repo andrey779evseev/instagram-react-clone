@@ -1,10 +1,10 @@
-import metaLogo from '@assets/icons/settings/meta-logo.svg'
+import MetaTitle from '@components/common/assets/MetaTitle'
 
 
 const SettingsSidebarMeta = () => {
   return (
     <div className="py-[47px] px-8 min-h-[240px] border-t border-t-gray10">
-      <img src={metaLogo} alt=""/>
+      <MetaTitle/>
       <div className="mt-[10px] mb-2 text-cobalt text-base font-medium">
         Accounts Center
       </div>

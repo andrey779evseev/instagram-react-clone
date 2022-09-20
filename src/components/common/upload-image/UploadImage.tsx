@@ -1,11 +1,10 @@
-import {ChangeEvent, memo} from 'react'
+import {ChangeEvent, memo, PropsWithChildren} from 'react'
 import s from './UploadImage.module.scss'
 
 
-type PropsType = {
-  children?: JSX.Element
+type PropsType = PropsWithChildren<{
   uploadImage: (file: File) => void
-}
+}>
 
 const UploadImage = (props: PropsType) => {
   const {

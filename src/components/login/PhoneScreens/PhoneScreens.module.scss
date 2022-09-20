@@ -3,7 +3,7 @@
   width: 380px;
   background-size: cover;
   background-position: center center;
-  background-image: url('@assets/icons/login/screens/bg.png');
+  background-image: url('@assets/img/login/screens/bg.png');
   background-repeat: no-repeat;
   position: relative;
   .screen_content {
@@ -24,16 +24,16 @@
       visibility: visible;
     }
     &.sc_1 {
-      background-image: url('@assets/icons/login/screens/1.png');
+      background-image: url('@assets/img/login/screens/1.png');
     }
     &.sc_2 {
-      background-image: url('@assets/icons/login/screens/2.png');
+      background-image: url('@assets/img/login/screens/2.png');
     }
     &.sc_3 {
-      background-image: url('@assets/icons/login/screens/3.png');
+      background-image: url('@assets/img/login/screens/3.png');
     }
     &.sc_4 {
-      background-image: url('@assets/icons/login/screens/4.png');
+      background-image: url('@assets/img/login/screens/4.png');
     }
   }
 }

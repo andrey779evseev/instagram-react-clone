@@ -3,10 +3,10 @@ import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
 import Button, {EnumButtonTheme} from '@components/common/button/Button'
 import {useQuery} from '@tanstack/react-query'
 import {useNavigate} from 'react-router-dom'
-import settingsIcon from '@assets/icons/common/settings-icon.svg'
 import TextParser from '@components/common/text-parser/TextParser'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
+import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 
 
 const ProfileHeader = () => {
@@ -51,7 +51,7 @@ const ProfileHeader = () => {
               skeleton={<Skeleton variant='rounded' width={24} height={24}/>}
               className='ml-6'
             >
-              <img src={settingsIcon} className='w-6 h-6' />
+              <SettingsIcon width={24} height={24}/>
             </SkeletonWrapper>
           </div>
           <SkeletonWrapper

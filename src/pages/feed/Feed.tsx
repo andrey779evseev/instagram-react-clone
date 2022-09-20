@@ -1,3 +1,4 @@
+import SliderArrowIcon from '@components/common/assets/icons/SliderArrowIcon'
 import DetailPost from '@components/posts/detail/DetailPost'
 import RightPanel from '@components/right-panel/RightPanel'
 import FeedPosts from '../../components/posts/FeedPosts'

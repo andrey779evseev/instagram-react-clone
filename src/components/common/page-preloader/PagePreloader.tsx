@@ -1,4 +1,4 @@
-import InstagramIcon from '../icons/InstagramIcon'
+import InstagramIcon from '../assets/icons/InstagramIcon'
 import s from './PagePreloader.module.scss'
 
 

@@ -1,6 +1,6 @@
 import {AccountService} from '@api/services/account/AccountService'
 import {AuthService} from '@api/services/auth/AuthService'
-import googleLogo from '@assets/icons/common/google-logo.svg'
+import googleLogo from '@assets/img/common/google-logo.svg'
 import {CredentialsAtom} from '@store/atoms/AuthenticationAtom'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {SaveToLocalStorage} from '@utils/LocalStorage'
@@ -8,6 +8,7 @@ import {useUpdateAtom} from 'jotai/utils'
 import {memo, useEffect, useState} from 'react'
 import {useGoogleLogin} from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
+import GoogleIcon from '../assets/icons/GoogleIcon'
 import s from './GoogleSignInBtn.module.scss'
 
 type PropsType = {
@@ -73,7 +74,7 @@ const GoogleSignInBtn = (props: PropsType) => {
 
   return (
     <div className={s.google_sign_in_btn} onClick={login}>
-      <img src={googleLogo} className={s.logo}/>
+      <GoogleIcon className={s.logo}/>
       Continue with google
     </div>
   )

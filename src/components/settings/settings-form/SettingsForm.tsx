@@ -1,4 +1,4 @@
-import {memo} from 'react'
+import {memo, PropsWithChildren} from 'react'
 import s from './SettingsForm.module.scss'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
@@ -11,10 +11,9 @@ import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import Skeleton from '@components/common/skeleton/Skeleton'
 
 
-type PropsType = {
+type PropsType = PropsWithChildren<{
   items: SettingsFormItem[]
-  children?: JSX.Element
-}
+}>
 
 const SettingsForm = (props: PropsType) => {
   const {items, children} = props

@@ -1,5 +1,5 @@
 import {memo, useMemo} from 'react'
-import defaultAvatar from '@assets/icons/common/default-avatar.jpg'
+import defaultAvatar from '@assets/img/common/default-avatar.jpg'
 import AsyncImage from '../async-image/AsyncImage'
 
 

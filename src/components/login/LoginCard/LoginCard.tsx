@@ -1,6 +1,6 @@
 import {AccountService} from '@api/services/account/AccountService'
 import {AuthService} from '@api/services/auth/AuthService'
-import instagramLogo from '@assets/icons/common/instagram-logo.svg'
+import InstagramTitle from '@components/common/assets/InstagramTitle'
 import Button from '@components/common/button/Button'
 import DividerWithText from '@components/common/divider-with-text/DividerWithText'
 import Error from '@components/common/error/Error'
@@ -53,7 +53,7 @@ const LoginCard = () => {
   return (
     <div className='border border-gray10 py-6 px-10'>
       <div className="flex flex-col items-center">
-        <img src={instagramLogo} className='w-[183px] h-[57px] mb-6'/>
+        <InstagramTitle className='mb-6' width={183} height={57}/>
         <div className="mb-3.5 w-full">
           <Input
             value={email}

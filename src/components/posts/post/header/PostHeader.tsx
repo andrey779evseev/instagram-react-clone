@@ -1,7 +1,6 @@
+import MoreIcon from '@components/common/assets/icons/MoreIcon'
 import ImageBox from '@components/common/image-box/ImageBox'
-import moreIcon from '@assets/icons/post/more-icon.svg'
-import {memo} from 'react'
-import MoreIcon from '@components/common/icons/MoreIcon'
+import { memo } from 'react'
 
 type PropsType = {
   authorAvatar: string

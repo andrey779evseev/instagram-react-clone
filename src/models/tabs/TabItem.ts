@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default class TabItem {
   constructor(obj?: Partial<TabItem>) {
     if(obj)
@@ -5,5 +7,5 @@ export default class TabItem {
   }
   Name: string = ''
   Route: string = ''
-  Icon?: string
+  Icon: string | React.ElementType = ''
 }

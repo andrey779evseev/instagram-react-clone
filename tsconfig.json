@@ -27,6 +27,7 @@
       "@store/*": ["./src/store/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@guards/*": ["./src/guards/*"],
+      "@hoc/*": ["./src/hoc/*"],
     }
   },
   "include": ["src"],

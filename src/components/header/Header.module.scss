@@ -16,31 +16,6 @@
       &:not(:last-child) {
         margin-right: 25px;
       }
-      .header_icon {
-        height: 24px;
-        width: 24px;
-        background-position: center center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        &.home {
-          background-image: url('@assets/icons/header-icons/links/home-icon.svg');
-          &.active {
-            background-image: url('@assets/icons/header-icons/links/home-icon-active.svg');
-          }
-        }
-        &.messenger {
-          background-image: url('@assets/icons/header-icons/links/messenger-icon.svg');
-        }
-        &.plus {
-          background-image: url('@assets/icons/header-icons/links/plus-icon.svg');
-        }
-        &.compass {
-          background-image: url('@assets/icons/header-icons/links/compass-icon.svg');
-        }
-        &.heart {
-          background-image: url('@assets/icons/header-icons/links/heart-icon.svg');
-        }
-      }
       &.active {
         &.profile {
           height: fit-content;

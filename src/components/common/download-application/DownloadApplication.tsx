@@ -1,5 +1,5 @@
-import googlePlayBadge from '@assets/icons/common/google-play-badge.png'
-import appStoreBadge from '@assets/icons/common/app-store-badge.svg'
+import googlePlayBadge from '@assets/img/common/google-play-badge.png'
+import appStoreBadge from '@assets/img/common/app-store-badge.svg'
 
 const DownloadApplication = () => {
   return (

@@ -1,6 +1,6 @@
-import {useRef, useState} from 'react'
+import { useRef, useState } from 'react'
+import SearchIcon from '../assets/icons/SearchIcon'
 import './Search.scss'
-import searchIcon from '@assets/icons/header-icons/search-icon.svg'
 
 
 const Search = () => {
@@ -26,7 +26,7 @@ const Search = () => {
         />
       </form>
       <span className={`search_input_placeholder ${!value && !isInputFocused ? 'show' : ''}`} onClick={focusOnInput}>
-        <img src={searchIcon} className='mr-3'/>
+        <SearchIcon className='mr-3'/>
         Search
       </span>
     </div>

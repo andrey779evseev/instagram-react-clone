@@ -1,10 +1,9 @@
-import {memo} from 'react'
+import {memo, PropsWithChildren} from 'react'
 
 
-type PropsType = {
-  children: JSX.Element | string
+type PropsType = PropsWithChildren<{
   condition: boolean
-}
+}>
 
 const If = (props: PropsType) => {
   const {

@@ -1,4 +1,4 @@
-import {memo} from 'react'
+import {memo, PropsWithChildren} from 'react'
 import s from './Button.module.scss'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 
@@ -8,14 +8,13 @@ export enum EnumButtonTheme {
   Secondary = 'secondary'
 }
 
-type PropsType = {
-  children?: JSX.Element | string
+type PropsType = PropsWithChildren<{
   width?: string
   disabled?: boolean,
   onClick?: Function
   isLoading?: boolean
   theme?: EnumButtonTheme
-}
+}>
 
 const Button = (props: PropsType) => {
   const {

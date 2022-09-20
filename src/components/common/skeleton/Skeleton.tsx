@@ -1,15 +1,14 @@
 import s from './Skeleton.module.scss';
-import { memo } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
 
-type PropsType = {
+type PropsType = PropsWithChildren<{
    animation?: 'pulse' | 'wave' | false,
-   children?: JSX.Element,
    height?: number | string,
    style?: object,
    variant: 'circular' | 'rectangular' | 'rounded' | 'text',
    width?: number | string,
-}
+}>
 
 const Skeleton = (props: PropsType) => {
   const {

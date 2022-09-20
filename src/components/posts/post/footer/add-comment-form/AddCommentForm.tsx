@@ -1,6 +1,6 @@
 import s from './AddCommentForm.module.scss'
-import emojiIcon from '@assets/icons/post/emoji-icon.svg'
 import {useMemo, useState} from 'react'
+import EmojiIcon from '@components/common/assets/icons/EmojiIcon'
 
 
 const AddCommentForm = () => {
@@ -8,7 +8,7 @@ const AddCommentForm = () => {
   const isAvaliablePost = useMemo(() => commentText !== '', [commentText])
   return (
     <div className={s.add_comment_container}>
-      <img src={emojiIcon} className='cursor-pointer'/>
+      <EmojiIcon className='cursor-pointer'/>
       <input 
         type='text' 
         className={s.add_comment_input} 

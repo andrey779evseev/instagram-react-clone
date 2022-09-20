@@ -31,7 +31,7 @@ const AuthLayout = loadable(
   }
 )
 const ProfilePosts = loadable(
-  () => pMinDelay(import('@pages/profile/posts/ProfilePosts'), 900),
+  () => pMinDelay(import('@pages/profile/posts/ProfilePosts'), 1000),
   {
     fallback: <PagePreloader />
   }
