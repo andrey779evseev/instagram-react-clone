@@ -78,7 +78,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 
   const visibleChildren = useMemo(
     () =>
-      new Array(visibleNodeCount).fill(null).map((_, index) => {
+      new Array(Math.min(items.length, visibleNodeCount)).fill(null).map((_, index) => {
         const item = items[startNode + index]
         return <Item key={index} item={item} size={itemHeight} />
       }),

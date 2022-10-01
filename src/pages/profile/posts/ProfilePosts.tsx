@@ -35,6 +35,7 @@ const ProfilePosts = () => {
           flatPosts[i]
         ])
     }
+    console.log(arr)
     return arr
   }, [flatPosts])
 

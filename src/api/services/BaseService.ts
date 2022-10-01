@@ -1,10 +1,10 @@
-import axios, {AxiosRequestConfig} from 'axios'
-import {BASE_URL} from '@api/common/ApiConstants'
-import {AccessTokenAtom} from '@store/atoms/AccessTokenAtom'
-import {EnumHttpMethod} from '@api/common/EnumHttpMethod'
+import { BASE_URL } from '@api/common/ApiConstants'
+import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
 import SendParams from '@api/common/SendParams'
-import {readAtom} from '@utils/JotaiNexus'
-import {logout} from '@utils/Logout'
+import { refreshAccessToken } from '@api/utils/RefreshToken'
+import { AccessTokenAtom } from '@store/atoms/AccessTokenAtom'
+import { readAtom } from '@utils/JotaiNexus'
+import axios, { AxiosRequestConfig } from 'axios'
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -17,7 +17,7 @@ instance.interceptors.response.use(res => {
   return res
 }, err => {
   if(err.response.status === 401)
-    logout()
+    refreshAccessToken()
   return Promise.reject(err)
 })
 
