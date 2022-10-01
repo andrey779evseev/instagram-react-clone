@@ -1,5 +1,5 @@
-export default class AuthenticationResponse {
-  constructor(obj?: Partial<AuthenticationResponse>) {
+export default class AuthenticationCredentials {
+  constructor(obj?: Partial<AuthenticationCredentials>) {
     if(obj)
       Object.assign(this, obj)
   }

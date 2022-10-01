@@ -1,5 +1,5 @@
-export default class PostMiniatureResponse {
-  constructor(obj?: Partial<PostMiniatureResponse>) {
+export default class PostMiniature {
+  constructor(obj?: Partial<PostMiniature>) {
     if(obj)
       Object.assign(this, obj)
   }

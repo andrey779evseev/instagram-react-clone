@@ -1,0 +1,22 @@
+.liked_by_avatar_img {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  &:not(:last-child):before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    border: 3px solid $white;
+    border-radius: 50%;
+  }
+  img {
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+  }
+}
