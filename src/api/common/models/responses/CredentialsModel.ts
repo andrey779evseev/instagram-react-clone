@@ -1,5 +1,5 @@
-export default class AuthenticationCredentials {
-  constructor(obj?: Partial<AuthenticationCredentials>) {
+export default class CredentialsModel {
+  constructor(obj?: Partial<CredentialsModel>) {
     if(obj)
       Object.assign(this, obj)
   }

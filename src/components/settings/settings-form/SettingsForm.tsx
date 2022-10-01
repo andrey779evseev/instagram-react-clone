@@ -70,11 +70,6 @@ const SettingsForm = (props: PropsType) => {
                     <UploadImage uploadImage={item.SetValue as (file: File) => void}>
                       <span className={s.avatar_data_change_photo}>
                         Change profile photo
-                        <span className="ml-2">
-                          <If condition={item.IsLoading}>
-                              <LittleLoading color="cobalt"/>
-                          </If>
-                        </span>
                       </span>
                     </UploadImage>
                   </If>

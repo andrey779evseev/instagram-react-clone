@@ -15,6 +15,7 @@ const UploadImage = (props: PropsType) => {
   const upload = (e: ChangeEvent<HTMLInputElement>) => {
     if(e && e.target.files && e.target.files[0])
       uploadImage(e.target.files[0])
+    e.target.value = ''
   }
 
   return (

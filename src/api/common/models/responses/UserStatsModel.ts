@@ -1,5 +1,5 @@
-export default class UserStats {
-  constructor(obj?: Partial<UserStats>) {
+export default class UserStatsModel {
+  constructor(obj?: Partial<UserStatsModel>) {
     if(obj)
       Object.assign(this, obj)
   }

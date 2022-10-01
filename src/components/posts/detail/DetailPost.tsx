@@ -1,36 +1,39 @@
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
-import MoreIcon from '@components/common/assets/icons/MoreIcon'
+import CommentModel from '@api/common/models/responses/CommentModel'
+import { PostService } from '@api/services/post/PostService'
+import Modal from '@components/common/modal/Modal'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
+import PostCommentsList from '@components/posts/detail/comments/PostCommentsList'
+import DetailPostFooter from '@components/posts/detail/footer/DetailPostFooter'
+import DetailPostHeader from '@components/posts/detail/header/DetailPostHeader'
 import useWindowSize from '@hooks/UseWindowSize'
-import { BaseSyntheticEvent, useMemo, useState } from 'react'
-import s from './DetailPost.module.scss'
+import { useQuery } from '@tanstack/react-query'
+import { memo, useMemo } from 'react'
+import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
 
+type PropsType = {
+  id: string
+  onClose: () => void
+}
 
-const DetailPost = () => {
-  const [visible, setVisible] = useState(true)
+const DetailPost = (props: PropsType) => {
+  const { id, onClose } = props
+  const aspectRatio = 1 / 2.2
   const [maxWidth, maxHeight] = useWindowSize()
-  const isLoading = false
-  const aspectRatio = 1/2.2
-  const post = {
-    "Id": "6bea56c2-3c3c-403f-9a18-1d001f29aa85",
-    "Author": {
-      "Id": "b770d456-8f16-49c1-9a8f-bdc6eeb45114",
-      "Nickname": "malifor",
-      "Avatar": "https://lh3.googleusercontent.com/a-/AFdZucpfaTbBH95gMxFv5AubLitvK8ffHa9wz2UXPnOqhw=s96-c"
-    },
-    "Description": "description 99",
-    "Photo": "https://images.unsplash.com/photo-1662047920109-dbb718472918?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-    "PostedAt": "2022-09-02T21:51:45.495323",
-    "LikesInfo": {
-      "FirstName": "malifor",
-      "Avatars": [
-        "https://lh3.googleusercontent.com/a-/AFdZucpfaTbBH95gMxFv5AubLitvK8ffHa9wz2UXPnOqhw=s96-c"
-      ],
-      "LikesCount": 1
-    }
-  }
-  
+
+  const { data: post, isLoading: isLoadingPost } = useQuery(['post', id], () =>
+    PostService.GetPost(id)
+  )
+  const { data: commentsData, isLoading: isLoadingComments } = useQuery(
+    ['comments', id],
+    () => PostService.GetComments(id)
+  )
+
+  const isLoading = useMemo(
+    () => isLoadingPost || isLoadingComments,
+    [isLoadingPost, isLoadingComments]
+  )
+
   const styles = useMemo(() => {
     let width = maxWidth - 48
     let height = width * aspectRatio
@@ -44,37 +47,56 @@ const DetailPost = () => {
     }
   }, [maxHeight, maxWidth])
 
-  const close = (e: BaseSyntheticEvent) => {
-    if(e.target.className === s.detail_post_container)
-      setVisible(false)
-  }
-
-  if(!visible)
-    return <></>
+  const comments = useMemo(() => {
+    if (isLoading) return []
+    return [
+      {
+        Text: post?.Description,
+        Author: post?.Author,
+        CommentedAt: post?.PostedAt,
+        PostId: id,
+        CommentId: ''
+      },
+      ...commentsData!
+    ] as CommentModel[]
+  }, [commentsData, post])
 
   return (
-    <div className={s.detail_post_container} onClick={close}>
-      <div className={s.detail_post_content} style={styles}>
-        <div className={s.detail_post_photo_container}>
-          <SkeletonWrapper
-            condition={isLoading}
-            skeleton={<Skeleton height='100%' width='100%' variant='rectangular'/>}
-          >
-            <div className={s.detail_post_photo} style={{backgroundImage: `url('${post.Photo}')`}}/>
-          </SkeletonWrapper>
-        </div>
-        <div className='w-1/2 h-full'>
-          <div className={s.detail_post_content_header}>
-            <div className='flex items-center'>
-              <Avatar src={post.Author.Avatar} size={EnumAvatarSize.Medium}/>
-              <span className='ml-[14px] text-sm font-medium'>{post.Author.Nickname}</span>
-            </div>
-            <MoreIcon/>
-          </div>
-        </div>
+    <Modal width={styles.width} height={styles.height} onClose={onClose}>
+      <div className='w-1/2'>
+        <SkeletonWrapper
+          condition={isLoading}
+          skeleton={
+            <Skeleton height='100%' width='100%' variant='rectangular' />
+          }
+          full
+        >
+          <div
+            className='bg-image-contain w-full h-full bg-black'
+            style={{ backgroundImage: `url('${post?.Photo}')` }}
+          />
+        </SkeletonWrapper>
       </div>
-    </div>
+      <div className='w-1/2 h-full flex flex-col justify-between'>
+        <DetailPostHeader
+          isLoading={isLoading}
+          nickname={post?.Author.Nickname}
+          avatar={post?.Author.Avatar}
+        />
+        <PostCommentsList
+          comments={comments}
+          avatar={post?.Author.Avatar}
+          isLoading={isLoading}
+        />
+        <DetailPostFooter
+          postedAt={post?.PostedAt}
+          isLoading={isLoading}
+          likesInfo={post?.LikesInfo}
+        />
+        <AddCommentForm />
+      </div>
+    </Modal>
   )
 }
 
-export default DetailPost
+export default memo(DetailPost)

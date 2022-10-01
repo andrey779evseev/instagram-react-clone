@@ -39,6 +39,7 @@ const LoginCard = () => {
     },
     onError: (error: AxiosError) => {
       setErrMsg(error.response?.data as string)
+      setIsLoading(false)
     }
   })
 

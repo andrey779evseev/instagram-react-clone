@@ -1,5 +1,5 @@
-export default class LikesInfo {
-  constructor(obj?: Partial<LikesInfo>) {
+export default class LikesInfoModel {
+  constructor(obj?: Partial<LikesInfoModel>) {
     if (obj)
       Object.assign(this, obj)
   }

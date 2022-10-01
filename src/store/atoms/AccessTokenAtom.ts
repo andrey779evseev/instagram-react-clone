@@ -1,5 +1,5 @@
 import {AuthService} from '@api/services/auth/AuthService'
-import AuthenticationResponse from '@api/services/auth/models/responses/AuthenticationResponse'
+import CredentialsModel from '@api/common/models/responses/CredentialsModel'
 import User from '@models/user/User'
 import {CredentialsAtom} from '@store/atoms/AuthenticationAtom'
 import {RefreshTokenAtom} from '@store/atoms/RefreshTokenAtom'
@@ -7,7 +7,7 @@ import {writeAtom} from '@utils/JotaiNexus'
 import {GetFromLocalStorage} from '@utils/LocalStorage'
 import {logout} from '@utils/Logout'
 import {atom} from 'jotai'
-import {queryClient} from '../../main'
+import {queryClient} from '@providers/QueryProvider'
 
 
 export const AccessTokenAtom = atom<Promise<string | null>>(
@@ -27,7 +27,7 @@ export const AccessTokenAtom = atom<Promise<string | null>>(
       logout()
       return null
     }
-    let response: AuthenticationResponse | null = null
+    let response: CredentialsModel | null = null
     await AuthService.RefreshToken({
       RefreshToken: refreshToken,
       Email: user?.Email ?? email as string
@@ -40,6 +40,6 @@ export const AccessTokenAtom = atom<Promise<string | null>>(
       return null
     }
     writeAtom(CredentialsAtom, response)
-    return (response as AuthenticationResponse).AccessToken
+    return (response as CredentialsModel).AccessToken
   }
 )

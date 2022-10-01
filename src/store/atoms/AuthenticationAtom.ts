@@ -1,6 +1,6 @@
-import AuthenticationResponse from '@api/services/auth/models/responses/AuthenticationResponse'
+import CredentialsModel from '@api/common/models/responses/CredentialsModel'
 import {atomWithStorage} from 'jotai/utils'
 
-export const CredentialsAtom = atomWithStorage<AuthenticationResponse | null>('credentials', null)
+export const CredentialsAtom = atomWithStorage<CredentialsModel | null>('credentials', null)
 
 

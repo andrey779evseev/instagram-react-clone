@@ -1,5 +1,5 @@
-export default class UserMiniature {
-  constructor(obj?: Partial<UserMiniature>) {
+export default class UserMiniatureModel {
+  constructor(obj?: Partial<UserMiniatureModel>) {
     if (obj)
       Object.assign(this, obj)
   }

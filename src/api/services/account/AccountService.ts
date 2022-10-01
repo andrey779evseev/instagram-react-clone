@@ -1,8 +1,8 @@
 import {customFetch} from '@api/services/BaseService'
 import {EnumHttpMethod} from '@api/common/EnumHttpMethod'
 import User from '@models/user/User'
-import UpdateUserRequest from '@api/services/account/models/requests/UpdateUserRequest'
-import UserStatsResponse from './models/responses/UserStatsResponse'
+import UpdateUserRequest from '@api/common/models/requests/UpdateUserRequest'
+import UserStatsModel from '../../common/models/responses/UserStatsModel'
 
 export namespace AccountService {
   const controllerName = 'account'
@@ -36,7 +36,7 @@ export namespace AccountService {
     })
   }
   export const GetStats = () => {
-    return customFetch<UserStatsResponse>({
+    return customFetch<UserStatsModel>({
       Method: EnumHttpMethod.Get,
       Path: `${controllerName}/get-stats`
     })

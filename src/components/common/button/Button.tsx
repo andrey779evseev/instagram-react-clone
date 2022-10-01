@@ -1,6 +1,7 @@
-import {memo, PropsWithChildren} from 'react'
-import s from './Button.module.scss'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
+import withClassName from '@hoc/WithClassName'
+import { PropsWithChildren } from 'react'
+import s from './Button.module.scss'
 
 
 export enum EnumButtonTheme {
@@ -41,4 +42,4 @@ const Button = (props: PropsType) => {
   )
 }
 
-export default memo(Button)
+export default withClassName(Button)

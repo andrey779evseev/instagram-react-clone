@@ -1,13 +1,13 @@
-import UserMiniature from '@api/common/models/responses/UserMiniature'
+import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
 
-export default class CommentInfo {
-  constructor(obj?: Partial<CommentInfo>) {
+export default class CommentModel {
+  constructor(obj?: Partial<CommentModel>) {
     if (obj)
       Object.assign(this, obj)
   }
   CommentId: string = ''
   PostId: string = ''
-  Author: UserMiniature = null!
+  Author: UserMiniatureModel = null!
   Text: string = ''
   CommentedAt: string = ''
 }

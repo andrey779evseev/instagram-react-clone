@@ -14,10 +14,10 @@ const PostFooter = (props: PropsType) => {
     <div className='border border-gray20 border-t-0'>
       <div className='p-4'>
         <PostFooterActions/>
-        <div className='font-bold'>{addDotsToNumber(likesCount)} likes</div>
+        <div className='font-bold mt-4'>{addDotsToNumber(likesCount)} likes</div>
         <PostFooterDescription />
         <div className='text-gray50 cursor-pointer mt-1'>View all 100 comments</div>
-        <div className='text-[10px] text-gray50 uppercase mt-1'>1 hour ago</div>
+        <div className='text-s text-gray50 uppercase mt-1'>1 hour ago</div>
       </div>
       <AddCommentForm/>
     </div>

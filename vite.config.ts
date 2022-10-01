@@ -21,6 +21,8 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, './src/utils'),
       '@components': path.resolve(__dirname, './src/components'),
       '@hoc': path.resolve(__dirname, './src/hoc'),
+      '@config': path.resolve(__dirname, './src/config'),
+      '@providers': path.resolve(__dirname, './src/providers'),
     },
   },
   css: {

@@ -1,9 +1,14 @@
 import {AccountService} from '@api/services/account/AccountService'
 import Button from '@components/common/button/Button'
+import If from '@components/common/if/If'
+import ImageCrop from '@components/common/image-crop/ImageCrop'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import useDebounce from '@hooks/UseDebounce'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
+import { base64ToBlob } from '@utils/Base64ToBlob'
+import { fileToUrl, ObjectUrlFileType } from '@utils/fileToUrl'
+import { getFileNameFromUrl } from '@utils/GetFileNameFromUrl'
 import {useEffect, useMemo, useState} from 'react'
 
 
@@ -16,12 +21,16 @@ const EditProfile = () => {
   const [description, setDescription] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
+  const [cropUrl, setCropUrl] = useState<ObjectUrlFileType | null>(null)
+  const [filename, setFilename] = useState<string | null>(null)
+  const [isVisibleCrop, setIsVisibleCrop] = useState(false)
   const debouncedNickname = useDebounce(nickname, 500)
   
   const setAvatarMutation = useMutation(AccountService.SetAvatar, {
     onSuccess: res => {
       setAvatar(res)
       qc.setQueryData(['user'], {...user!, Avatar: res})
+      closeCrop()
     }
   })
   const updateUserMutation = useMutation(AccountService.UpdateUser, {
@@ -44,9 +53,23 @@ const EditProfile = () => {
     setAvatar(user.Avatar)
   }, [user])
 
-  const saveAvatar = (file: File) => {
-    const formData = new FormData();
-    formData.append('file',file)
+  const openCrop = (file: File) => {
+    const url = fileToUrl(file)
+    setCropUrl(url)
+    setFilename(file.name)
+  }
+
+  const closeCrop = () => {
+    cropUrl?.revoke()
+    setCropUrl(null)
+    setFilename(null)
+    setIsVisibleCrop(false)
+  }
+
+  const saveAvatar = (base64: string) => {
+    const blob = base64ToBlob(base64)
+    var formData = new FormData()
+    formData.append("file", blob, filename!)
     setAvatarMutation.mutate(formData)
   }
 
@@ -55,8 +78,7 @@ const EditProfile = () => {
       new SettingsFormItem({
         Type: EnumSettingsFormItemType.AvatarWithEdit,
         Value: avatar,
-        SetValue: saveAvatar,
-        IsLoading: setAvatarMutation.isLoading,
+        SetValue: openCrop,
         Label: nickname,
         MarginBottom: '!mb-4'
       }),
@@ -192,6 +214,16 @@ const EditProfile = () => {
           </span>
         </div>
       </SettingsForm>
+      <If condition={cropUrl !== null}>
+        <ImageCrop
+          onCrop={saveAvatar}
+          url={cropUrl?.url!}
+          isLoading={setAvatarMutation.isLoading}
+          onClose={closeCrop}
+          onLoadImage={() => setIsVisibleCrop(true)}
+          className={`${isVisibleCrop ? 'opacity-1' : 'opacity-0'} transition-opacity duration-200`}
+        />
+      </If>
     </div>
   )
 }

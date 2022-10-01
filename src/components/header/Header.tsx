@@ -1,5 +1,5 @@
 import CompassIcon from '@components/common/assets/icons/CompassIcon'
-import HeartIcon from '@components/common/assets/icons/HeartIcon'
+import LikeIcon from '@components/common/assets/icons/LikeIcon'
 import HomeFilledIcon from '@components/common/assets/icons/HomeFilledIcon'
 import HomeIcon from '@components/common/assets/icons/HomeIcon'
 import MessengerIcon from '@components/common/assets/icons/MessengerIcon'
@@ -36,7 +36,7 @@ const Header = () => {
             <CompassIcon/>
           </NavLink>
           <NavLink to='/likes'  className={s.header_icon_container}>
-            <HeartIcon/>
+            <LikeIcon/>
           </NavLink>
           <div className={`${s.header_icon_container} ${s.profile} ${(isProfilePage || isSettingsPage) && s.active}`}>
             <CurrentUser/>

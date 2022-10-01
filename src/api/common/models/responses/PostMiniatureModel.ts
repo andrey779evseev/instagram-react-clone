@@ -1,5 +1,5 @@
-export default class PostMiniature {
-  constructor(obj?: Partial<PostMiniature>) {
+export default class PostMiniatureModel {
+  constructor(obj?: Partial<PostMiniatureModel>) {
     if(obj)
       Object.assign(this, obj)
   }

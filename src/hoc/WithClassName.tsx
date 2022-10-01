@@ -11,16 +11,16 @@ type PropsType = {
 const withClassName = <P extends object & JSX.IntrinsicAttributes>(
   Component: React.ComponentType<P>
 ) => {
-  const WithTheme = memo((props: Omit<P, keyof PropsType> & PropsType) => {
+  const WithClassName = memo((props: Omit<P, keyof PropsType> & PropsType) => {
     const { className = '' } = props
     return (
-      <div className={`${className} inline-block`}>
-        <Component {...(props as P)} />
+      <div className={`${className} block`}>
+        <Component {...(props as P)}/>
       </div>
     )
   })
-  WithTheme.displayName = `withClassName${getComponentName(Component)}`
-  return WithTheme
+  WithClassName.displayName = `withClassName${getComponentName(Component)}`
+  return WithClassName
 }
 
 

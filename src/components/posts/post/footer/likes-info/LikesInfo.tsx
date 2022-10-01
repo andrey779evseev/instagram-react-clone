@@ -13,7 +13,7 @@ const LikesInfo = (props: PropsType) => {
   const { images = [], firstName, count } = props
 
   return (
-    <div className='flex mt-4'>
+    <div className='flex'>
       <If condition={images && images.length > 0}>
         <span
           className='flex h-5 relative overflow-hidden mr-1'

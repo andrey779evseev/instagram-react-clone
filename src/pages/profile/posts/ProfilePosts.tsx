@@ -1,4 +1,4 @@
-import PostMiniatureResponse from '@api/services/post/models/responses/PostMiniatureResponse'
+import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
 import { PostService } from '@api/services/post/PostService'
 import If from '@components/common/if/If'
 import InfinityList from '@components/common/infinity-list/InfinityList'
@@ -26,7 +26,7 @@ const ProfilePosts = () => {
   const flatPosts = useMemo(() => data?.pages.flat(1) ?? [], [data])
 
   const tripledFlatPosts = useMemo(() => {
-    const arr: PostMiniatureResponse[][] = []
+    const arr: PostMiniatureModel[][] = []
     for (let i = 0; i < flatPosts.length; i++) {
       if((i + 1) % 3 === 0)
         arr.push([

@@ -5,6 +5,7 @@ type PropsType = PropsWithChildren<{
   condition: boolean
   skeleton: React.ReactElement
   className?: string
+  full?: boolean
 }>
 
 const SkeletonWrapper = (props: PropsType) => {
@@ -12,10 +13,11 @@ const SkeletonWrapper = (props: PropsType) => {
     condition,
     skeleton,
     children,
-    className
+    className,
+    full = false
   } = props
   return (
-    <div className={`${className} w-full h-full`}>
+    <div className={`${className} ${full ? 'w-full h-full' : 'w-auto h-auto'}`}>
       {
         !condition ?
         children :
