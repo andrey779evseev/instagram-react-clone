@@ -50,7 +50,7 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
       onClose !== undefined
     ) {
       setInnerVisible(false)
-      await delay(150)
+      await delay(350)
       onClose()
     }
   }

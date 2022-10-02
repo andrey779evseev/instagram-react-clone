@@ -5,7 +5,8 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef
+  useRef,
+  useState
 } from 'react'
 
 type PropsType<T> = {
@@ -33,6 +34,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
   } = props
   const bottomAnchor = useRef(null)
   const { scrollTop } = useScrollTop(true)
+  const [latestOffsetY, setLatestOffsetY] = useState(0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(bottomAnchorCallback, {
@@ -72,8 +74,13 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
   }, [height, itemHeight, additionalItemsCount, items, startNode])
 
   const offsetY = useMemo(
-    () => startNode * itemHeight + startNode * paddingForItem,
-    [startNode, itemHeight, paddingForItem]
+    () => {
+      const value = startNode * itemHeight + startNode * paddingForItem
+      if (document.body.style.position !== 'fixed')
+        setLatestOffsetY(value)
+      return document.body.style.position === 'fixed' ? latestOffsetY : value
+    },
+    [startNode, itemHeight, paddingForItem, document.body.style.position]
   )
 
   const visibleChildren = useMemo(
