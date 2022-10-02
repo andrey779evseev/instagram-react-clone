@@ -1,8 +1,6 @@
-import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import Skeleton from '@components/common/skeleton/Skeleton'
-import Avatar, {EnumAvatarSize} from '@components/common/avatar/Avatar'
-import {fromDateToNow} from '@utils/date/FromDateToNow'
 import CommentModel from '@api/common/models/responses/CommentModel'
+import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import { fromDateToNow } from '@utils/date/FromDateToNow'
 
 
 type PropsType = {

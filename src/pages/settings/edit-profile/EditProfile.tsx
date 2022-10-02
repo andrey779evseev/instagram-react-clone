@@ -7,7 +7,7 @@ import useDebounce from '@hooks/UseDebounce'
 import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import { base64ToBlob } from '@utils/Base64ToBlob'
-import { fileToUrl, ObjectUrlFileType } from '@utils/fileToUrl'
+import { fileToUrl, ObjectUrlFileType } from '@utils/FileToUrl'
 import { getFileNameFromUrl } from '@utils/GetFileNameFromUrl'
 import {useEffect, useMemo, useState} from 'react'
 
@@ -221,7 +221,7 @@ const EditProfile = () => {
           isLoading={setAvatarMutation.isLoading}
           onClose={closeCrop}
           onLoadImage={() => setIsVisibleCrop(true)}
-          className={`${isVisibleCrop ? 'opacity-1' : 'opacity-0'} transition-opacity duration-200`}
+          className={`${isVisibleCrop ? '!opacity-100' : '!opacity-0'} !transition-opacity`}
         />
       </If>
     </div>

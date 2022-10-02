@@ -7,6 +7,11 @@ import {
 import { createPortal } from 'react-dom'
 import Portal from '../portal/Portal'
 import s from './Modal.module.scss'
+import { useDeferredValue } from 'react'
+import useDeffer from '@hooks/UseDeffer'
+import CloseIcon from '../assets/icons/CloseIcon'
+import { delay } from '@utils/Delay'
+import { removeScrollBarFromBody } from '@utils/RemoveScrollBarFromBody'
 
 type PropsType = {
   width?: string
@@ -25,26 +30,29 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
     onClose = undefined,
     visible = true
   } = props
+  const [innerVisible, setInnerVisible] = useState(false)
 
   useEffect(() => {
-    document.body.style.top = `-${window.scrollY}px`
-    document.body.style.position = 'fixed'
-
     window.addEventListener('keydown', onEscKeyDown)
-    return () => {
-      const scrollY = document.body.style.top
-      document.body.style.position = ''
-      document.body.style.top = ''
-      window.scrollTo(0, parseInt(scrollY || '0') * -1)
+    const addScrollBar = removeScrollBarFromBody()
+    setTimeout(() => setInnerVisible(true), 1)
 
+    return () => {
+      addScrollBar()
       window.removeEventListener('keydown', onEscKeyDown)
     }
   }, [])
 
-  const close = (e: BaseSyntheticEvent) => {
+  const close = async (e: BaseSyntheticEvent, withoutCheck = false) => {
     e.stopPropagation()
-    if (e.target.className === s.modal_container && onClose !== undefined)
+    if (
+      ((e.target.id && e.target.id === 'modal-container') || withoutCheck) &&
+      onClose !== undefined
+    ) {
+      setInnerVisible(false)
+      await delay(150)
       onClose()
+    }
   }
 
   const onEscKeyDown = (e: KeyboardEvent) => {
@@ -56,7 +64,20 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 
   return (
     <Portal id='modals-root'>
-      <div className={`${s.modal_container} ${className}`} onClick={close}>
+      <div
+        className={`${s.modal_container} ${className} ${
+          innerVisible && 'show'
+        }`}
+        id='modal-container'
+        onClick={close}
+      >
+        <div
+          className='absolute top-4 right-4 cursor-pointer'
+          id='close-icon'
+          onClick={e => close(e, true)}
+        >
+          <CloseIcon />
+        </div>
         <div
           className={s.modal_content}
           style={{

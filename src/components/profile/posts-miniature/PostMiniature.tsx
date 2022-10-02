@@ -26,6 +26,11 @@ const PostMiniature = (props: PropsType) => {
     setIsVisibleHover(false)
   }
 
+  const closeModal = () => {
+    setVisibleModal(false)
+    setIsVisibleHover(false)
+  }
+
   return (
     <div 
       className="relative text-white cursor-pointer"
@@ -52,7 +57,7 @@ const PostMiniature = (props: PropsType) => {
         </span>
       </div>
       <If condition={visibleModal}>
-        <DetailPost id={post.Id} onClose={() => setVisibleModal(false)}/>
+        <DetailPost id={post.Id} onClose={closeModal}/>
       </If>
     </div>
   )
