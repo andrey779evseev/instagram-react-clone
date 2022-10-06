@@ -24,8 +24,9 @@ const AuthorizationGuard = () => {
       setIsLoading(false)
     } else {
       (async () => {
-        await qc.prefetchQuery(['user'], AccountService.GetUser)
-        const user = qc.getQueryData<User>(['user'])
+        console.log('req')
+        const user = await AccountService.GetUser()
+        qc.setQueryData(['user'], () => user)
         if(user) {
           SaveToLocalStorage('email', user.Email)
           if(isLoginPage || isRegistrationPage)

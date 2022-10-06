@@ -4,7 +4,8 @@ import SendParams from '@api/common/SendParams'
 import { refreshAccessToken } from '@api/utils/RefreshToken'
 import { AccessTokenAtom } from '@store/atoms/AccessTokenAtom'
 import { readAtom } from '@utils/JotaiNexus'
-import axios, { AxiosRequestConfig } from 'axios'
+import { logout } from '@utils/Logout'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -16,8 +17,12 @@ const instance = axios.create({
 instance.interceptors.response.use(res => {
   return res
 }, err => {
-  if(err.response.status === 401)
-    refreshAccessToken()
+  if(err.response.status === 401) {
+    if(err.response.config.url?.includes('refresh-token'))
+      logout()
+    else
+      refreshAccessToken()
+  }
   return Promise.reject(err)
 })
 

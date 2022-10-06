@@ -1,5 +1,5 @@
 import s from './Input.module.scss'
-import {memo, useMemo, useState} from 'react'
+import { memo, useMemo, useState } from 'react'
 import Error from '@components/common/error/Error'
 
 type PropsType = {
@@ -10,6 +10,16 @@ type PropsType = {
   required?: boolean
   minimalistic?: boolean
   error?: string
+  inputMode?:
+    | 'text'
+    | 'none'
+    | 'search'
+    | 'email'
+    | 'tel'
+    | 'url'
+    | 'numeric'
+    | 'decimal'
+    | undefined
 }
 
 const Input = (props: PropsType) => {
@@ -20,7 +30,8 @@ const Input = (props: PropsType) => {
     type = 'text',
     required = false,
     minimalistic = false,
-    error = ''
+    error = '',
+    inputMode = undefined
   } = props
   const [isTouched, setIsTouched] = useState(false)
   const isError = useMemo(() => {
@@ -30,13 +41,16 @@ const Input = (props: PropsType) => {
     <div>
       <input
         type={type}
+        inputMode={inputMode}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className={`${s.input} ${isError && s.with_error} ${minimalistic && s.minimalistic}`}
+        onChange={e => setValue(e.target.value)}
+        className={`${s.input} ${isError && s.with_error} ${
+          minimalistic && s.minimalistic
+        }`}
         placeholder={placeholder}
         onBlur={() => setIsTouched(true)}
       />
-      <Error error={error}/>
+      <Error error={error} />
     </div>
   )
 }

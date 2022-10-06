@@ -28,19 +28,10 @@ const RegistrationCard = () => {
   const navigate = useNavigate()
   const debouncedNickname = useDebounce(nickname, 500)
 
-  const {refetch} = useQuery(['user'], AccountService.GetUser, {
-    enabled: false,
-    retry: false,
-    onSuccess: res => {
-      SaveToLocalStorage('email', res.Email)
-      setIsLoading(false)
-    }
-  })
   const registerMutation = useMutation(AuthService.Register, {
     onSuccess: async res => {
       setCredentials(res)
-      await refetch()
-      navigate('/feed')
+      navigate('/login')
     },
     onError: (error: AxiosError) => {
       setErrMsg(error.response?.data as string)
@@ -57,7 +48,7 @@ const RegistrationCard = () => {
       nickname === '' ||
       password === '' ||
       validNickname === false
-  }, [email, fullName, nickname, password])
+  }, [email, fullName, nickname, password, validNickname])
 
   const register = async () => {
     setIsLoading(true)
@@ -83,6 +74,16 @@ const RegistrationCard = () => {
             value={email}
             setValue={setEmail}
             placeholder="Email"
+            type='email'
+            inputMode='email'
+          />
+        </div>
+        <div className={s.input_container}>
+          <Input
+            value={password}
+            setValue={setPassword}
+            placeholder="Password"
+            type="password"
           />
         </div>
         <div className={s.input_container}>
@@ -98,14 +99,6 @@ const RegistrationCard = () => {
             setValue={setNickname}
             placeholder="Nickname"
             error={validNickname === false ? 'This nickname is already taken' : ''}
-          />
-        </div>
-        <div className={s.input_container}>
-          <Input
-            value={password}
-            setValue={setPassword}
-            placeholder="Password"
-            type="password"
           />
         </div>
       </div>
