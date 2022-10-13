@@ -35,8 +35,6 @@ const getConfig = async (params: SendParams): Promise<AxiosRequestConfig | undef
   const token = await readAtom(AccessTokenAtom)
   if(token)
     config.headers!.Authorization = `Bearer ${token}`
-  if(params.IsFile)
-    config.headers!['content-type'] = 'multipart/form-data'
   if(params.QueryParams !== null)
     config.params = params.QueryParams
   return config

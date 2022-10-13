@@ -1,66 +1,39 @@
+import Button from '@components/common/button/Button'
+import Modal from '@components/common/modal/Modal'
 import useKeyPress from '@hooks/UseKeyPress'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
-import {
-  memo,
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { memo, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import ReactCrop, { centerCrop, Crop, makeAspectCrop } from 'react-image-crop'
-import Button from '../button/Button'
-import Modal from '../modal/Modal'
 
 type PropsType = {
   aspect?: number
   onCrop: (image: string) => void
   url: string
   isLoading?: boolean
-  onClose?: () => void
+  onClose: () => void
   onLoadImage?: () => void
   className?: string
 }
 
-const ImageCrop = (props: PropsType) => {
+const AvatarCrop = (props: PropsType) => {
   const {
     aspect = 1 / 1,
     onCrop,
     url,
     isLoading,
     className,
-    onClose = undefined,
+    onClose,
     onLoadImage = undefined
   } = props
 
   const [crop, setCrop] = useState<Crop>()
+  const [loaded, setLoaded] = useState(false)
   const imageRef = useRef<HTMLImageElement | null>(null)
   const enterPressed = useKeyPress('Enter', true)
 
   useEffect(() => {
     if (enterPressed) getCroppedImg()
   }, [enterPressed])
-
-  const onImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    const { naturalWidth: width, naturalHeight: height } = e.currentTarget
-    const isMaxWidth = width > height
-    const crop = centerCrop(
-      makeAspectCrop(
-        {
-          unit: '%',
-          height: isMaxWidth ? 90 : undefined,
-          width: isMaxWidth ? undefined : 90
-        },
-        aspect,
-        width,
-        height
-      ),
-      width,
-      height
-    )
-    setCrop(crop)
-    if (onLoadImage) onLoadImage()
-  }
 
   const getCroppedImg = () => {
     if (!imageRef.current?.width || !crop) return
@@ -69,18 +42,31 @@ const ImageCrop = (props: PropsType) => {
     })
   }
 
+  useEffect(() => {
+    if (onLoadImage) onLoadImage()
+  }, [])
+
+  const onChange = (cropParams: Crop) => {
+    if (!loaded) {
+      setLoaded(true)
+      if (onLoadImage) onLoadImage()
+    }
+    setCrop(cropParams)
+  }
+
   return (
     <Modal
       height='90%'
       width='fit-content'
       onClose={onClose}
       className={className}
+      contentClassName='relative'
     >
-      <div className='p-4 h-full flex flex-col w-fit'>
+      <div className='p-4'>
         <ReactCrop
           crop={crop}
-          onChange={c => setCrop(c)}
-          onComplete={c => setCrop(c)}
+          onChange={onChange}
+          onComplete={onChange}
           className='!flex w-fit'
           aspect={aspect}
           keepSelection={true}
@@ -90,11 +76,15 @@ const ImageCrop = (props: PropsType) => {
           <img
             src={url}
             className='h-full'
-            onLoad={onImageLoad}
             ref={imageRef}
           />
         </ReactCrop>
-        <Button onClick={getCroppedImg} className='mt-4' isLoading={isLoading}>
+        <Button
+          onClick={getCroppedImg}
+          className='mt-4'
+          isLoading={isLoading}
+          disabled={!crop}
+        >
           Crop
         </Button>
       </div>
@@ -102,4 +92,4 @@ const ImageCrop = (props: PropsType) => {
   )
 }
 
-export default memo(ImageCrop)
+export default memo(AvatarCrop)

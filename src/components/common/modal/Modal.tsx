@@ -1,24 +1,36 @@
+import { delay } from '@utils/Delay'
+import {
+  getUnit,
+  getValueRelativeWindow,
+  isSpecialUnitless,
+  isUnitless,
+  parseUnitValue
+} from '@utils/Measurement'
+import { removeScrollBarFromBody } from '@utils/RemoveScrollBarFromBody'
 import {
   BaseSyntheticEvent,
+  MouseEventHandler,
   PropsWithChildren,
+  SyntheticEvent,
   useEffect,
+  useMemo,
   useState
 } from 'react'
-import { createPortal } from 'react-dom'
+import CloseIcon from '../assets/icons/CloseIcon'
 import Portal from '../portal/Portal'
 import s from './Modal.module.scss'
-import { useDeferredValue } from 'react'
-import useDeffer from '@hooks/UseDeffer'
-import CloseIcon from '../assets/icons/CloseIcon'
-import { delay } from '@utils/Delay'
-import { removeScrollBarFromBody } from '@utils/RemoveScrollBarFromBody'
 
 type PropsType = {
-  width?: string
-  height?: string
-  onClose?: () => void
+  width?: string | number
+  height?: string | number
+  onClose: () => void
   visible?: boolean
   className?: string
+  minWidth?: string
+  minHeight?: string
+  aspectRatio?: number
+  rounded?: boolean
+  contentClassName?: string
 }
 
 const Modal = (props: PropsWithChildren<PropsType>) => {
@@ -27,10 +39,19 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
     className,
     width = '50%',
     height = '50%',
-    onClose = undefined,
-    visible = true
+    onClose,
+    visible = true,
+    minWidth = 'unset',
+    minHeight = 'unset',
+    aspectRatio = undefined,
+    rounded = false,
+    contentClassName
   } = props
   const [innerVisible, setInnerVisible] = useState(false)
+  const [clickCoords, setClickCoords] = useState<{
+    x: number
+    y: number
+  } | null>(null)
 
   useEffect(() => {
     window.addEventListener('keydown', onEscKeyDown)
@@ -43,17 +64,73 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
     }
   }, [])
 
-  const close = async (e: BaseSyntheticEvent, withoutCheck = false) => {
+  const close = async (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    withoutCheck = false
+  ) => {
     e.stopPropagation()
     if (
-      ((e.target.id && e.target.id === 'modal-container') || withoutCheck) &&
+      (((e.target as HTMLDivElement).id &&
+        (e.target as HTMLDivElement).id === 'modal-container') ||
+        withoutCheck) &&
       onClose !== undefined
     ) {
       setInnerVisible(false)
-      await delay(350)
+      await delay(150)
       onClose()
     }
   }
+
+  const styles = useMemo(() => {
+    const res = {
+      width: getValueRelativeWindow(width),
+      height: getValueRelativeWindow(height, false),
+      minHeight,
+      minWidth,
+      borderRadius: rounded ? '12px' : ''
+    }
+
+    if (
+      aspectRatio === undefined ||
+      (isSpecialUnitless(width) && isSpecialUnitless(height))
+    )
+      return res
+
+    let maxWidth = typeof width === 'number' ? width : null
+    let maxHeight = typeof height === 'number' ? height : null
+    if (maxWidth === null && !isSpecialUnitless(width)) {
+      const parsedWidth = parseUnitValue(width as string)
+      maxWidth =
+        parsedWidth.unit === 'px'
+          ? parsedWidth.value
+          : (window.innerWidth / 100) * parsedWidth.value
+    }
+    if (maxHeight === null && !isSpecialUnitless(height)) {
+      const parsedHeight = parseUnitValue(height as string)
+      maxHeight =
+        parsedHeight.unit === 'px'
+          ? parsedHeight.value
+          : (window.innerHeight / 100) * parsedHeight.value
+    }
+    let w = 0
+    let h = 0
+    if (isSpecialUnitless(width)) {
+      h = maxHeight as number
+      w = h / aspectRatio
+    } else {
+      w = maxWidth as number
+      h = w * aspectRatio
+    }
+    if (h > (maxHeight as number)) {
+      h = maxHeight as number
+      w = h * aspectRatio
+    }
+    return {
+      ...res,
+      height: h + 'px',
+      width: w + 'px'
+    }
+  }, [height, width, aspectRatio, minWidth, minHeight])
 
   const onEscKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && onClose) onClose()
@@ -69,7 +146,7 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
           innerVisible && 'show'
         }`}
         id='modal-container'
-        onClick={close}
+        onMouseDown={close}
       >
         <div
           className='absolute top-4 right-4 cursor-pointer'
@@ -79,11 +156,8 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
           <CloseIcon />
         </div>
         <div
-          className={s.modal_content}
-          style={{
-            width,
-            height
-          }}
+          className={`${s.modal_content} ${contentClassName}`}
+          style={styles}
         >
           {children}
         </div>

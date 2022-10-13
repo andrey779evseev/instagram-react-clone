@@ -3,18 +3,18 @@ import s from './UploadImage.module.scss'
 
 
 type PropsType = PropsWithChildren<{
-  uploadImage: (file: File) => void
+  onUpload: (file: File) => void
 }>
 
 const UploadImage = (props: PropsType) => {
   const {
     children,
-    uploadImage
+    onUpload
   } = props
 
   const upload = (e: ChangeEvent<HTMLInputElement>) => {
     if(e && e.target.files && e.target.files[0])
-      uploadImage(e.target.files[0])
+    onUpload(e.target.files[0])
     e.target.value = ''
   }
 

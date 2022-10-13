@@ -18,7 +18,6 @@ type PropsType = {
 
 const DetailPost = (props: PropsType) => {
   const { id, onClose } = props
-  const aspectRatio = 1 / 2.2
   const [maxWidth, maxHeight] = useWindowSize()
 
   const { data: post, isLoading: isLoadingPost } = useQuery(['post', id], () =>
@@ -33,19 +32,6 @@ const DetailPost = (props: PropsType) => {
     () => isLoadingPost || isLoadingComments,
     [isLoadingPost, isLoadingComments]
   )
-
-  const styles = useMemo(() => {
-    let width = maxWidth - 48
-    let height = width * aspectRatio
-    if (height > maxHeight - 48) {
-      height = maxHeight - 48
-      width = height / aspectRatio
-    }
-    return {
-      height: height + 'px',
-      width: width + 'px'
-    }
-  }, [maxHeight, maxWidth])
 
   const comments = useMemo(() => {
     if (isLoading) return []
@@ -62,7 +48,12 @@ const DetailPost = (props: PropsType) => {
   }, [commentsData, post])
 
   return (
-    <Modal width={styles.width} height={styles.height} onClose={onClose}>
+    <Modal
+      width={window.innerWidth - 48}
+      height={window.innerHeight - 48}
+      aspectRatio={2.2/1}
+      onClose={onClose}
+    >
       <div className='w-1/2'>
         <SkeletonWrapper
           condition={isLoading}

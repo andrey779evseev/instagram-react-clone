@@ -24,13 +24,12 @@ const AuthorizationGuard = () => {
       setIsLoading(false)
     } else {
       (async () => {
-        console.log('req')
         const user = await AccountService.GetUser()
         qc.setQueryData(['user'], () => user)
         if(user) {
           SaveToLocalStorage('email', user.Email)
           if(isLoginPage || isRegistrationPage)
-          navigate('/feed')
+            navigate('/feed')
         }
         setIsLoading(false)
       })()

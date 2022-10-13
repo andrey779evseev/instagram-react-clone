@@ -67,7 +67,7 @@ const SettingsForm = (props: PropsType) => {
                     </SkeletonWrapper>
                   </div>
                   <If condition={!isAvatarWithoutEdit(item)}>
-                    <UploadImage uploadImage={item.SetValue as (file: File) => void}>
+                    <UploadImage onUpload={item.SetValue as (file: File) => void}>
                       <span className={s.avatar_data_change_photo}>
                         Change profile photo
                       </span>

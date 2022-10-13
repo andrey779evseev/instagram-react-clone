@@ -5,7 +5,6 @@ import './assets/styles/global.scss'
 import 'react-image-crop/src/ReactCrop.scss'
 import './config/Gapi'
 import './config/Dayjs'
-import '@utils/RegisterBuffer'
 
 
 let container: HTMLElement | null = null

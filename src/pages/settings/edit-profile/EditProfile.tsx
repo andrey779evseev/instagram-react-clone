@@ -1,15 +1,14 @@
-import {AccountService} from '@api/services/account/AccountService'
+import { AccountService } from '@api/services/account/AccountService'
 import Button from '@components/common/button/Button'
 import If from '@components/common/if/If'
-import ImageCrop from '@components/common/image-crop/ImageCrop'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import useDebounce from '@hooks/UseDebounce'
-import SettingsFormItem, {EnumSettingsFormItemType} from '@models/settings-form/SettingsFormItem'
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
+import SettingsFormItem, { EnumSettingsFormItemType } from '@models/settings-form/SettingsFormItem'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { base64ToBlob } from '@utils/Base64ToBlob'
 import { fileToUrl, ObjectUrlFileType } from '@utils/FileToUrl'
-import { getFileNameFromUrl } from '@utils/GetFileNameFromUrl'
-import {useEffect, useMemo, useState} from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import AvatarCrop from './avatar-crop/AvatarCrop'
 
 
 const EditProfile = () => {
@@ -215,7 +214,7 @@ const EditProfile = () => {
         </div>
       </SettingsForm>
       <If condition={cropUrl !== null}>
-        <ImageCrop
+        <AvatarCrop
           onCrop={saveAvatar}
           url={cropUrl?.url!}
           isLoading={setAvatarMutation.isLoading}

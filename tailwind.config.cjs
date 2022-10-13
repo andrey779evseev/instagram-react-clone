@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        's': '.625rem'
+        's': '.625rem',
+        'xxl': '1.375rem',
       },
       keyframes: {
         bubble: {
