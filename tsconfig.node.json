@@ -1,10 +1,14 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
-  },
-  "include": ["vite.config.ts", "./src/utils/colors/ColorParser.ts", "./src/utils/colors/colors.json"]
+	"compilerOptions": {
+		"composite": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true
+	},
+	"include": [
+		"vite.config.ts",
+		"./src/utils/colors/ColorParser.ts",
+		"./src/utils/colors/colors.json"
+	]
 }

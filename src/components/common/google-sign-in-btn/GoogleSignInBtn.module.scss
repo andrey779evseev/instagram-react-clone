@@ -1,23 +1,23 @@
 .google_sign_in_btn {
-  background: $gray10;
-  width: 100%;
-  height: 34px;
-  color: #000;
-  font-size: 13px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 59px;
-  position: relative;
-  transition: background 0.2s ease-in-out;
-  cursor: pointer;
-  &:hover {
-    background: $gray20;
-  }
-  .logo {
-    position: absolute;
-    top: 6px;
-    left: 37px;
-  }
+	background: $gray10;
+	width: 100%;
+	height: 34px;
+	color: #000;
+	font-size: 13px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 59px;
+	position: relative;
+	transition: background 0.2s ease-in-out;
+	cursor: pointer;
+	&:hover {
+		background: $gray20;
+	}
+	.logo {
+		position: absolute;
+		top: 6px;
+		left: 37px;
+	}
 }

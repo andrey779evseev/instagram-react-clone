@@ -1,0 +1,4 @@
+/dist
+/.fleet
+/node_modules
+/public

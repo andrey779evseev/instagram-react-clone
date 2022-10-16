@@ -1,24 +1,23 @@
-
 .input {
-  border: 1px solid $gray20;
-  width: 100%;
-  height: 40px;
-  border-radius: 3px;
-  background: #FAFAFA;
-  padding: 12px;
-  color: $dark;
-  outline: none;
-  transition: border .2s ease, background .2s ease;
-  &::placeholder {
-    color: #959595;
-  }
-  &.minimalistic {
-    border: 1px solid $gray10;
-    background: $white;
-    height: 32px;
-  }
-  &.with_error {
-    border: 1px solid $red;
-    background: rgba(237, 73, 86, 0.05);
-  }
+	border: 1px solid $gray20;
+	width: 100%;
+	height: 40px;
+	border-radius: 3px;
+	background: #fafafa;
+	padding: 12px;
+	color: $dark;
+	outline: none;
+	transition: border 0.2s ease, background 0.2s ease;
+	&::placeholder {
+		color: #959595;
+	}
+	&.minimalistic {
+		border: 1px solid $gray10;
+		background: $white;
+		height: 32px;
+	}
+	&.with_error {
+		border: 1px solid $red;
+		background: rgba(237, 73, 86, 0.05);
+	}
 }

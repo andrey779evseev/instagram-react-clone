@@ -1,83 +1,88 @@
-import {AccountService} from '@api/services/account/AccountService'
-import {AuthService} from '@api/services/auth/AuthService'
-import googleLogo from '@assets/img/common/google-logo.svg'
-import {CredentialsAtom} from '@store/atoms/AuthenticationAtom'
-import {useMutation, useQuery} from '@tanstack/react-query'
-import {SaveToLocalStorage} from '@utils/LocalStorage'
-import {useUpdateAtom} from 'jotai/utils'
-import {memo, useEffect, useState} from 'react'
-import {useGoogleLogin} from 'react-google-login'
-import {useNavigate} from 'react-router-dom'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useUpdateAtom } from 'jotai/utils'
+import { memo, useEffect, useState } from 'react'
+import {
+	GoogleLoginResponse,
+	GoogleLoginResponseOffline,
+	useGoogleLogin,
+} from 'react-google-login'
+import { useNavigate } from 'react-router-dom'
+import { SaveToLocalStorage } from '@utils/LocalStorage'
+import { AccountService } from '@api/services/account/AccountService'
+import { AuthService } from '@api/services/auth/AuthService'
+import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import s from './GoogleSignInBtn.module.scss'
 
 type PropsType = {
-  setIsLoading: Function
+	setIsLoading: (value: boolean) => void
 }
 
 const GoogleSignInBtn = (props: PropsType) => {
-  const {setIsLoading} = props
-  const setCredentials = useUpdateAtom(CredentialsAtom)
-  const navigate = useNavigate()
-  const [isButtonClicked, setIsButtonClicked] = useState(false)
-  const [googleUser, setGoogleUser] = useState<any>(null)
+	const { setIsLoading } = props
+	const setCredentials = useUpdateAtom(CredentialsAtom)
+	const navigate = useNavigate()
+	const [isButtonClicked, setIsButtonClicked] = useState(false)
+	const [googleUser, setGoogleUser] = useState<GoogleLoginResponse | null>(null)
 
-  const googleLoginMutation = useMutation(AuthService.GoogleLogin, {
-    onSuccess: async res => {
-      setCredentials(res)
-      await refetch()
-      navigate('/feed')
-    }
-  })
+	const googleLoginMutation = useMutation(AuthService.GoogleLogin, {
+		onSuccess: async (res) => {
+			setCredentials(res)
+			await refetch()
+			navigate('/feed')
+		},
+	})
 
-  const {refetch} = useQuery(['user'], AccountService.GetUser, {
-    enabled: false,
-    retry: false,
-    onSuccess: res => {
-      SaveToLocalStorage('email', res.Email)
-      setIsLoading(false)
-    }
-  })
+	const { refetch } = useQuery(['user'], AccountService.GetUser, {
+		enabled: false,
+		retry: false,
+		onSuccess: (res) => {
+			SaveToLocalStorage('email', res.Email)
+			setIsLoading(false)
+		},
+	})
 
-  useEffect(() => {
-    if(!googleUser || !isButtonClicked) return
-    setIsLoading(true)
-    googleLoginMutation.mutate({
-      Token: googleUser.getAuthResponse().id_token,
-      Email: googleUser.profileObj.email,
-      Name: googleUser.profileObj.name,
-      Avatar: googleUser.profileObj.imageUrl
-    })
-  }, [googleUser, isButtonClicked])
-  
-  const login = () => {
-    setIsButtonClicked(true)
-    if(!googleUser)
-      signIn()
-  }
-  
-  const onSuccess = (res: any) => {
-    setGoogleUser(res)
-  }
+	useEffect(() => {
+		if (!googleUser || !isButtonClicked) return
+		setIsLoading(true)
+		googleLoginMutation.mutate({
+			Token: googleUser!.getAuthResponse().id_token,
+			Email: googleUser!.profileObj.email,
+			Name: googleUser!.profileObj.name,
+			Avatar: googleUser!.profileObj.imageUrl,
+		})
+	}, [googleUser, isButtonClicked])
 
-  const onFailure = (err: any) => {
-    console.log('google login failed:', err)
-  }
+	const login = () => {
+		setIsButtonClicked(true)
+		if (!googleUser) signIn()
+	}
 
-  const { signIn } = useGoogleLogin({
-    onSuccess,
-    clientId: import.meta.env.VITE_GOOGLE_SIGNIN_CLIENT_ID,
-    cookiePolicy: 'single_host_origin',
-    isSignedIn: true,
-    onFailure,
-  })
+	const onSuccess = (res: GoogleLoginResponse) => {
+		setGoogleUser(res)
+	}
 
-  return (
-    <div className={s.google_sign_in_btn} onClick={login}>
-      <GoogleIcon className={s.logo}/>
-      Continue with google
-    </div>
-  )
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const onFailure = (err: any) => {
+		console.log('google login failed:', err)
+	}
+
+	const { signIn } = useGoogleLogin({
+		onSuccess: onSuccess as (
+			res: GoogleLoginResponse | GoogleLoginResponseOffline
+		) => void,
+		clientId: import.meta.env.VITE_GOOGLE_SIGNIN_CLIENT_ID,
+		cookiePolicy: 'single_host_origin',
+		isSignedIn: true,
+		onFailure,
+	})
+
+	return (
+		<div className={s.google_sign_in_btn} onClick={login}>
+			<GoogleIcon className={s.logo} />
+			Continue with google
+		</div>
+	)
 }
 
 export default memo(GoogleSignInBtn)

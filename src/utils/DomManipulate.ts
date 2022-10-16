@@ -1,3 +1,3 @@
 export const GetRootElement = () => {
-  return document.getElementById('root') as HTMLDivElement
+	return document.getElementById('root') as HTMLDivElement
 }

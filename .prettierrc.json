@@ -1,0 +1,21 @@
+{
+	"trailingComma": "es5",
+	"tabWidth": 2,
+	"semi": false,
+	"singleQuote": true,
+	"useTabs": true,
+	"jsxSingleQuote": true,
+	"importOrder": [
+		"^react/(.*)$",
+		"^@components/(.*)$",
+		"^@utils/(.*)$",
+		"^@hooks/(.*)$",
+		"^@api/(.*)$",
+		"^@store/(.*)$",
+		"^@models/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": false,
+	"importOrderSortSpecifiers": true,
+	"organizeImportsSkipDestructiveCodeActions": false
+}

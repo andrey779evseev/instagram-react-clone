@@ -1,37 +1,36 @@
-
 .registration_card {
-  padding: 32px 40px;
-  border-radius: 3px;
-  border: 1px solid $gray10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 350px;
-  .registration_description {
-    color: $gray50;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 18px;
-    text-align: center;
-    width: 100%;
-  }
-  .form_container {
-    margin-top: 13px;
-    width: 100%;
-    .input_container {
-      width: 100%;
-      margin-bottom: 8px;
-      &:last-child {
-        margin-bottom: 16px;
-      }
-    }
-  }
-  .registration_license {
-    margin-top: 23px;
-    font-size: 12px;
-    color: $gray50;
-    width: 100%;
-    text-align: center;
-    font-weight: 300;
-  }
+	padding: 32px 40px;
+	border-radius: 3px;
+	border: 1px solid $gray10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 350px;
+	.registration_description {
+		color: $gray50;
+		font-size: 18px;
+		font-weight: 500;
+		margin-bottom: 18px;
+		text-align: center;
+		width: 100%;
+	}
+	.form_container {
+		margin-top: 13px;
+		width: 100%;
+		.input_container {
+			width: 100%;
+			margin-bottom: 8px;
+			&:last-child {
+				margin-bottom: 16px;
+			}
+		}
+	}
+	.registration_license {
+		margin-top: 23px;
+		font-size: 12px;
+		color: $gray50;
+		width: 100%;
+		text-align: center;
+		font-weight: 300;
+	}
 }

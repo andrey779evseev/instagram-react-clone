@@ -1,26 +1,25 @@
-
 .add_comment_container {
-  border-top: 1px solid $gray10;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-  .add_comment_input {
-    margin-left: 16px;
-    height: 100%;
-    width: 100%;
-    background: transparent;
-    outline: none;
-    &::placeholder {
-      color: $dark;
-    }
-  }
-  .post_btn {
-    color: #0095F6;
-    font-weight: 600;
-    cursor: pointer;
-    &.disabled {
-      opacity: 0.3;
-    }
-  }
+	border-top: 1px solid $gray10;
+	height: 52px;
+	display: flex;
+	align-items: center;
+	padding: 14px 16px;
+	.add_comment_input {
+		margin-left: 16px;
+		height: 100%;
+		width: 100%;
+		background: transparent;
+		outline: none;
+		&::placeholder {
+			color: $dark;
+		}
+	}
+	.post_btn {
+		color: #0095f6;
+		font-weight: 600;
+		cursor: pointer;
+		&.disabled {
+			opacity: 0.3;
+		}
+	}
 }
