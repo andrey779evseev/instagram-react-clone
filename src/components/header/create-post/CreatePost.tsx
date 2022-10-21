@@ -74,7 +74,7 @@ const CreatePost = (props: PropsType) => {
 	const symbolsCount = useMemo(() => description.length, [description])
 	const step = useMemo(() => steps[currentStep - 1], [currentStep])
 	const isDisabled = useMemo(() => {
-		switch (currentStep) {
+switch (currentStep) {
 			case 2:
 				return !crop || !imageWidth || !image
 			case 3:

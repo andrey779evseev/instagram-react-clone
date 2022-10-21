@@ -11,7 +11,8 @@
 		"lint:fix": "yarn eslint --fix .",
 		"prettier:check": "yarn prettier . --check",
 		"prettier:fix": "yarn prettier --write .",
-		"format": "yarn prettier:fix && yarn lint:fix"
+		"format": "yarn prettier:fix && yarn lint:fix",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@loadable/component": "^5.15.2",
@@ -44,6 +45,7 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-react": "^7.31.10",
 		"eslint-plugin-unused-imports": "^2.0.0",
+		"husky": "^8.0.1",
 		"postcss": "^8.4.17",
 		"prettier": "^2.7.1",
 		"prettier-plugin-organize-imports": "^3.1.1",
