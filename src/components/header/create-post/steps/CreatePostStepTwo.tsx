@@ -1,6 +1,6 @@
-import ImageCrop from '@components/common/image-crop/ImageCrop'
 import { memo } from 'react'
 import { Crop } from 'react-image-crop'
+import ImageCrop from '@components/common/image-crop/ImageCrop'
 
 type PropsType = {
 	value: number

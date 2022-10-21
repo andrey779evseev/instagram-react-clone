@@ -24,12 +24,12 @@ const ConfirmationModal = (props: PropsType) => {
 		onClose,
 		firstActionTitle,
 		secondActionTitle,
-		visible = true
+		visible = true,
 	} = props
 
 	const color = useColor(propsColor)
 
-	if(!visible) return <></>
+	if (!visible) return <></>
 
 	return (
 		<Modal

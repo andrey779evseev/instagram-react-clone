@@ -14,15 +14,15 @@ export namespace PostService {
 	export const CreatePost = async (req: CreatePostRequest) => {
 		const url = await MediaService.SaveImage({
 			Data: req.Data,
-			FileType: FileTypeEnum.PostPicture
+			FileType: FileTypeEnum.PostPicture,
 		})
 		return customFetch({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/create-post`,
 			Req: {
 				Photo: url,
-				Description: req.Description
-			}
+				Description: req.Description,
+			},
 		})
 	}
 

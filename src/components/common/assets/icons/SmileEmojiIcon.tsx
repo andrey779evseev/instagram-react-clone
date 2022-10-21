@@ -7,7 +7,7 @@ type PropsType = {
 }
 
 const SmileEmojiIcon = (props: PropsType) => {
-	const {size = 24, color: propColor = 'dark'} = props
+	const { size = 24, color: propColor = 'dark' } = props
 
 	const color = useColor(propColor)
 

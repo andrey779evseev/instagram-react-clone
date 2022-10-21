@@ -14,7 +14,7 @@ const Switch = (props: PropsType) => {
 			return child.props.value === condition
 		})!
 	) : (children as ReactElement).props.value === condition ? (
-		children as ReactElement
+		(children as ReactElement)
 	) : (
 		<></>
 	)

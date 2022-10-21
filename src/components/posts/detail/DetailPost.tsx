@@ -6,10 +6,10 @@ import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import PostCommentsList from '@components/posts/detail/comments/PostCommentsList'
 import DetailPostFooter from '@components/posts/detail/footer/DetailPostFooter'
 import DetailPostHeader from '@components/posts/detail/header/DetailPostHeader'
+import useWindowSize from '@hooks/UseWindowSize'
 import CommentModel from '@api/common/models/responses/CommentModel'
 import { PostService } from '@api/services/post/PostService'
 import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
-import useWindowSize from '@hooks/UseWindowSize'
 
 type PropsType = {
 	id: string

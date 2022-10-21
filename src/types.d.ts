@@ -1,4 +1,3 @@
-
 //for Switch component, possibility to add value attribute for div tag
 declare namespace JSX {
 	interface ExtendedDiv

@@ -11,8 +11,8 @@ export namespace MediaService {
 			Req: req.Data,
 			Path: `${controllerName}/save-image`,
 			QueryParams: {
-				fileType: req.FileType
-			}
+				fileType: req.FileType,
+			},
 		})
 	}
 }

@@ -26,8 +26,8 @@ const ProfilePosts = () => {
 
 	const tripledFlatPosts = useMemo(() => {
 		const arr: PostMiniatureModel[][] = []
-		for (let i = 0; i < flatPosts.length; i+=3) {
-			arr.push(flatPosts.slice(i,i+3))
+		for (let i = 0; i < flatPosts.length; i += 3) {
+			arr.push(flatPosts.slice(i, i + 3))
 		}
 		return arr
 	}, [flatPosts])

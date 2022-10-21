@@ -1,7 +1,7 @@
+import { memo } from 'react'
 import ArrowIcon from '@components/common/assets/icons/ArrowIcon'
 import If from '@components/common/if/If'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
-import { memo } from 'react'
 import { CreatePostStepType } from './CreatePost'
 
 type PropsType = {
@@ -14,7 +14,7 @@ type PropsType = {
 }
 
 const CreatePostHeader = (props: PropsType) => {
-	const {currentStep, back, next, step, isDisabled, isLoading} = props
+	const { currentStep, back, next, step, isDisabled, isLoading } = props
 	return (
 		<div
 			className={`w-full h-11 min-h-11 px-4 pt-1 border-b border-b-gray20 flex-center select-none ${
@@ -34,7 +34,11 @@ const CreatePostHeader = (props: PropsType) => {
 					}`}
 					onClick={next}
 				>
-					{isLoading && currentStep === 3 ? <LittleLoading color='cobalt'/> : step.NextTitle}
+					{isLoading && currentStep === 3 ? (
+						<LittleLoading color='cobalt' />
+					) : (
+						step.NextTitle
+					)}
 				</span>
 			</If>
 		</div>

@@ -19,11 +19,11 @@ export namespace AccountService {
 	export const SetAvatar = async (req: SetAvatarRequest) => {
 		const url = await MediaService.SaveImage({
 			Data: req.Data,
-			FileType: FileTypeEnum.Avatar
+			FileType: FileTypeEnum.Avatar,
 		})
 		return customFetch<string>({
 			Method: EnumHttpMethod.Put,
-			Req: {Url: url},
+			Req: { Url: url },
 			Path: `${controllerName}/set-avatar`,
 		})
 	}

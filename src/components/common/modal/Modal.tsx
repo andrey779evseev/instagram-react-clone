@@ -40,7 +40,7 @@ const Modal = (props: PropsType) => {
 		rounded = false,
 		contentClassName,
 		maxHeight = 'unset',
-		maxWidth = 'unset'
+		maxWidth = 'unset',
 	} = props
 	const [innerVisible, setInnerVisible] = useState(false)
 	const [windowWidth, windowHeight] = useWindowSize()
@@ -81,7 +81,7 @@ const Modal = (props: PropsType) => {
 			minWidth,
 			borderRadius: rounded ? '12px' : '',
 			maxHeight: isSpecialUnitless(maxHeight) ? maxHeight : maxHeight + 'px',
-			maxWidth: isSpecialUnitless(maxWidth) ? maxWidth : maxWidth + 'px'
+			maxWidth: isSpecialUnitless(maxWidth) ? maxWidth : maxWidth + 'px',
 		}
 
 		if (
@@ -133,7 +133,7 @@ const Modal = (props: PropsType) => {
 		windowWidth,
 		windowHeight,
 		maxHeight,
-		maxWidth
+		maxWidth,
 	])
 
 	const onEscKeyDown = (e: KeyboardEvent) => {

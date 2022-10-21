@@ -1,5 +1,5 @@
-import { memo, useEffect, useRef, useState } from 'react'
-import ReactCrop, { Crop } from 'react-image-crop'
+import { memo, useEffect, useState } from 'react'
+import { Crop } from 'react-image-crop'
 import Button from '@components/common/button/Button'
 import ImageCrop from '@components/common/image-crop/ImageCrop'
 import Modal from '@components/common/modal/Modal'

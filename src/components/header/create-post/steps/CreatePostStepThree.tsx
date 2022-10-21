@@ -1,8 +1,8 @@
-import { AccountService } from '@api/services/account/AccountService'
-import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
+import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
+import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import { AccountService } from '@api/services/account/AccountService'
 
 type PropsType = {
 	value: number

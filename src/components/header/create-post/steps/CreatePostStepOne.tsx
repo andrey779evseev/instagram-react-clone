@@ -1,7 +1,7 @@
+import { memo } from 'react'
 import AssetsIcon from '@components/common/assets/icons/AssetsIcon'
 import Button from '@components/common/button/Button'
 import UploadImage from '@components/common/upload-image/UploadImage'
-import { memo } from 'react'
 
 type PropsType = {
 	onUpload: (file: File) => void
@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 const CreatePostStepOne = (props: PropsType) => {
-	const {onUpload} = props
+	const { onUpload } = props
 	return (
 		<div className='flex-center w-full flex-grow flex-col px-10'>
 			<AssetsIcon />

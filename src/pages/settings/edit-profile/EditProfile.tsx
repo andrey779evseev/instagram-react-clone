@@ -1,15 +1,15 @@
-import { AccountService } from '@api/services/account/AccountService'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useMemo, useState } from 'react'
 import Button from '@components/common/button/Button'
 import If from '@components/common/if/If'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
-import useDebounce from '@hooks/UseDebounce'
-import SettingsFormItem, {
-	EnumSettingsFormItemType
-} from '@models/settings-form/SettingsFormItem'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { base64ToBlob } from '@utils/Base64ToBlob'
-import { fileToUrl, ObjectUrlFileType } from '@utils/FileToUrl'
-import { useEffect, useMemo, useState } from 'react'
+import { ObjectUrlFileType, fileToUrl } from '@utils/FileToUrl'
+import useDebounce from '@hooks/UseDebounce'
+import { AccountService } from '@api/services/account/AccountService'
+import SettingsFormItem, {
+	EnumSettingsFormItemType,
+} from '@models/settings-form/SettingsFormItem'
 import AvatarCrop from './avatar-crop/AvatarCrop'
 
 const EditProfile = () => {
@@ -27,8 +27,7 @@ const EditProfile = () => {
 	const debouncedNickname = useDebounce(nickname, 500)
 
 	const setAvatarMutation = useMutation(
-		(data: FormData) =>
-			AccountService.SetAvatar({ Data: data }),
+		(data: FormData) => AccountService.SetAvatar({ Data: data }),
 		{
 			onSuccess: async (res) => {
 				setAvatar(res)

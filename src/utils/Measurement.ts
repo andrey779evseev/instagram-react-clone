@@ -6,7 +6,13 @@ export const toUnitless = (value: string) => {
 	return parseFloat(value)
 }
 
-const unitlessValues = ['auto', 'max-content', 'min-content', 'fit-content', 'unset']
+const unitlessValues = [
+	'auto',
+	'max-content',
+	'min-content',
+	'fit-content',
+	'unset',
+]
 
 /**
  * Function for checking if value is unitless and it is a special string value

@@ -8,12 +8,12 @@ type PropsType = {
 }
 
 const TriplePost = (props: PropsType) => {
-	const { item:items, size } = props
+	const { item: items, size } = props
 	return (
 		<div className='triple_post flex gap-[29px] mb-[29px]'>
-			{
-				items.map(item => <PostMiniature post={item} size={size} key={item.Id}/>)
-			}
+			{items.map((item) => (
+				<PostMiniature post={item} size={size} key={item.Id} />
+			))}
 		</div>
 	)
 }
