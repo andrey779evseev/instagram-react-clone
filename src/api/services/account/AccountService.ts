@@ -1,8 +1,11 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
+import { FileTypeEnum } from '@api/common/models/enums/FileTypeEnum'
+import SetAvatarRequest from '@api/common/models/requests/SetAvatarRequest'
 import UpdateUserRequest from '@api/common/models/requests/UpdateUserRequest'
 import { customFetch } from '@api/services/BaseService'
 import User from '@models/user/User'
 import UserStatsModel from '../../common/models/responses/UserStatsModel'
+import { MediaService } from '../media/MediaService'
 
 export namespace AccountService {
 	const controllerName = 'account'
@@ -13,12 +16,15 @@ export namespace AccountService {
 			Path: `${controllerName}/get-user`,
 		})
 	}
-	export const SetAvatar = (data: FormData) => {
+	export const SetAvatar = async (req: SetAvatarRequest) => {
+		const url = await MediaService.SaveImage({
+			Data: req.Data,
+			FileType: FileTypeEnum.Avatar
+		})
 		return customFetch<string>({
 			Method: EnumHttpMethod.Put,
-			Req: data,
+			Req: {Url: url},
 			Path: `${controllerName}/set-avatar`,
-			IsFile: true,
 		})
 	}
 	export const UpdateUser = (req: UpdateUserRequest) => {

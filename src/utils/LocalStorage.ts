@@ -12,8 +12,7 @@ export const GetFromLocalStorage = <T>(key: string): T | null => {
 	}
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const SaveToLocalStorage = async (key: string, value: any) => {
+export const SaveToLocalStorage = async (key: string, value: unknown) => {
 	if (localStorage) {
 		await localStorage.setItem(key, JSON.stringify(value))
 	} else {

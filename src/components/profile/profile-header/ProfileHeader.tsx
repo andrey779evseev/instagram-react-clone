@@ -11,7 +11,7 @@ import { AccountService } from '@api/services/account/AccountService'
 const ProfileHeader = () => {
 	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const { data: stats, isLoading } = useQuery(
-		['stats'],
+		['stats', user?.Id],
 		AccountService.GetStats
 	)
 	const navigate = useNavigate()

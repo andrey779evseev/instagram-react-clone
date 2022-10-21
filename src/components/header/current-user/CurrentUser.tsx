@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import ProfileIcon from '@components/common/assets/icons/ProfileIcon'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
-import Dropdown from '@components/common/dropdown/Dropdown'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
 import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import DropdownItem from '@models/dropdown/DropdownItem'
+import Dropdown from '@components/common/dropdown/Dropdown'
 
 const CurrentUser = () => {
 	const { data: user } = useQuery(['user'], AccountService.GetUser)

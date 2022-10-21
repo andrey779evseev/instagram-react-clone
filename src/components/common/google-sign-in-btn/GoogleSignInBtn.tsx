@@ -62,8 +62,7 @@ const GoogleSignInBtn = (props: PropsType) => {
 		setGoogleUser(res)
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const onFailure = (err: any) => {
+	const onFailure = (err: unknown) => {
 		console.log('google login failed:', err)
 	}
 

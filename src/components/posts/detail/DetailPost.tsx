@@ -9,6 +9,7 @@ import DetailPostHeader from '@components/posts/detail/header/DetailPostHeader'
 import CommentModel from '@api/common/models/responses/CommentModel'
 import { PostService } from '@api/services/post/PostService'
 import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
+import useWindowSize from '@hooks/UseWindowSize'
 
 type PropsType = {
 	id: string
@@ -17,6 +18,8 @@ type PropsType = {
 
 const DetailPost = (props: PropsType) => {
 	const { id, onClose } = props
+
+	const [windowWidth, windowHeight] = useWindowSize()
 
 	const { data: post, isLoading: isLoadingPost } = useQuery(['post', id], () =>
 		PostService.GetPost(id)
@@ -45,10 +48,18 @@ const DetailPost = (props: PropsType) => {
 		] as CommentModel[]
 	}, [commentsData, post])
 
+	const width = useMemo(() => {
+		return Math.min(windowWidth - 48, 1000)
+	}, [windowWidth])
+
+	const height = useMemo(() => {
+		return Math.min(windowHeight - 48, 600)
+	}, [windowHeight])
+
 	return (
 		<Modal
-			width={window.innerWidth - 48}
-			height={window.innerHeight - 48}
+			width={width}
+			height={height}
 			aspectRatio={2.2 / 1}
 			onClose={onClose}
 		>

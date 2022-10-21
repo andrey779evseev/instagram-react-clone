@@ -6,9 +6,7 @@ export default class SendParams {
 	}
 	Method: EnumHttpMethod = EnumHttpMethod.Get
 	Path: string = ''
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	Req?: any = null
+	Req?: unknown
 	WithToken?: boolean = true
-	IsFile?: boolean = false
-	QueryParams?: Record<string, string>
+	QueryParams?: Record<string, unknown>
 }

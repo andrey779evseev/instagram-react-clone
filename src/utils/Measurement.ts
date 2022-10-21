@@ -6,10 +6,10 @@ export const toUnitless = (value: string) => {
 	return parseFloat(value)
 }
 
-const unitlessValues = ['auto', 'max-content', 'min-content', 'fit-content']
+const unitlessValues = ['auto', 'max-content', 'min-content', 'fit-content', 'unset']
 
 /**
- * Function for checing if value is unitless and it is a special string value
+ * Function for checking if value is unitless and it is a special string value
  */
 export const isSpecialUnitless = (value: string | number) => {
 	if (typeof value === 'number') return false

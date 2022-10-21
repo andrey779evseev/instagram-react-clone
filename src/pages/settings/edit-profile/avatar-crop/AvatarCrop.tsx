@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import ReactCrop, { Crop } from 'react-image-crop'
 import Button from '@components/common/button/Button'
+import ImageCrop from '@components/common/image-crop/ImageCrop'
 import Modal from '@components/common/modal/Modal'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
 import useKeyPress from '@hooks/UseKeyPress'
@@ -8,7 +9,7 @@ import useKeyPress from '@hooks/UseKeyPress'
 type PropsType = {
 	aspect?: number
 	onCrop: (image: string) => void
-	url: string
+	image: string
 	isLoading?: boolean
 	onClose: () => void
 	onLoadImage?: () => void
@@ -19,7 +20,7 @@ const AvatarCrop = (props: PropsType) => {
 	const {
 		aspect = 1 / 1,
 		onCrop,
-		url,
+		image,
 		isLoading,
 		className,
 		onClose,
@@ -27,19 +28,19 @@ const AvatarCrop = (props: PropsType) => {
 	} = props
 
 	const [crop, setCrop] = useState<Crop>()
+	const [imageWidth, setImageWidth] = useState<number>(0)
 	const [loaded, setLoaded] = useState(false)
-	const imageRef = useRef<HTMLImageElement | null>(null)
 	const enterPressed = useKeyPress('Enter', true)
 
 	useEffect(() => {
 		if (enterPressed) getCroppedImg()
 	}, [enterPressed])
 
-	const getCroppedImg = () => {
-		if (!imageRef.current?.width || !crop) return
-		cropImageViaCanvas(crop, imageRef.current.width, url, (base64) => {
-			onCrop(base64)
-		})
+	const getCroppedImg = async () => {
+		if (!imageWidth || !crop) return
+		cropImageViaCanvas(crop, imageWidth, image).then((cropped) =>
+			onCrop(cropped as string)
+		)
 	}
 
 	useEffect(() => {
@@ -63,18 +64,16 @@ const AvatarCrop = (props: PropsType) => {
 			contentClassName='relative'
 		>
 			<div className='p-4'>
-				<ReactCrop
+				<ImageCrop
 					crop={crop}
 					onChange={onChange}
-					onComplete={onChange}
-					className='!flex w-fit'
+					image={image}
 					aspect={aspect}
-					keepSelection={true}
-					ruleOfThirds={true}
+					onLoadImage={(e) =>
+						setImageWidth((e.target as HTMLImageElement).width)
+					}
 					style={{ height: 'calc(100% - 46px)' }}
-				>
-					<img src={url} className='h-full' ref={imageRef} />
-				</ReactCrop>
+				/>
 				<Button
 					onClick={getCroppedImg}
 					className='mt-4'

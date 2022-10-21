@@ -33,7 +33,7 @@ const getConfig = async (
 	const config: AxiosRequestConfig = {
 		headers: {},
 	}
-	if (!params.WithToken && !params.IsFile) return undefined
+	if (!params.WithToken) return undefined
 	const token = await readAtom(AccessTokenAtom)
 	if (token) config.headers!.Authorization = `Bearer ${token}`
 	if (params.QueryParams !== null) config.params = params.QueryParams

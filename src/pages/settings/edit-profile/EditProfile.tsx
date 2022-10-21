@@ -1,15 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useMemo, useState } from 'react'
+import { AccountService } from '@api/services/account/AccountService'
 import Button from '@components/common/button/Button'
 import If from '@components/common/if/If'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
-import { base64ToBlob } from '@utils/Base64ToBlob'
-import { ObjectUrlFileType, fileToUrl } from '@utils/FileToUrl'
 import useDebounce from '@hooks/UseDebounce'
-import { AccountService } from '@api/services/account/AccountService'
 import SettingsFormItem, {
-	EnumSettingsFormItemType,
+	EnumSettingsFormItemType
 } from '@models/settings-form/SettingsFormItem'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { base64ToBlob } from '@utils/Base64ToBlob'
+import { fileToUrl, ObjectUrlFileType } from '@utils/FileToUrl'
+import { useEffect, useMemo, useState } from 'react'
 import AvatarCrop from './avatar-crop/AvatarCrop'
 
 const EditProfile = () => {
@@ -26,13 +26,17 @@ const EditProfile = () => {
 	const [isVisibleCrop, setIsVisibleCrop] = useState(false)
 	const debouncedNickname = useDebounce(nickname, 500)
 
-	const setAvatarMutation = useMutation(AccountService.SetAvatar, {
-		onSuccess: (res) => {
-			setAvatar(res)
-			qc.setQueryData(['user'], { ...user!, Avatar: res })
-			closeCrop()
-		},
-	})
+	const setAvatarMutation = useMutation(
+		(data: FormData) =>
+			AccountService.SetAvatar({ Data: data }),
+		{
+			onSuccess: async (res) => {
+				setAvatar(res)
+				qc.setQueryData(['user'], { ...user!, Avatar: res })
+				closeCrop()
+			},
+		}
+	)
 	const updateUserMutation = useMutation(AccountService.UpdateUser, {
 		onSuccess: (res) => {
 			qc.setQueryData(['user'], res)
@@ -212,7 +216,7 @@ const EditProfile = () => {
 			<If condition={cropUrl !== null}>
 				<AvatarCrop
 					onCrop={saveAvatar}
-					url={cropUrl!.url}
+					image={cropUrl?.url as string}
 					isLoading={setAvatarMutation.isLoading}
 					onClose={closeCrop}
 					onLoadImage={() => setIsVisibleCrop(true)}

@@ -11,9 +11,10 @@ type PropsType = {
 	secondActionTitle?: string
 	color?: string
 	onClose: () => void
+	visible?: boolean
 }
 
-const ConfirmationWindow = (props: PropsType) => {
+const ConfirmationModal = (props: PropsType) => {
 	const {
 		title,
 		description,
@@ -23,9 +24,12 @@ const ConfirmationWindow = (props: PropsType) => {
 		onClose,
 		firstActionTitle,
 		secondActionTitle,
+		visible = true
 	} = props
 
 	const color = useColor(propsColor)
+
+	if(!visible) return <></>
 
 	return (
 		<Modal
@@ -58,4 +62,4 @@ const ConfirmationWindow = (props: PropsType) => {
 	)
 }
 
-export default memo(ConfirmationWindow)
+export default memo(ConfirmationModal)

@@ -34,13 +34,12 @@ const Dropdown = (props: PropsType) => {
 								<div className={s.dropdown_divider}></div>
 							) : (
 								<div className={s.item} onClick={() => callback(item)}>
-									<If condition={!!item.Image}>
-										{typeof item.Image === 'string' ? (
+									{item.Image &&
+										(typeof item.Image === 'string' ? (
 											<img src={item.Image} className='mr-2.5' />
 										) : (
 											<item.Image className='mr-2.5' />
-										)}
-									</If>
+										))}
 									<div className={s.dropdown_item_title}>
 										{item.Name}
 										<If condition={item.IsLoading}>

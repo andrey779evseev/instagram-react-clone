@@ -1,15 +1,17 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
+import { AccountService } from '@api/services/account/AccountService'
 import { PostService } from '@api/services/post/PostService'
 
 const ProfilePosts = () => {
+	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
-			['mini-posts'],
+			['mini-posts', user?.Id],
 			({ pageParam = null }) =>
 				PostService.GetMiniatures({ Cursor: pageParam, Take: 27 }),
 			{
@@ -24,9 +26,8 @@ const ProfilePosts = () => {
 
 	const tripledFlatPosts = useMemo(() => {
 		const arr: PostMiniatureModel[][] = []
-		for (let i = 0; i < flatPosts.length; i++) {
-			if ((i + 1) % 3 === 0)
-				arr.push([flatPosts[i - 2], flatPosts[i - 1], flatPosts[i]])
+		for (let i = 0; i < flatPosts.length; i+=3) {
+			arr.push(flatPosts.slice(i,i+3))
 		}
 		return arr
 	}, [flatPosts])

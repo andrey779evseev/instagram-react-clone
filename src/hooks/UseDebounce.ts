@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useDebounce = (value: any, delay: number) => {
-	const [debouncedValue, setDebouncedValue] = useState(value)
+const useDebounce = <T>(value: T, delay: number) => {
+	const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
 	useEffect(() => {
 		const handler = setTimeout(() => {

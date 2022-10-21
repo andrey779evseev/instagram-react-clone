@@ -50,8 +50,8 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 	}, [])
 
 	const bottomAnchorCallback = useCallback(
-		(enteries: IntersectionObserverEntry[]) => {
-			if (onBottom && enteries[0].isIntersecting) onBottom()
+		(entries: IntersectionObserverEntry[]) => {
+			if (onBottom && entries[0].isIntersecting) onBottom()
 		},
 		[onBottom]
 	)
@@ -61,9 +61,15 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 
 	const startNode = useMemo(
 		() =>
-			Math.min(
-				Math.max(0, Math.floor(scrollTop / itemHeight) - additionalItemsCount),
-				items.length - (2 * additionalItemsCount + 1)
+			Math.max(
+				0,
+				Math.min(
+					Math.max(
+						0,
+						Math.floor(scrollTop / itemHeight) - additionalItemsCount
+					),
+					items.length - (2 * additionalItemsCount + 1)
+				)
 			),
 		[scrollTop, itemHeight, additionalItemsCount]
 	)
@@ -104,7 +110,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 					{visibleChildren}
 					<div className='relative'>
 						<div
-							className='absolute bottom-0 left-0 w-full pt-96'
+							className='absolute bottom-0 left-0 w-full pt-96 -z-10'
 							ref={bottomAnchor}
 						/>
 					</div>

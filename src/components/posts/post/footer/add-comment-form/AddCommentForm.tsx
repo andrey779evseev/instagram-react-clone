@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
-import EmojiIcon from '@components/common/assets/icons/EmojiIcon'
+import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
 import s from './AddCommentForm.module.scss'
 
 const AddCommentForm = () => {
 	const [commentText, setCommentText] = useState('')
-	const isAvaliablePost = useMemo(() => commentText !== '', [commentText])
+	const isAvailablePost = useMemo(() => commentText !== '', [commentText])
 	return (
 		<div className={s.add_comment_container}>
-			<EmojiIcon className='cursor-pointer' />
+			<SmileEmojiIcon className='cursor-pointer' />
 			<input
 				type='text'
 				className={s.add_comment_input}
@@ -15,7 +15,7 @@ const AddCommentForm = () => {
 				value={commentText}
 				onChange={(e) => setCommentText(e.target.value)}
 			/>
-			<div className={`${s.post_btn} ${!isAvaliablePost && s.disabled}`}>
+			<div className={`${s.post_btn} ${!isAvailablePost && s.disabled}`}>
 				Post
 			</div>
 		</div>

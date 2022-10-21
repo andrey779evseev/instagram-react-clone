@@ -11,7 +11,7 @@ import CloseIcon from '../assets/icons/CloseIcon'
 import Portal from '../portal/Portal'
 import s from './Modal.module.scss'
 
-type PropsType = {
+type PropsType = PropsWithChildren<{
 	width?: string | number
 	height?: string | number
 	onClose: () => void
@@ -22,9 +22,11 @@ type PropsType = {
 	aspectRatio?: number
 	rounded?: boolean
 	contentClassName?: string
-}
+	maxHeight?: number | string
+	maxWidth?: number | string
+}>
 
-const Modal = (props: PropsWithChildren<PropsType>) => {
+const Modal = (props: PropsType) => {
 	const {
 		children,
 		className,
@@ -37,6 +39,8 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 		aspectRatio = undefined,
 		rounded = false,
 		contentClassName,
+		maxHeight = 'unset',
+		maxWidth = 'unset'
 	} = props
 	const [innerVisible, setInnerVisible] = useState(false)
 	const [windowWidth, windowHeight] = useWindowSize()
@@ -76,6 +80,8 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 			minHeight,
 			minWidth,
 			borderRadius: rounded ? '12px' : '',
+			maxHeight: isSpecialUnitless(maxHeight) ? maxHeight : maxHeight + 'px',
+			maxWidth: isSpecialUnitless(maxWidth) ? maxWidth : maxWidth + 'px'
 		}
 
 		if (
@@ -84,18 +90,18 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 		)
 			return res
 
-		let maxWidth = typeof width === 'number' ? width : null
-		let maxHeight = typeof height === 'number' ? height : null
-		if (maxWidth === null && !isSpecialUnitless(width)) {
+		let maxW = typeof width === 'number' ? width : null
+		let maxH = typeof height === 'number' ? height : null
+		if (maxW === null && !isSpecialUnitless(width)) {
 			const parsedWidth = parseUnitValue(width as string)
-			maxWidth =
+			maxW =
 				parsedWidth.unit === 'px'
 					? parsedWidth.value
 					: (window.innerWidth / 100) * parsedWidth.value
 		}
-		if (maxHeight === null && !isSpecialUnitless(height)) {
+		if (maxH === null && !isSpecialUnitless(height)) {
 			const parsedHeight = parseUnitValue(height as string)
-			maxHeight =
+			maxH =
 				parsedHeight.unit === 'px'
 					? parsedHeight.value
 					: (window.innerHeight / 100) * parsedHeight.value
@@ -103,14 +109,14 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 		let w = 0
 		let h = 0
 		if (isSpecialUnitless(width)) {
-			h = maxHeight as number
+			h = maxH as number
 			w = h / aspectRatio
 		} else {
-			w = maxWidth as number
+			w = maxW as number
 			h = w * aspectRatio
 		}
-		if (h > (maxHeight as number)) {
-			h = maxHeight as number
+		if (h > (maxH as number)) {
+			h = maxH as number
 			w = h * aspectRatio
 		}
 		return {
@@ -126,6 +132,8 @@ const Modal = (props: PropsWithChildren<PropsType>) => {
 		minHeight,
 		windowWidth,
 		windowHeight,
+		maxHeight,
+		maxWidth
 	])
 
 	const onEscKeyDown = (e: KeyboardEvent) => {
