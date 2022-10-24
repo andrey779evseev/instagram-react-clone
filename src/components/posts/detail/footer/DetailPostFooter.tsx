@@ -9,13 +9,14 @@ type PropsType = {
 	isLoading: boolean
 	postedAt: string | undefined
 	likesInfo: LikesInfoModel | undefined
+	postId: string | undefined
 }
 
 const DetailPostFooter = (props: PropsType) => {
-	const { isLoading, postedAt, likesInfo } = props
+	const { isLoading, postedAt, likesInfo, postId } = props
 	return (
 		<div className='mt-auto border-t border-t-gray10 p-4'>
-			<PostFooterActions />
+			<PostFooterActions postId={postId} liked={likesInfo?.Liked} />
 			<SkeletonWrapper
 				condition={isLoading}
 				skeleton={<Skeleton variant='text' width='50%' />}

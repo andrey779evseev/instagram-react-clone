@@ -49,11 +49,15 @@ const DetailPost = (props: PropsType) => {
 	}, [commentsData, post])
 
 	const width = useMemo(() => {
-		return Math.min(windowWidth - 48, 1000)
+		return windowWidth > 1200 && windowWidth < 1600
+			? 800
+			: Math.min(windowWidth - 48, 1000)
 	}, [windowWidth])
 
 	const height = useMemo(() => {
-		return Math.min(windowHeight - 48, 600)
+		return windowWidth > 1200 && windowWidth < 1600
+			? 500
+			: Math.min(windowHeight - 48, 600)
 	}, [windowHeight])
 
 	return (
@@ -89,11 +93,12 @@ const DetailPost = (props: PropsType) => {
 					isLoading={isLoading}
 				/>
 				<DetailPostFooter
+					postId={post?.Id}
 					postedAt={post?.PostedAt}
 					isLoading={isLoading}
 					likesInfo={post?.LikesInfo}
 				/>
-				<AddCommentForm />
+				<AddCommentForm postId={post?.Id} />
 			</div>
 		</Modal>
 	)

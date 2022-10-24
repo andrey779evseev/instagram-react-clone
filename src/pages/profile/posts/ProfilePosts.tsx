@@ -3,11 +3,14 @@ import { useMemo } from 'react'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
+import useWindowSize from '@hooks/UseWindowSize'
 import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
 import { AccountService } from '@api/services/account/AccountService'
 import { PostService } from '@api/services/post/PostService'
 
 const ProfilePosts = () => {
+	const [, windowHeight] = useWindowSize()
+
 	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
@@ -32,10 +35,7 @@ const ProfilePosts = () => {
 		return arr
 	}, [flatPosts])
 
-	const windowHeight = useMemo(
-		() => window.innerHeight - 60,
-		[window.innerHeight]
-	)
+	const height = useMemo(() => windowHeight - 60, [windowHeight])
 
 	return (
 		<>
@@ -46,7 +46,7 @@ const ProfilePosts = () => {
 					Item={TriplePost}
 					onBottom={hasNextPage ? fetchNextPage : undefined}
 					loader={isFetchingNextPage ? <Spinner /> : undefined}
-					height={windowHeight}
+					height={height}
 					itemHeight={290}
 					items={tripledFlatPosts}
 					additionalItemsCount={3}

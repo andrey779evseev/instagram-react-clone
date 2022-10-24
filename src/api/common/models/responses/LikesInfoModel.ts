@@ -5,4 +5,5 @@ export default class LikesInfoModel {
 	Avatars: string[]
 	FirstName: string
 	LikesCount: number
+	Liked: boolean
 }

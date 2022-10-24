@@ -5,7 +5,6 @@ import {
 	useEffect,
 	useMemo,
 	useRef,
-	useState,
 } from 'react'
 import useScrollTop from '@hooks/UseScrollTop'
 
@@ -33,8 +32,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 		paddingForItem = 0,
 	} = props
 	const bottomAnchor = useRef(null)
-	const { scrollTop } = useScrollTop(true)
-	const [latestOffsetY, setLatestOffsetY] = useState(0)
+	const { scrollTop } = useScrollTop(true, true)
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(bottomAnchorCallback, {
@@ -82,9 +80,8 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 	//necessary for keeping offsetY when modals open and body became fixed
 	const offsetY = useMemo(() => {
 		const value = startNode * itemHeight + startNode * paddingForItem
-		if (document.body.style.position !== 'fixed') setLatestOffsetY(value)
-		return document.body.style.position === 'fixed' ? latestOffsetY : value
-	}, [startNode, itemHeight, paddingForItem, document.body.style.position])
+		return value
+	}, [startNode, itemHeight, paddingForItem])
 
 	const visibleChildren = useMemo(
 		() =>

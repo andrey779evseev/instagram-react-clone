@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 
-const useScrollTop = (fromRoot: boolean = false) => {
+/**
+ *
+ * @param fromRoot returns scroll top for window else for element provided to ref
+ * @param checkForFixedBody if body became fixed (scroll top automatically reduces to zero) it will return last scroll top before its happened
+ */
+const useScrollTop = (
+	fromRoot: boolean = false,
+	checkForFixedBody: boolean = false
+) => {
 	const [scrollTop, setScrollTop] = useState(0)
 	const ref = useRef<HTMLDivElement>()
 
 	const onScroll = (e: Event) => {
+		if (checkForFixedBody && document.body.style.position === 'fixed') return
+
 		if (fromRoot) setScrollTop(window.scrollY)
 		else
 			requestAnimationFrame(() => {
