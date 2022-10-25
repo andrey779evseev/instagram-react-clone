@@ -40,19 +40,19 @@ const ConfirmationModal = (props: PropsType) => {
 			rounded
 		>
 			<div className='w-full h-full flex flex-col'>
-				<div className='flex-center flex-col flex-grow p-8 pb-4'>
+				<div className='flex-center flex-col grow p-8 pb-4'>
 					<div className='text-lg font-semibold'>{title}</div>
-					<div className='text-sm mt-1 text-gray50'>{description}</div>
+					<div className='text-gray50 text-sm mt-1'>{description}</div>
 				</div>
 				<div
-					className='h-12 flex-center cursor-pointer font-bold transition-colors hover:bg-gray10 border-y border-y-gray20'
+					className='flex-center hover:bg-gray10 border-y-gray20 cursor-pointer font-bold transition-colors h-12 border-y'
 					style={{ color }}
 					onClick={firstAction}
 				>
 					{firstActionTitle}
 				</div>
 				<div
-					className='h-12 flex-center cursor-pointer hover:bg-gray10 transition-colors'
+					className='flex-center hover:bg-gray10 h-12 cursor-pointer transition-colors'
 					onClick={secondAction}
 				>
 					{secondActionTitle}

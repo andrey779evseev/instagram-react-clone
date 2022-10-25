@@ -205,7 +205,7 @@ const EditProfile = () => {
 						Send
 					</Button>
 					<span
-						className='font-medium text-cobalt cursor-pointer'
+						className='text-cobalt font-medium cursor-pointer'
 						onClick={deactivateAccount}
 					>
 						Temporarily deactivate my account

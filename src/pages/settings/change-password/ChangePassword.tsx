@@ -115,7 +115,7 @@ const ChangePassword = () => {
 					>
 						Change Password
 					</Button>
-					<div className='font-medium text-cobalt mt-7 cursor-pointer'>
+					<div className='text-cobalt font-medium mt-7 cursor-pointer'>
 						You forgot your password?
 					</div>
 				</div>

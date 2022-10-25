@@ -11,7 +11,7 @@ const AccountInfo = () => {
 				<div className='font-semibold'>{user?.Nickname}</div>
 				<div className='text-gray50'>{user?.Name}</div>
 			</div>
-			<div className='ml-auto text-cobalt font-bold text-xs cursor-pointer'>
+			<div className='text-cobalt ml-auto font-bold text-xs cursor-pointer'>
 				Switch
 			</div>
 		</div>

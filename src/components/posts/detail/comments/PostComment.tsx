@@ -17,7 +17,7 @@ const PostComment = (props: PropsType) => {
 					<span className='font-semibold'>{comment.Author?.Nickname} </span>
 					{comment.Text}
 				</div>
-				<div className='text-xs text-gray50 mt-2'>
+				<div className='text-gray50 text-xs mt-2'>
 					{fromDateToNow(comment?.CommentedAt)}
 				</div>
 			</div>

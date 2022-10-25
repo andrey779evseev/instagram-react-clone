@@ -54,7 +54,7 @@ const LoginCard = () => {
 	}
 
 	return (
-		<div className='border border-gray10 py-6 px-10'>
+		<div className='border-gray10 border py-6 px-10'>
 			<div className='flex flex-col items-center'>
 				<InstagramTitle className='mb-6' width={183} height={57} />
 				<div className='mb-3.5 w-full'>

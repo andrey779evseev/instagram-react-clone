@@ -15,7 +15,7 @@ type PropsType = {
 const DetailPostFooter = (props: PropsType) => {
 	const { isLoading, postedAt, likesInfo, postId } = props
 	return (
-		<div className='mt-auto border-t border-t-gray10 p-4'>
+		<div className='border-t-gray10 mt-auto border-t p-4'>
 			<PostFooterActions postId={postId} liked={likesInfo?.Liked} />
 			<SkeletonWrapper
 				condition={isLoading}
@@ -28,7 +28,7 @@ const DetailPostFooter = (props: PropsType) => {
 					firstName={likesInfo?.FirstName}
 				/>
 			</SkeletonWrapper>
-			<div className='text-gray50 uppercase text-s'>
+			<div className='text-gray50 text-s uppercase'>
 				<SkeletonWrapper
 					condition={isLoading}
 					skeleton={<Skeleton variant='text' width='40%' />}

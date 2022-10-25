@@ -25,7 +25,7 @@ const Header = () => {
 			<div className={s.header_container}>
 				<InstagramTitle className='mt-2 mr-[150px]' />
 				<Search />
-				<div className='flex ml-[150px] items-center w-100 justify-between'>
+				<div className='w-100 flex ml-[150px] items-center justify-between'>
 					<NavLink to='/feed' className={s.header_icon_container}>
 						{({ isActive }: { isActive: boolean }) =>
 							isActive ? <HomeFilledIcon /> : <HomeIcon />

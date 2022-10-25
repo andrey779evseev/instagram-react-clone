@@ -11,14 +11,14 @@ const Suggestions = () => {
 			{suggestions.map((suggestion, i) => (
 				<div className='card flex my-2 items-center' key={i}>
 					<Avatar src={suggestion.Avatar} size={EnumAvatarSize.Medium} />
-					<div className='flex flex-col items-between w-full px-3 overflow-hidden'>
+					<div className='items-between flex flex-col w-full px-3 overflow-hidden'>
 						<span className='text-dark'>terylucas</span>
 						<div className='text-gray50 overflow-hidden text-ellipsis whitespace-nowrap'>
 							Followed {suggestion.CommonFollower} +{' '}
 							{suggestion.CommonFollowersCount - 1} more
 						</div>
 					</div>
-					<span className='cursor-pointer text-cobalt'>Follow</span>
+					<span className='text-cobalt cursor-pointer'>Follow</span>
 				</div>
 			))}
 		</div>

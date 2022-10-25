@@ -17,7 +17,7 @@ const CreatePostHeader = (props: PropsType) => {
 	const { currentStep, back, next, step, isDisabled, isLoading } = props
 	return (
 		<div
-			className={`w-full h-11 min-h-11 px-4 pt-1 border-b border-b-gray20 flex-center select-none ${
+			className={`min-h-11 border-b-gray20 flex-center w-full h-11 px-4 pt-1 border-b select-none ${
 				currentStep !== 1 && currentStep !== 4 && '!justify-between'
 			}`}
 		>

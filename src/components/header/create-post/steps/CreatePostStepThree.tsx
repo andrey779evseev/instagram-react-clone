@@ -19,13 +19,13 @@ const CreatePostStepThree = (props: PropsType) => {
 	return (
 		<div className='p-4 w-[300px] flex-1 flex flex-col'>
 			<div className='flex items-center mb-3'>
-				<div className='border border-gray50 rounded-full'>
+				<div className='border-gray50 border rounded-full'>
 					<Avatar src={user?.Avatar} size={EnumAvatarSize.Small} />
 				</div>
 				<span className='font-semibold text-base ml-3'>{user?.Nickname}</span>
 			</div>
 			<textarea
-				className='resize-none w-full flex-1 text-base outline-none placeholder:text-gray50'
+				className='placeholder:text-gray50 resize-none w-full flex-1 text-base outline-none'
 				placeholder='Write a caption...'
 				value={description}
 				onChange={(e) => setDescription(e.target.value)}

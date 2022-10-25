@@ -11,7 +11,7 @@ type PropsType = {
 const PostFooter = (props: PropsType) => {
 	const { likesCount } = props
 	return (
-		<div className='border border-gray20 border-t-0'>
+		<div className='border-gray20 border border-t-0'>
 			<div className='p-4'>
 				<PostFooterActions />
 				<div className='font-bold mt-4'>

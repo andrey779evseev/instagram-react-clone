@@ -10,7 +10,7 @@ type PropsType = {
 const PostHeader = (props: PropsType) => {
 	const { authorAvatar, authorName } = props
 	return (
-		<div className='bg-white w-full flex items-center justify-between px-4 py-[9px] border border-gray10'>
+		<div className='border-gray10 bg-white w-full flex items-center justify-between px-4 py-[9px] border'>
 			<div className='flex items-center'>
 				<ImageBox image={authorAvatar} isSmall={true} />
 				<span className='ml-4'>{authorName}</span>

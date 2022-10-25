@@ -9,7 +9,7 @@ const Success = (props: PropsType) => {
 	if (!message || message === '') return <></>
 	return (
 		<div className='mt-2.5'>
-			<div className='w-full text-center text-green text-xs mt-[10px] px-5'>
+			<div className='text-green w-full text-center text-xs mt-[10px] px-5'>
 				{message}
 			</div>
 		</div>

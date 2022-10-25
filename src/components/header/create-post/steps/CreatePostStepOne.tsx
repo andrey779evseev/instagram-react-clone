@@ -11,9 +11,9 @@ type PropsType = {
 const CreatePostStepOne = (props: PropsType) => {
 	const { onUpload } = props
 	return (
-		<div className='flex-center w-full flex-grow flex-col px-10'>
+		<div className='flex-center w-full grow flex-col px-10'>
 			<AssetsIcon />
-			<div className='font-light text-xxl mt-4'>
+			<div className='text-xxl font-light mt-4'>
 				Drag photos and videos here
 			</div>
 			<UploadImage onUpload={onUpload}>
