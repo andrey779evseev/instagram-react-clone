@@ -1,9 +1,20 @@
-const CloseIcon = () => {
+import { memo } from 'react'
+import useColor from '@hooks/UseColor'
+
+type PropsType = {
+	color?: string
+}
+
+const CloseIcon = (props: PropsType) => {
+	const { color: propsColor = 'white' } = props
+
+	const color = useColor(propsColor)
+
 	return (
 		<svg
 			aria-label='Close'
-			color='#ffffff'
-			fill='#ffffff'
+			color={color}
+			fill={color}
 			height='18'
 			role='img'
 			viewBox='0 0 48 48'
@@ -19,4 +30,4 @@ const CloseIcon = () => {
 	)
 }
 
-export default CloseIcon
+export default memo(CloseIcon)

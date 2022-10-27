@@ -17,8 +17,8 @@ type PropsType = PropsWithChildren<{
 	onClose: () => void
 	visible?: boolean
 	className?: string
-	minWidth?: string
-	minHeight?: string
+	minWidth?: string | number
+	minHeight?: string | number
 	aspectRatio?: number
 	rounded?: boolean
 	contentClassName?: string
@@ -77,8 +77,8 @@ const Modal = (props: PropsType) => {
 		const res = {
 			width: getValueRelativeWindow(width, windowWidth),
 			height: getValueRelativeWindow(height, windowHeight),
-			minHeight,
-			minWidth,
+			minHeight: isSpecialUnitless(minHeight) ? minHeight : minHeight + 'px',
+			minWidth: isSpecialUnitless(minWidth) ? minWidth : minWidth + 'px',
 			borderRadius: rounded ? '12px' : '',
 			maxHeight: isSpecialUnitless(maxHeight) ? maxHeight : maxHeight + 'px',
 			maxWidth: isSpecialUnitless(maxWidth) ? maxWidth : maxWidth + 'px',
@@ -92,6 +92,7 @@ const Modal = (props: PropsType) => {
 
 		let maxW = typeof width === 'number' ? width : null
 		let maxH = typeof height === 'number' ? height : null
+		console.log(maxW === null && !isSpecialUnitless(width))
 		if (maxW === null && !isSpecialUnitless(width)) {
 			const parsedWidth = parseUnitValue(width as string)
 			maxW =

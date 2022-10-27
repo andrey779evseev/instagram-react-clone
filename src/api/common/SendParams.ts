@@ -8,5 +8,5 @@ export default class SendParams {
 	Path: string = ''
 	Req?: unknown
 	WithToken?: boolean = true
-	QueryParams?: Record<string, unknown>
+	QueryParams?: Record<string, unknown> | object
 }

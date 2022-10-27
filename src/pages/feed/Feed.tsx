@@ -4,8 +4,8 @@ import StoriesMiniaturesList from '../../components/stories-miniatures/StoriesMi
 
 const Feed = () => {
 	return (
-		<div className='flex '>
-			<div className='mr-7 w-[470px]'>
+		<div className='flex justify-center'>
+			<div className='mr-20 w-[470px]'>
 				<StoriesMiniaturesList />
 				<FeedPosts />
 			</div>

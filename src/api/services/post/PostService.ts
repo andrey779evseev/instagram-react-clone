@@ -54,8 +54,7 @@ export namespace PostService {
 		return customFetch<PostMiniatureModel[]>({
 			Method: EnumHttpMethod.Get,
 			Path: `${controllerName}/get-miniatures`,
-			//hack because class can't be accepted as Record
-			QueryParams: req as unknown as Record<string, unknown>,
+			QueryParams: req,
 		})
 	}
 
