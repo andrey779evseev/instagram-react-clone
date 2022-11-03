@@ -28,3 +28,4 @@ dist-ssr
 .fleet
 
 package-lock.json
+yarn.lock
