@@ -25,7 +25,9 @@ const LoginCard = () => {
 		() => email !== '' && password !== '',
 		[email, password]
 	)
-	const { refetch } = useQuery(['user'], AccountService.GetUser, {
+	const { refetch } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {
@@ -81,7 +83,7 @@ const LoginCard = () => {
 				</Button>
 				<Error error={errMsg} />
 				<DividerWithText text='OR' />
-				<GoogleSignInBtn setIsLoading={setIsLoading} />
+				<GoogleSignInBtn setIsLoading={setIsLoading} setErrMsg={setErrMsg} />
 				<div className='text-cobalt text-xs mt-5'>You forgot the password?</div>
 			</div>
 		</div>

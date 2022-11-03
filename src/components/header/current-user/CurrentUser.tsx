@@ -1,6 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useAtomValue } from 'jotai'
-import { useUpdateAtom } from 'jotai/utils'
 import { useMemo } from 'react'
 import { useGoogleLogout } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
@@ -8,26 +7,23 @@ import ProfileIcon from '@components/common/assets/icons/ProfileIcon'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Dropdown from '@components/common/dropdown/Dropdown'
-import { SaveToLocalStorage } from '@utils/LocalStorage'
+import { logout } from '@utils/Logout'
 import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
-import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import DropdownItem from '@models/dropdown/DropdownItem'
 
 const CurrentUser = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
-	const qc = useQueryClient()
-	const setCredentials = useUpdateAtom(CredentialsAtom)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 	const refreshToken = useAtomValue(RefreshTokenAtom)
 	const navigate = useNavigate()
 	const revokeMutation = useMutation(AuthService.RevokeToken, {
 		onSuccess: () => {
-			setCredentials(null)
-			qc.removeQueries(['user'])
-			SaveToLocalStorage('email', undefined)
-			signOut()
-			navigate('/login', { replace: true })
+			if (!!user?.GoogleId) signOut()
+			logout()
 		},
 	})
 
@@ -37,10 +33,6 @@ const CurrentUser = () => {
 
 	const openSettings = () => {
 		navigate('/settings/edit-profile')
-	}
-
-	const logout = () => {
-		revokeMutation.mutate({ RefreshToken: refreshToken! })
 	}
 
 	const dropdownItems = useMemo(
@@ -58,7 +50,7 @@ const CurrentUser = () => {
 			new DropdownItem({ IsDivider: true }),
 			new DropdownItem({
 				Name: 'Log out',
-				Callback: logout,
+				Callback: () => revokeMutation.mutate({ RefreshToken: refreshToken! }),
 				IsLoading: revokeMutation.isLoading,
 				CloseAfterClick: false,
 			}),

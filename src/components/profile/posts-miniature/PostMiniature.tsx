@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 import CommentFilledIcon from '@components/common/assets/icons/CommentFilledIcon'
 import HeartFilledIcon from '@components/common/assets/icons/HeartFilledIcon'
 import If from '@components/common/if/If'
-import DetailPost from '@components/posts/detail/DetailPost'
+import PostModal from '@components/posts/modal/PostModal'
 import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
 import s from './PostMiniature.module.scss'
 
@@ -52,7 +52,7 @@ const PostMiniature = (props: PropsType) => {
 				</span>
 			</div>
 			<If condition={visibleModal}>
-				<DetailPost id={post.Id} onClose={closeModal} />
+				<PostModal postId={post.Id} onClose={closeModal} />
 			</If>
 		</div>
 	)

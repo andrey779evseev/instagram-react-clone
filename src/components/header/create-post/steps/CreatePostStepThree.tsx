@@ -14,7 +14,10 @@ type PropsType = {
 const CreatePostStepThree = (props: PropsType) => {
 	const { description, setDescription, symbolsCount } = props
 
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 
 	return (
 		<div className='p-4 w-[300px] flex-1 flex flex-col'>

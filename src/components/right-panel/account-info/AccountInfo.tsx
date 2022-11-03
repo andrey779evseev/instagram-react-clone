@@ -3,7 +3,10 @@ import { AccountService } from '@api/services/account/AccountService'
 import Avatar from '../../common/avatar/Avatar'
 
 const AccountInfo = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 	return (
 		<div className='flex items-center'>
 			<Avatar src={user?.Avatar} />

@@ -43,7 +43,7 @@ const Modal = (props: PropsType) => {
 		maxWidth = 'unset',
 	} = props
 	const [innerVisible, setInnerVisible] = useState(false)
-	const [windowWidth, windowHeight] = useWindowSize()
+	const { windowWidth, windowHeight } = useWindowSize()
 
 	useEffect(() => {
 		window.addEventListener('keydown', onEscKeyDown)
@@ -92,7 +92,6 @@ const Modal = (props: PropsType) => {
 
 		let maxW = typeof width === 'number' ? width : null
 		let maxH = typeof height === 'number' ? height : null
-		console.log(maxW === null && !isSpecialUnitless(width))
 		if (maxW === null && !isSpecialUnitless(width)) {
 			const parsedWidth = parseUnitValue(width as string)
 			maxW =

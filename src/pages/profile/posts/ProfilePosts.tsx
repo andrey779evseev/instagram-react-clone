@@ -1,22 +1,20 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import useWindowSize from '@hooks/UseWindowSize'
 import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
-import { AccountService } from '@api/services/account/AccountService'
-import { PostService } from '@api/services/post/PostService'
+import { PostsService } from '@api/services/posts/PostsService'
 
 const ProfilePosts = () => {
-	const [, windowHeight] = useWindowSize()
+	const { windowHeight } = useWindowSize()
 
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
-			['mini-posts', user?.Id],
+			['mini-posts'],
 			({ pageParam = null }) =>
-				PostService.GetMiniatures({ Cursor: pageParam, Take: 27 }),
+				PostsService.GetMiniatures({ Cursor: pageParam, Take: 27 }),
 			{
 				getNextPageParam: (lastPage) =>
 					lastPage.length === 27

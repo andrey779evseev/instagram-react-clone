@@ -3,35 +3,48 @@ import { memo, useMemo } from 'react'
 import Modal from '@components/common/modal/Modal'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import PostCommentsList from '@components/posts/detail/comments/PostCommentsList'
-import DetailPostFooter from '@components/posts/detail/footer/DetailPostFooter'
-import DetailPostHeader from '@components/posts/detail/header/DetailPostHeader'
 import useWindowSize from '@hooks/UseWindowSize'
 import CommentModel from '@api/common/models/responses/CommentModel'
 import { PostService } from '@api/services/post/PostService'
 import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
+import PostCommentsList from './comments/PostCommentsList'
+import PostModalFooter from './footer/PostModalFooter'
+import DetailPostHeader from './header/DetailPostHeader'
 
 type PropsType = {
-	id: string
+	postId: string
 	onClose: () => void
 }
 
-const DetailPost = (props: PropsType) => {
-	const { id, onClose } = props
+const PostModal = (props: PropsType) => {
+	const { postId, onClose } = props
 
-	const [windowWidth, windowHeight] = useWindowSize()
+	const { windowWidth, windowHeight } = useWindowSize()
 
-	const { data: post, isLoading: isLoadingPost } = useQuery(['post', id], () =>
-		PostService.GetPost(id)
-	)
-	const { data: commentsData, isLoading: isLoadingComments } = useQuery(
-		['comments', id],
-		() => PostService.GetComments(id)
-	)
+	const { data: post, isLoading: isLoadingPost } = useQuery({
+		queryKey: ['post', { post: postId }],
+		queryFn: () => PostService.GetPost(postId),
+	})
+	const { data: author, isLoading: isLoadingAuthor } = useQuery({
+		queryKey: ['author', { post: postId }],
+		queryFn: () => PostService.GetAuthor(postId),
+	})
+	const { data: likesInfo, isLoading: isLoadingLikesInfo } = useQuery({
+		queryKey: ['likes', { post: postId }],
+		queryFn: () => PostService.GetLikesInfo(postId),
+	})
+	const { data: commentsData, isLoading: isLoadingComments } = useQuery({
+		queryKey: ['comments', { post: postId }],
+		queryFn: () => PostService.GetComments(postId),
+	})
 
 	const isLoading = useMemo(
-		() => isLoadingPost || isLoadingComments,
-		[isLoadingPost, isLoadingComments]
+		() =>
+			isLoadingPost ||
+			isLoadingComments ||
+			isLoadingLikesInfo ||
+			isLoadingAuthor,
+		[isLoadingPost, isLoadingComments, isLoadingAuthor, isLoadingLikesInfo]
 	)
 
 	const comments = useMemo(() => {
@@ -39,9 +52,9 @@ const DetailPost = (props: PropsType) => {
 		return [
 			{
 				Text: post?.Description,
-				Author: post?.Author,
+				Author: author,
 				CommentedAt: post?.PostedAt,
-				PostId: id,
+				PostId: postId,
 				CommentId: '',
 			},
 			...commentsData!,
@@ -84,19 +97,19 @@ const DetailPost = (props: PropsType) => {
 			<div className='w-1/2 h-full flex flex-col justify-between'>
 				<DetailPostHeader
 					isLoading={isLoading}
-					nickname={post?.Author.Nickname}
-					avatar={post?.Author.Avatar}
+					nickname={author?.Nickname}
+					avatar={author?.Avatar}
 				/>
 				<PostCommentsList
 					comments={comments}
-					avatar={post?.Author.Avatar}
+					avatar={author?.Avatar}
 					isLoading={isLoading}
 				/>
-				<DetailPostFooter
+				<PostModalFooter
 					postId={post?.Id}
 					postedAt={post?.PostedAt}
 					isLoading={isLoading}
-					likesInfo={post?.LikesInfo}
+					likesInfo={likesInfo}
 				/>
 				<AddCommentForm postId={post?.Id} />
 			</div>
@@ -104,4 +117,4 @@ const DetailPost = (props: PropsType) => {
 	)
 }
 
-export default memo(DetailPost)
+export default memo(PostModal)

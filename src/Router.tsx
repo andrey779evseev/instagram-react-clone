@@ -2,6 +2,7 @@ import loadable from '@loadable/component'
 import pMinDelay from 'p-min-delay'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import PagePreloader from '@components/common/page-preloader/PagePreloader'
+import Spinner from '@components/common/spinner/Spinner'
 
 const AuthorizationGuard = loadable(
 	() => pMinDelay(import('@guards/AuthorizationGuard'), 200),
@@ -31,9 +32,9 @@ const AuthLayout = loadable(
 	}
 )
 const ProfilePosts = loadable(
-	() => pMinDelay(import('@pages/profile/posts/ProfilePosts'), 1000),
+	() => pMinDelay(import('@pages/profile/posts/ProfilePosts'), 200),
 	{
-		fallback: <PagePreloader />,
+		fallback: <Spinner full />,
 	}
 )
 const Profile = loadable(

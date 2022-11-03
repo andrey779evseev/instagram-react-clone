@@ -13,7 +13,10 @@ import SettingsFormItem, {
 } from '@models/settings-form/SettingsFormItem'
 
 const ChangePassword = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 	const [oldPassword, setOldPassword] = useState('')
 	const [newPassword, setNewPassword] = useState('')
 	const [confirmNewPassword, setConfirmNewPassword] = useState('')

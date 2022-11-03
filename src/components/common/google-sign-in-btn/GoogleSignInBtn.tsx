@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useUpdateAtom } from 'jotai/utils'
 import { memo, useEffect, useState } from 'react'
 import {
@@ -16,10 +17,11 @@ import s from './GoogleSignInBtn.module.scss'
 
 type PropsType = {
 	setIsLoading: (value: boolean) => void
+	setErrMsg: (error: string) => void
 }
 
 const GoogleSignInBtn = (props: PropsType) => {
-	const { setIsLoading } = props
+	const { setIsLoading, setErrMsg } = props
 	const setCredentials = useUpdateAtom(CredentialsAtom)
 	const navigate = useNavigate()
 	const [isButtonClicked, setIsButtonClicked] = useState(false)
@@ -31,9 +33,15 @@ const GoogleSignInBtn = (props: PropsType) => {
 			await refetch()
 			navigate('/feed')
 		},
+		onError: (error: AxiosError) => {
+			setErrMsg(error.response?.data as string)
+			setIsLoading(false)
+		},
 	})
 
-	const { refetch } = useQuery(['user'], AccountService.GetUser, {
+	const { refetch } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {

@@ -9,18 +9,17 @@ import SuggestionItem from '../item/SuggestionItem'
 
 type PropsType = {
 	onClose: () => void
-	userId: string
 }
 
 const SuggestionModal = (props: PropsType) => {
-	const { onClose, userId } = props
+	const { onClose } = props
 
-	const [, windowHeight] = useWindowSize()
+	const { windowHeight } = useWindowSize()
 
-	const { data: suggestions, isLoading } = useQuery(
-		['suggestions', userId, 20],
-		() => FriendshipsService.GetSuggestions({ Take: 20 })
-	)
+	const { data: suggestions, isLoading } = useQuery({
+		queryKey: ['suggestions', { take: 20 }],
+		queryFn: () => FriendshipsService.GetSuggestions({ Take: 20 }),
+	})
 
 	return (
 		<Modal
@@ -35,12 +34,11 @@ const SuggestionModal = (props: PropsType) => {
 				<ModalHeader title='Suggestions' onClose={onClose} />
 				<div className='flex-1 px-4'>
 					{isLoading ? (
-						<Spinner />
+						<Spinner full />
 					) : (
 						suggestions?.map((suggestion) => (
 							<SuggestionItem
 								suggestion={suggestion}
-								userId={userId}
 								key={suggestion.Id}
 								isSmall={false}
 							/>

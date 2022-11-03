@@ -1,19 +1,27 @@
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button, { EnumButtonTheme } from '@components/common/button/Button'
+import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import TextParser from '@components/common/text-parser/TextParser'
 import { AccountService } from '@api/services/account/AccountService'
+import FollowingFollowersModal from './modals/FollowingFollowersModal'
 
 const ProfileHeader = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
-	const { data: stats, isLoading } = useQuery(
-		['stats', user?.Id],
-		AccountService.GetStats
-	)
+	const [isFollowingModal, setIsFollowingModal] = useState(false)
+	const [isFollowersModal, setIsFollowersModal] = useState(false)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
+	const { data: stats, isLoading } = useQuery({
+		queryKey: ['stats'],
+		queryFn: AccountService.GetStats,
+	})
 	const navigate = useNavigate()
 
 	const goToEditProfile = () => {
@@ -71,11 +79,17 @@ const ProfileHeader = () => {
 								<span className='font-medium'>{stats?.PostsCount} </span>
 								posts
 							</div>
-							<div className='text-base ml-10 whitespace-nowrap'>
+							<div
+								className='text-base ml-10 whitespace-nowrap cursor-pointer'
+								onClick={() => setIsFollowersModal(true)}
+							>
 								<span className='font-medium'>{stats?.FollowersCount} </span>
 								followers
 							</div>
-							<div className='text-base ml-10 whitespace-nowrap'>
+							<div
+								className='text-base ml-10 whitespace-nowrap cursor-pointer'
+								onClick={() => setIsFollowingModal(true)}
+							>
 								<span className='font-medium'>{stats?.FollowingCount} </span>
 								following
 							</div>
@@ -98,6 +112,16 @@ const ProfileHeader = () => {
 					</SkeletonWrapper>
 				</div>
 			</div>
+			<If condition={isFollowingModal || isFollowersModal}>
+				<FollowingFollowersModal
+					onClose={() =>
+						isFollowingModal
+							? setIsFollowingModal(false)
+							: setIsFollowersModal(false)
+					}
+					isFollowing={isFollowingModal}
+				/>
+			</If>
 		</div>
 	)
 }

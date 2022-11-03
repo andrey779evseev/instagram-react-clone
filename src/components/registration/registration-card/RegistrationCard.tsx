@@ -35,13 +35,11 @@ const RegistrationCard = () => {
 			setErrMsg(error.response?.data as string)
 		},
 	})
-	const { data: validNickname } = useQuery(
-		['check-nickname', debouncedNickname],
-		() => AccountService.CheckNickname(debouncedNickname),
-		{
-			enabled: debouncedNickname !== '',
-		}
-	)
+	const { data: validNickname } = useQuery({
+		queryKey: ['check-nickname', debouncedNickname],
+		queryFn: () => AccountService.CheckNickname(debouncedNickname),
+		enabled: debouncedNickname !== '',
+	})
 
 	const disabledBtn = useMemo(() => {
 		return (
@@ -69,7 +67,7 @@ const RegistrationCard = () => {
 			<div className={s.registration_description}>
 				Sign up to see photos and videos of your friends.
 			</div>
-			<GoogleSignInBtn setIsLoading={setIsLoading} />
+			<GoogleSignInBtn setIsLoading={setIsLoading} setErrMsg={setErrMsg} />
 			<DividerWithText text='OR' />
 			<div className={s.form_container}>
 				<div className={s.input_container}>

@@ -15,10 +15,10 @@ const TriplePost = (props: PropsType) => {
 			<If condition={!!item[0]}>
 				<PostMiniature post={item[0]} size={size} />
 			</If>
-			<If condition={!!item[0]}>
+			<If condition={!!item[1]}>
 				<PostMiniature post={item[1]} size={size} />
 			</If>
-			<If condition={!!item[0]}>
+			<If condition={!!item[2]}>
 				<PostMiniature post={item[2]} size={size} />
 			</If>
 		</div>

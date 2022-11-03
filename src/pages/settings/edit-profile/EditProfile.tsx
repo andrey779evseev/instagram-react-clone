@@ -13,7 +13,10 @@ import SettingsFormItem, {
 import AvatarCrop from './avatar-crop/AvatarCrop'
 
 const EditProfile = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 	const qc = useQueryClient()
 	const [avatar, setAvatar] = useState('')
 	const [name, setName] = useState('')
@@ -41,13 +44,11 @@ const EditProfile = () => {
 			qc.setQueryData(['user'], res)
 		},
 	})
-	const { data: validNickname } = useQuery(
-		['check-nickname', debouncedNickname],
-		() => AccountService.CheckNickname(debouncedNickname),
-		{
-			enabled: debouncedNickname !== '' && debouncedNickname !== user?.Nickname,
-		}
-	)
+	const { data: validNickname } = useQuery({
+		queryKey: ['check-nickname', debouncedNickname],
+		queryFn: () => AccountService.CheckNickname(debouncedNickname),
+		enabled: debouncedNickname !== '' && debouncedNickname !== user?.Nickname,
+	})
 
 	useEffect(() => {
 		if (!user) return

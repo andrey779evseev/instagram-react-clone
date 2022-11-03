@@ -505,6 +505,11 @@
   resolved "http://194.28.112.20:4873/@remix-run%2frouter/-/router-1.0.2.tgz#1c17eadb2fa77f80a796ad5ea9bf108e6993ef06"
   integrity sha512-GRSOFhJzjGN+d4sKHTMSvNeUPoZiDHWmRnXfzaxrqe7dE/Nzlc8BiMSJdLDESZlndM7jIUrZ/F4yWqVYlI0rwQ==
 
+"@tanstack/eslint-plugin-query@^4.14.2":
+  version "4.14.2"
+  resolved "http://194.28.112.20:4873/@tanstack%2feslint-plugin-query/-/eslint-plugin-query-4.14.2.tgz#974c4be11f03fa79d3ebcb067084c0ee1d4de109"
+  integrity sha512-+thnGm8srPy5/+p3SALX+0XVDXzklTFYD+WD33brkUcp8vt7Z2z0DuzxcWEr9dXLQuqRtdBJBlFCvUtw9CzwtQ==
+
 "@tanstack/match-sorter-utils@^8.1.1":
   version "8.1.1"
   resolved "http://194.28.112.20:4873/@tanstack%2fmatch-sorter-utils/-/match-sorter-utils-8.1.1.tgz#895f407813254a46082a6bbafad9b39b943dc834"
@@ -2759,10 +2764,10 @@ util-deprecate@^1.0.2:
   resolved "http://194.28.112.20:4873/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-vite@3.2.0:
-  version "3.2.0"
-  resolved "http://194.28.112.20:4873/vite/-/vite-3.2.0.tgz#a4015914620ff0122ea57fddfecc0e250eb6582c"
-  integrity sha512-Ovj7+cqIdM1I0LPCk2CWxzgADXMix3NLXpUT6g7P7zg/a9grk/TaC3qn9YMg7w7M0POIVCBOp1aBANJW+RH7oA==
+vite@^3.2.0:
+  version "3.2.2"
+  resolved "http://194.28.112.20:4873/vite/-/vite-3.2.2.tgz#280762bfaf47bcea1d12698427331c0009ac7c1f"
+  integrity sha512-pLrhatFFOWO9kS19bQ658CnRYzv0WLbsPih6R+iFeEEhDOuYgYCX2rztUViMz/uy/V8cLCJvLFeiOK7RJEzHcw==
   dependencies:
     esbuild "^0.15.9"
     postcss "^8.4.18"

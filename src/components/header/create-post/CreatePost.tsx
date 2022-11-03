@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo, useMemo, useState } from 'react'
 import { Crop } from 'react-image-crop'
 import Modal from '@components/common/modal/Modal'
@@ -8,7 +8,6 @@ import { base64ToBlob } from '@utils/Base64ToBlob'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
 import { fileToUrl } from '@utils/FileToUrl'
 import useWindowSize from '@hooks/UseWindowSize'
-import { AccountService } from '@api/services/account/AccountService'
 import { PostService } from '@api/services/post/PostService'
 import CreatePostHeader from './CreatePostHeader'
 import CreatePostStepFour from './steps/CreatePostStepFour'
@@ -60,14 +59,13 @@ const CreatePost = (props: PropsType) => {
 	const [description, setDescription] = useState('')
 	const [filename, setFilename] = useState('')
 	const [croppedImageBlob, setCroppedImageBlob] = useState<Blob | null>(null)
-	const [, windowHeight] = useWindowSize()
+	const { windowHeight } = useWindowSize()
 	const qc = useQueryClient()
 
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const createPostMutation = useMutation(PostService.CreatePost, {
 		onSuccess: () => {
 			setCurrentStep((step) => step + 1)
-			qc.invalidateQueries(['mini-posts', user?.Id])
+			qc.invalidateQueries(['mini-posts'])
 		},
 	})
 

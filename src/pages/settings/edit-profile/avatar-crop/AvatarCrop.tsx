@@ -1,10 +1,9 @@
-import { memo, useEffect, useState } from 'react'
+import { KeyboardEvent, memo, useEffect, useState } from 'react'
 import { Crop } from 'react-image-crop'
 import Button from '@components/common/button/Button'
 import ImageCrop from '@components/common/image-crop/ImageCrop'
 import Modal from '@components/common/modal/Modal'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
-import useKeyPress from '@hooks/UseKeyPress'
 
 type PropsType = {
 	aspect?: number
@@ -30,11 +29,10 @@ const AvatarCrop = (props: PropsType) => {
 	const [crop, setCrop] = useState<Crop>()
 	const [imageWidth, setImageWidth] = useState<number>(0)
 	const [loaded, setLoaded] = useState(false)
-	const enterPressed = useKeyPress('Enter', true)
 
 	useEffect(() => {
-		if (enterPressed) getCroppedImg()
-	}, [enterPressed])
+		if (onLoadImage) onLoadImage()
+	}, [])
 
 	const getCroppedImg = async () => {
 		if (!imageWidth || !crop) return
@@ -43,9 +41,9 @@ const AvatarCrop = (props: PropsType) => {
 		)
 	}
 
-	useEffect(() => {
-		if (onLoadImage) onLoadImage()
-	}, [])
+	const onKeyUp = (e: KeyboardEvent) => {
+		if (e.code === 'Enter') getCroppedImg()
+	}
 
 	const onChange = (cropParams: Crop) => {
 		if (!loaded) {
@@ -63,7 +61,7 @@ const AvatarCrop = (props: PropsType) => {
 			className={className}
 			contentClassName='relative'
 		>
-			<div className='p-4'>
+			<div className='p-4' onKeyUp={onKeyUp}>
 				<ImageCrop
 					crop={crop}
 					onChange={onChange}

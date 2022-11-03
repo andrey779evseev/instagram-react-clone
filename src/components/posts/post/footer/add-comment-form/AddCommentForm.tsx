@@ -1,9 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { memo, useEffect, useMemo, useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { KeyboardEvent, memo, useMemo, useState } from 'react'
 import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
-import useKeyPress from '@hooks/UseKeyPress'
-import { AccountService } from '@api/services/account/AccountService'
 import { PostService } from '@api/services/post/PostService'
 import s from './AddCommentForm.module.scss'
 
@@ -15,21 +13,19 @@ const AddCommentForm = (props: PropsType) => {
 	const { postId } = props
 	const [commentText, setCommentText] = useState('')
 	const isAvailablePost = useMemo(() => commentText !== '', [commentText])
-	const enterPressed = useKeyPress('Enter', true)
-
-	useEffect(() => {
-		if (enterPressed) addComment()
-	}, [enterPressed])
 
 	const qc = useQueryClient()
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const addCommentMutation = useMutation(PostService.AddComment, {
 		onSuccess: () => {
 			setCommentText('')
-			qc.invalidateQueries(['comments', postId])
-			qc.invalidateQueries(['mini-posts', user?.Id])
+			qc.invalidateQueries(['comments', { post: postId }])
+			qc.invalidateQueries(['mini-posts'])
 		},
 	})
+
+	const onKeyUp = (e: KeyboardEvent) => {
+		if (e.code === 'Enter') addComment()
+	}
 
 	const addComment = () => {
 		addCommentMutation.mutate({
@@ -39,7 +35,7 @@ const AddCommentForm = (props: PropsType) => {
 	}
 
 	return (
-		<div className={s.add_comment_container}>
+		<div className={s.add_comment_container} onKeyUp={onKeyUp}>
 			<SmileEmojiIcon className='cursor-pointer' />
 			<input
 				type='text'

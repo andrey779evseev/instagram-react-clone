@@ -35,7 +35,13 @@ const Button = (props: PropsType) => {
 			style={{ width }}
 			onClick={click}
 		>
-			{isLoading ? <LittleLoading color='white' /> : children}
+			{isLoading ? (
+				<LittleLoading
+					color={theme === EnumButtonTheme.Primary ? 'white' : 'cobalt'}
+				/>
+			) : (
+				children
+			)}
 		</button>
 	)
 }

@@ -7,7 +7,7 @@ import RouterProvider from './providers/RouterProvider'
 
 const App = () => {
 	return (
-		<div>
+		<>
 			<QueryProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<JotaiNexus />
@@ -16,7 +16,7 @@ const App = () => {
 				</RouterProvider>
 			</QueryProvider>
 			<div id='modals-root'></div>
-		</div>
+		</>
 	)
 }
 

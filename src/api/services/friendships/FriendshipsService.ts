@@ -28,4 +28,18 @@ export namespace FriendshipsService {
 			Path: `${controllerName}/${req.UserId}/unfollow`,
 		})
 	}
+
+	export const GetFollowers = () => {
+		return customFetch<UserMiniatureModel[]>({
+			Method: EnumHttpMethod.Get,
+			Path: `${controllerName}/get-followers`,
+		})
+	}
+
+	export const GetFollowing = () => {
+		return customFetch<UserMiniatureModel[]>({
+			Method: EnumHttpMethod.Get,
+			Path: `${controllerName}/get-following`,
+		})
+	}
 }

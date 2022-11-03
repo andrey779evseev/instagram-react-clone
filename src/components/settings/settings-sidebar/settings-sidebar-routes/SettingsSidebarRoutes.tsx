@@ -6,7 +6,10 @@ import { AccountService } from '@api/services/account/AccountService'
 import s from './SettingsSidebarRoutes.module.scss'
 
 const SettingsSidebarRoutes = () => {
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: AccountService.GetUser,
+	})
 	const isAvailableChangePassword = useMemo(() => !user?.GoogleId, [user])
 	return (
 		<div className={s.sidebar_routes_container}>

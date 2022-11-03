@@ -1,19 +1,28 @@
 import { memo } from 'react'
 import ImageBox from '@components/common/image-box/ImageBox'
 import MoreButton from '@components/common/more-button/MoreButton'
+import Skeleton from '@components/common/skeleton/Skeleton'
+import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 
 type PropsType = {
-	authorAvatar: string
-	authorName: string
+	authorAvatar: string | undefined
+	authorName: string | undefined
+	isLoading: boolean
 }
 
 const PostHeader = (props: PropsType) => {
-	const { authorAvatar, authorName } = props
+	const { authorAvatar, authorName, isLoading } = props
 	return (
 		<div className='border-gray10 bg-white w-full flex items-center justify-between px-4 py-[9px] border'>
 			<div className='flex items-center'>
-				<ImageBox image={authorAvatar} isSmall={true} />
-				<span className='ml-4'>{authorName}</span>
+				<ImageBox image={authorAvatar} isSmall={true} isLoading={isLoading} />
+				<SkeletonWrapper
+					condition={isLoading}
+					skeleton={<Skeleton variant='text' />}
+					className='ml-4'
+				>
+					<span>{authorName}</span>
+				</SkeletonWrapper>
 			</div>
 			<MoreButton />
 		</div>

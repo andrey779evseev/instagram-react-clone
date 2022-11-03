@@ -1,11 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo, useEffect, useState } from 'react'
 import BookmarkIcon from '@components/common/assets/icons/BookmarkIcon'
 import CommentIcon from '@components/common/assets/icons/CommentIcon'
 import PlaneIcon from '@components/common/assets/icons/PlaneIcon'
 import LikeButton from '@components/common/like-button/LikeButton'
-import PostDetailModel from '@api/common/models/responses/PostDetailModel'
-import { AccountService } from '@api/services/account/AccountService'
+import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
 import { PostService } from '@api/services/post/PostService'
 import s from './PostFooterActions.module.scss'
 
@@ -19,15 +18,14 @@ const PostFooterActions = (props: PropsType) => {
 	const [isLiked, setIsLiked] = useState(liked)
 
 	const qc = useQueryClient()
-	const { data: user } = useQuery(['user'], AccountService.GetUser)
 	const likeMutation = useMutation(PostService.LikePost, {
 		onSuccess: () => {
-			qc.invalidateQueries(['mini-posts', user?.Id])
+			invalidateMiniPosts()
 		},
 	})
 	const unlikeMutation = useMutation(PostService.UnlikePost, {
 		onSuccess: () => {
-			qc.invalidateQueries(['mini-posts', user?.Id])
+			invalidateMiniPosts()
 		},
 	})
 
@@ -35,13 +33,20 @@ const PostFooterActions = (props: PropsType) => {
 		setIsLiked(liked)
 	}, [liked])
 
+	const invalidateMiniPosts = () => {
+		qc.invalidateQueries(['mini-posts'])
+	}
+
 	const onLike = () => {
 		if (isLiked) unlikeMutation.mutate({ PostId: postId! })
 		else likeMutation.mutate({ PostId: postId! })
 
-		qc.setQueryData<PostDetailModel>(['post', postId], (prev) => {
-			prev!.LikesInfo.Liked = !isLiked
-			return prev
+		qc.setQueryData<LikesInfoModel>(['likes', { post: postId }], (prev) => {
+			return {
+				...prev,
+				Liked: !isLiked,
+				LikesCount: !isLiked ? prev!.LikesCount + 1 : prev!.LikesCount - 1,
+			} as LikesInfoModel
 		})
 
 		setIsLiked(!isLiked)
