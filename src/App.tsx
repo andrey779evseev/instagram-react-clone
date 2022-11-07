@@ -1,9 +1,10 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import React from 'react'
+import { RouterProvider } from 'react-router-dom'
+import PagePreloader from '@components/common/page-preloader/PagePreloader'
 import JotaiNexus from '@utils/JotaiNexus'
-import Router from './Router'
+import { router } from './Router'
 import QueryProvider from './providers/QueryProvider'
-import RouterProvider from './providers/RouterProvider'
 
 const App = () => {
 	return (
@@ -11,9 +12,10 @@ const App = () => {
 			<QueryProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<JotaiNexus />
-				<RouterProvider>
+				{/* <RouterProvider>
 					<Router />
-				</RouterProvider>
+				</RouterProvider> */}
+				<RouterProvider router={router} fallbackElement={<PagePreloader />} />
 			</QueryProvider>
 			<div id='modals-root'></div>
 		</>

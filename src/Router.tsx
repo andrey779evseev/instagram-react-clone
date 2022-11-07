@@ -1,6 +1,6 @@
 import loadable from '@loadable/component'
 import pMinDelay from 'p-min-delay'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import PagePreloader from '@components/common/page-preloader/PagePreloader'
 import Spinner from '@components/common/spinner/Spinner'
 
@@ -63,49 +63,69 @@ const EditProfile = loadable(
 	}
 )
 
-const Router = () => {
-	return (
-		<Routes>
-			{/* authorization wrapper for all pages */}
-			<Route element={<AuthorizationGuard />} path='/'>
-				{/* layout wrapper for authorized pages */}
-				<Route element={<Layout />} path=''>
-					{/* default redirect from index to feed */}
-					<Route index element={<Navigate to='/feed' />} />
+export const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <AuthorizationGuard />,
+		children: [
+			{
+				path: '',
+				element: <Layout />,
+				children: [
+					{
+						index: true,
+						element: <Navigate to='/feed' />,
+					},
+					{
+						path: '/feed',
+						element: <Feed />,
+					},
+					{
+						path: '/settings',
+						element: <SettingsLayout />,
+						children: [
+							{
+								index: true,
+								element: <Navigate to='edit-profile' />,
+							},
+							{
+								path: 'edit-profile',
+								element: <EditProfile />,
+							},
+							{
+								path: 'change-password',
+								element: <ChangePassword />,
+							},
+						],
+					},
+					{
+						path: '/profile/:userId',
+						element: <Profile />,
+						children: [
+							{
+								path: 'posts',
+								element: <ProfilePosts />,
+							},
+						],
+					},
+				],
+			},
+			{
+				path: '',
+				element: <AuthLayout />,
+				children: [
+					{
+						path: '/login',
+						element: <Login />,
+					},
+					{
+						path: '/registration',
+						element: <Registration />,
+					},
+				],
+			},
+		],
+	},
+])
 
-					{/* feed page */}
-					<Route element={<Feed />} path='/feed' />
-
-					{/* layout for settings tabs */}
-					<Route element={<SettingsLayout />} path='/settings'>
-						{/* default redirect from index to edit profile tab */}
-						<Route index element={<Navigate to='edit-profile' />} />
-
-						{/* edit profile tab in settings */}
-						<Route element={<EditProfile />} path='edit-profile' />
-
-						{/* change password tab in settings */}
-						<Route element={<ChangePassword />} path='change-password' />
-					</Route>
-
-					{/* profile page */}
-					<Route element={<Profile />} path='/profile/:userId'>
-						{/* posts tab on profile */}
-						<Route element={<ProfilePosts />} path='posts' />
-					</Route>
-				</Route>
-
-				{/* auth layout for non authorized pages */}
-				<Route element={<AuthLayout />} path=''>
-					{/* login page */}
-					<Route element={<Login />} path='/login' />
-
-					{/* registration page */}
-					<Route element={<Registration />} path='/registration' />
-				</Route>
-			</Route>
-		</Routes>
-	)
-}
-
-export default Router
+export const rootNavigate = router.navigate
