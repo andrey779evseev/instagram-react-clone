@@ -12,5 +12,5 @@ export const AccessTokenAtom = atom<Promise<string | null>>(async (get) => {
 	const tokenExpires =
 		new Date(credentials.AccessTokenExpiresAt).getTime() <= new Date().getTime()
 	if (!tokenExpires) return credentials.AccessToken
-	return refreshAccessToken()
+	return refreshAccessToken() as Promise<string | null>
 })
