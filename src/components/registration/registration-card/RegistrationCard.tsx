@@ -10,8 +10,8 @@ import Error from '@components/common/error/Error'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import Input from '@components/common/input/Input'
 import useDebounce from '@hooks/UseDebounce'
-import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
+import { UserService } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import s from './RegistrationCard.module.scss'
 
@@ -37,7 +37,7 @@ const RegistrationCard = () => {
 	})
 	const { data: validNickname } = useQuery({
 		queryKey: ['check-nickname', debouncedNickname],
-		queryFn: () => AccountService.CheckNickname(debouncedNickname),
+		queryFn: () => UserService.CheckNickname(debouncedNickname),
 		enabled: debouncedNickname !== '',
 	})
 

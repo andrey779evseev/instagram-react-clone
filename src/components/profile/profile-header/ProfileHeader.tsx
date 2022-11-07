@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button, { EnumButtonTheme } from '@components/common/button/Button'
@@ -8,22 +8,30 @@ import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import TextParser from '@components/common/text-parser/TextParser'
-import { AccountService } from '@api/services/account/AccountService'
+import { UserService } from '@api/services/user/UserService'
 import FollowingFollowersModal from './modals/FollowingFollowersModal'
 
 const ProfileHeader = () => {
 	const [isFollowingModal, setIsFollowingModal] = useState(false)
 	const [isFollowersModal, setIsFollowersModal] = useState(false)
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
-	})
-	const { data: stats, isLoading } = useQuery({
-		queryKey: ['stats'],
-		queryFn: AccountService.GetStats,
-	})
 	const navigate = useNavigate()
+	const { userId } = useParams()
 
+	// prettier-ignore
+	const { data: user } =
+		userId === 'me'
+			? useQuery({
+				queryKey: ['user'],
+				queryFn: UserService.GetCurrentUser,
+			})
+			: useQuery({
+				queryKey: ['user', { id: userId }],
+				queryFn: () => UserService.GetUser(userId!),
+			})
+	const { data: stats, isLoading } = useQuery({
+		queryKey: ['stats', { user: userId }],
+		queryFn: () => UserService.GetStats(userId!),
+	})
 	const goToEditProfile = () => {
 		navigate('/settings/edit-profile')
 	}
@@ -107,7 +115,7 @@ const ProfileHeader = () => {
 						skeleton={<Skeleton variant='text' style={{ fontSize: '16px' }} />}
 					>
 						<div className='text-base'>
-							<TextParser text={user!.Description} />
+							<TextParser text={user?.Description} />
 						</div>
 					</SkeletonWrapper>
 				</div>

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
+import { useParams } from 'react-router'
 import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
 import If from '@components/common/if/If'
 import Modal from '@components/common/modal/Modal'
@@ -16,14 +17,14 @@ type PropsType = {
 
 const FollowingModal = (props: PropsType) => {
 	const { onClose, isFollowing } = props
-
+	const { userId } = useParams()
 	const { windowHeight } = useWindowSize()
 
 	const { data: following, isLoading } = useQuery({
-		queryKey: [isFollowing ? 'following' : 'followers'],
+		queryKey: [isFollowing ? 'following' : 'followers', { user: userId }],
 		queryFn: isFollowing
-			? FriendshipsService.GetFollowing
-			: FriendshipsService.GetFollowers,
+			? () => FriendshipsService.GetFollowing(userId!)
+			: () => FriendshipsService.GetFollowers(userId!),
 	})
 
 	return (

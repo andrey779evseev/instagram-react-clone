@@ -8,15 +8,15 @@ import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Dropdown from '@components/common/dropdown/Dropdown'
 import { logout } from '@utils/Logout'
-import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
+import { UserService } from '@api/services/user/UserService'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import DropdownItem from '@models/dropdown/DropdownItem'
 
 const CurrentUser = () => {
 	const { data: user } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 	})
 	const refreshToken = useAtomValue(RefreshTokenAtom)
 	const navigate = useNavigate()
@@ -28,7 +28,7 @@ const CurrentUser = () => {
 	})
 
 	const openProfile = () => {
-		navigate('/profile')
+		navigate('/profile/me')
 	}
 
 	const openSettings = () => {

@@ -8,7 +8,7 @@ export namespace MediaService {
 	export const SaveImage = (req: SaveImageRequest) => {
 		return customFetch<string>({
 			Method: EnumHttpMethod.Post,
-			Req: req.Data,
+			Body: req.Data,
 			Path: `${controllerName}/save-image`,
 			QueryParams: {
 				fileType: req.FileType,

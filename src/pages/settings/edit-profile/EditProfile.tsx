@@ -6,7 +6,7 @@ import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import { base64ToBlob } from '@utils/Base64ToBlob'
 import { ObjectUrlFileType, fileToUrl } from '@utils/FileToUrl'
 import useDebounce from '@hooks/UseDebounce'
-import { AccountService } from '@api/services/account/AccountService'
+import { UserService } from '@api/services/user/UserService'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'
@@ -15,7 +15,7 @@ import AvatarCrop from './avatar-crop/AvatarCrop'
 const EditProfile = () => {
 	const { data: user } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 	})
 	const qc = useQueryClient()
 	const [avatar, setAvatar] = useState('')
@@ -30,7 +30,7 @@ const EditProfile = () => {
 	const debouncedNickname = useDebounce(nickname, 500)
 
 	const setAvatarMutation = useMutation(
-		(data: FormData) => AccountService.SetAvatar({ Data: data }),
+		(data: FormData) => UserService.SetAvatar({ Data: data }),
 		{
 			onSuccess: async (res) => {
 				setAvatar(res)
@@ -39,14 +39,14 @@ const EditProfile = () => {
 			},
 		}
 	)
-	const updateUserMutation = useMutation(AccountService.UpdateUser, {
+	const updateUserMutation = useMutation(UserService.UpdateUser, {
 		onSuccess: (res) => {
 			qc.setQueryData(['user'], res)
 		},
 	})
 	const { data: validNickname } = useQuery({
 		queryKey: ['check-nickname', debouncedNickname],
-		queryFn: () => AccountService.CheckNickname(debouncedNickname),
+		queryFn: () => UserService.CheckNickname(debouncedNickname),
 		enabled: debouncedNickname !== '' && debouncedNickname !== user?.Nickname,
 	})
 

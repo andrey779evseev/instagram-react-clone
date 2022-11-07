@@ -10,8 +10,8 @@ import Error from '@components/common/error/Error'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import Input from '@components/common/input/Input'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
-import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
+import { UserService } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 
 const LoginCard = () => {
@@ -27,7 +27,7 @@ const LoginCard = () => {
 	)
 	const { refetch } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {

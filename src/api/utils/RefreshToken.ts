@@ -5,6 +5,7 @@ import { logout } from '@utils/Logout'
 import CredentialsModel from '@api/common/models/responses/CredentialsModel'
 import { AuthService } from '@api/services/auth/AuthService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
+import { IsFetchingRefreshTokenAtom } from '@store/atoms/IsFetchingRefreshToken'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import User from '@models/user/User'
 
@@ -17,6 +18,9 @@ export const refreshAccessToken = async () => {
 		return null
 	}
 	let response: CredentialsModel | null = null
+	const isFetchingRefreshToken = readAtom(IsFetchingRefreshTokenAtom)
+	if (isFetchingRefreshToken) return
+	writeAtom(IsFetchingRefreshTokenAtom, true)
 	await AuthService.RefreshToken({
 		RefreshToken: refreshToken,
 		Email: user?.Email ?? (email as string),

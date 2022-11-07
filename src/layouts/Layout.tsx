@@ -5,7 +5,7 @@ const Layout = () => {
 	return (
 		<main className='flex flex-col items-center'>
 			<Header />
-			<div className='content'>
+			<div className='content mt-[60px]'>
 				<Outlet />
 			</div>
 		</main>

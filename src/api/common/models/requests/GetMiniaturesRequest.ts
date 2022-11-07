@@ -4,4 +4,5 @@ export default class GetMiniaturesRequest {
 	}
 	Cursor: string | null = null
 	Take?: number = 25
+	UserId: string
 }

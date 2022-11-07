@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
+import { useParams } from 'react-router'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
@@ -9,12 +10,17 @@ import { PostsService } from '@api/services/posts/PostsService'
 
 const ProfilePosts = () => {
 	const { windowHeight } = useWindowSize()
+	const { userId } = useParams()
 
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
-			['mini-posts'],
+			['mini-posts', { user: userId }],
 			({ pageParam = null }) =>
-				PostsService.GetMiniatures({ Cursor: pageParam, Take: 27 }),
+				PostsService.GetMiniatures({
+					Cursor: pageParam,
+					Take: 27,
+					UserId: userId!,
+				}),
 			{
 				getNextPageParam: (lastPage) =>
 					lastPage.length === 27

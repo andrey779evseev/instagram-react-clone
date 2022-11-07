@@ -6,7 +6,7 @@ export default class SendParams {
 	}
 	Method: EnumHttpMethod = EnumHttpMethod.Get
 	Path: string = ''
-	Req?: unknown
+	Body?: unknown
 	WithToken?: boolean = true
 	QueryParams?: Record<string, unknown> | object
 }

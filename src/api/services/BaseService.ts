@@ -50,7 +50,7 @@ export const customFetch = async <T = void>(params: SendParams): Promise<T> => {
 			break
 		case EnumHttpMethod.Post:
 		case EnumHttpMethod.Put:
-			req = instance[params.Method]<T>(params.Path, params.Req, config)
+			req = instance[params.Method]<T>(params.Path, params.Body, config)
 			break
 	}
 	return req.then((res) => res.data)

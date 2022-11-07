@@ -17,7 +17,7 @@ export namespace PostService {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/${req.PostId}/add-comment`,
-			Req: { Text: req.Text },
+			Body: { Text: req.Text },
 		})
 	}
 
@@ -43,7 +43,7 @@ export namespace PostService {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/create-post`,
-			Req: {
+			Body: {
 				Photo: url,
 				Description: req.Description,
 			},

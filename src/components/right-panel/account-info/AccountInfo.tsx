@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { AccountService } from '@api/services/account/AccountService'
+import { UserService } from '@api/services/user/UserService'
 import Avatar from '../../common/avatar/Avatar'
 
 const AccountInfo = () => {
 	const { data: user } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 	})
 	return (
 		<div className='flex items-center'>

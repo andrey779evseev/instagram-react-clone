@@ -6,8 +6,8 @@ import Button from '@components/common/button/Button'
 import Error from '@components/common/error/Error'
 import Success from '@components/common/success/Success'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
-import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
+import { UserService } from '@api/services/user/UserService'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'
@@ -15,7 +15,7 @@ import SettingsFormItem, {
 const ChangePassword = () => {
 	const { data: user } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 	})
 	const [oldPassword, setOldPassword] = useState('')
 	const [newPassword, setNewPassword] = useState('')

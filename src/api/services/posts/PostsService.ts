@@ -11,8 +11,11 @@ export namespace PostsService {
 	export const GetMiniatures = (req: GetMiniaturesRequest) => {
 		return customFetch<PostMiniatureModel[]>({
 			Method: EnumHttpMethod.Get,
-			Path: `${controllerName}/get-miniatures`,
-			QueryParams: req,
+			Path: `${controllerName}/get-miniatures/${req.UserId}`,
+			QueryParams: {
+				Take: req.Take,
+				Cursor: req.Cursor,
+			},
 		})
 	}
 

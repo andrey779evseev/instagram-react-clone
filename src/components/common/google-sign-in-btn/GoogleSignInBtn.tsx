@@ -9,8 +9,8 @@ import {
 } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
-import { AccountService } from '@api/services/account/AccountService'
 import { AuthService } from '@api/services/auth/AuthService'
+import { UserService } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import s from './GoogleSignInBtn.module.scss'
@@ -41,7 +41,7 @@ const GoogleSignInBtn = (props: PropsType) => {
 
 	const { refetch } = useQuery({
 		queryKey: ['user'],
-		queryFn: AccountService.GetUser,
+		queryFn: UserService.GetCurrentUser,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {

@@ -15,7 +15,7 @@ export namespace AuthService {
 		return customFetch<CredentialsModel>({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/login`,
-			Req: req,
+			Body: req,
 			WithToken: false,
 		})
 	}
@@ -23,7 +23,7 @@ export namespace AuthService {
 		return customFetch<CredentialsModel>({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/google-login`,
-			Req: req,
+			Body: req,
 			WithToken: false,
 		})
 	}
@@ -31,7 +31,7 @@ export namespace AuthService {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/revoke-token`,
-			Req: req,
+			Body: req,
 			WithToken: false,
 		})
 	}
@@ -39,7 +39,7 @@ export namespace AuthService {
 		return customFetch<CredentialsModel>({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/refresh-token`,
-			Req: req,
+			Body: req,
 			WithToken: false,
 		})
 	}
@@ -47,7 +47,7 @@ export namespace AuthService {
 		return customFetch<CredentialsModel>({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/register`,
-			Req: req,
+			Body: req,
 			WithToken: false,
 		})
 	}
@@ -55,7 +55,7 @@ export namespace AuthService {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/change-password`,
-			Req: req,
+			Body: req,
 		})
 	}
 }

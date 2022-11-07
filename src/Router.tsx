@@ -66,21 +66,41 @@ const EditProfile = loadable(
 const Router = () => {
 	return (
 		<Routes>
+			{/* authorization wrapper for all pages */}
 			<Route element={<AuthorizationGuard />} path='/'>
+				{/* layout wrapper for authorized pages */}
 				<Route element={<Layout />} path=''>
+					{/* default redirect from index to feed */}
 					<Route index element={<Navigate to='/feed' />} />
+
+					{/* feed page */}
 					<Route element={<Feed />} path='/feed' />
+
+					{/* layout for settings tabs */}
 					<Route element={<SettingsLayout />} path='/settings'>
+						{/* default redirect from index to edit profile tab */}
 						<Route index element={<Navigate to='edit-profile' />} />
+
+						{/* edit profile tab in settings */}
 						<Route element={<EditProfile />} path='edit-profile' />
+
+						{/* change password tab in settings */}
 						<Route element={<ChangePassword />} path='change-password' />
 					</Route>
-					<Route element={<Profile />} path='/profile'>
+
+					{/* profile page */}
+					<Route element={<Profile />} path='/profile/:userId'>
+						{/* posts tab on profile */}
 						<Route element={<ProfilePosts />} path='posts' />
 					</Route>
 				</Route>
+
+				{/* auth layout for non authorized pages */}
 				<Route element={<AuthLayout />} path=''>
+					{/* login page */}
 					<Route element={<Login />} path='/login' />
+
+					{/* registration page */}
 					<Route element={<Registration />} path='/registration' />
 				</Route>
 			</Route>

@@ -7,13 +7,19 @@ import User from '@models/user/User'
 import UserStatsModel from '../../common/models/responses/UserStatsModel'
 import { MediaService } from '../media/MediaService'
 
-export namespace AccountService {
-	const controllerName = 'account'
+export namespace UserService {
+	const controllerName = 'user'
 
-	export const GetUser = () => {
+	export const GetCurrentUser = () => {
 		return customFetch<User>({
 			Method: EnumHttpMethod.Get,
-			Path: `${controllerName}/get-user`,
+			Path: `${controllerName}/get-current-user`,
+		})
+	}
+	export const GetUser = (userId: string) => {
+		return customFetch<User>({
+			Method: EnumHttpMethod.Get,
+			Path: `${controllerName}/get-user/${userId}`,
 		})
 	}
 	export const SetAvatar = async (req: SetAvatarRequest) => {
@@ -23,14 +29,14 @@ export namespace AccountService {
 		})
 		return customFetch<string>({
 			Method: EnumHttpMethod.Put,
-			Req: { Url: url },
+			Body: { Url: url },
 			Path: `${controllerName}/set-avatar`,
 		})
 	}
 	export const UpdateUser = (req: UpdateUserRequest) => {
 		return customFetch<User>({
 			Method: EnumHttpMethod.Put,
-			Req: req,
+			Body: req,
 			Path: `${controllerName}/update-user`,
 		})
 	}
@@ -41,10 +47,10 @@ export namespace AccountService {
 			WithToken: false,
 		})
 	}
-	export const GetStats = () => {
+	export const GetStats = (userId: string) => {
 		return customFetch<UserStatsModel>({
 			Method: EnumHttpMethod.Get,
-			Path: `${controllerName}/get-stats`,
+			Path: `${controllerName}/get-stats/${userId}`,
 		})
 	}
 }

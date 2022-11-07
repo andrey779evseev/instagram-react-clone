@@ -2,15 +2,16 @@ import s from './Spinner.module.scss'
 
 type PropsType = {
 	full?: boolean
+	className?: string
 }
 
 const Spinner = (props: PropsType) => {
-	const { full = false } = props
+	const { className = '', full = false } = props
 	return (
 		<div
 			className={`w-full ${
 				full ? 'items-center h-full' : 'h-fit'
-			} flex justify-center`}
+			} flex justify-center ${className}`}
 		>
 			<div className={s.lds_spinner}>
 				<div></div>
