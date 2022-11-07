@@ -4,7 +4,7 @@ import Button from '@components/common/button/Button'
 import If from '@components/common/if/If'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import { base64ToBlob } from '@utils/Base64ToBlob'
-import { ObjectUrlFileType, fileToUrl } from '@utils/FileToUrl'
+import fileToUrl, { ObjectUrlFileType } from '@utils/FileToUrl'
 import useDebounce from '@hooks/UseDebounce'
 import { UserService } from '@api/services/user/UserService'
 import SettingsFormItem, {

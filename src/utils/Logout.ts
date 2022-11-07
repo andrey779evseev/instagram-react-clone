@@ -1,6 +1,6 @@
 import { queryClient } from '@providers/QueryProvider'
-import { rootNavigate } from 'src/Router'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
+import { rootNavigate } from '../Router'
 import { writeAtom } from './JotaiNexus'
 import { SaveToLocalStorage } from './LocalStorage'
 

@@ -6,7 +6,7 @@ import ConfirmationModal from '@components/common/modal/confirmation-modal/Confi
 import Switch from '@components/common/switch/Switch'
 import { base64ToBlob } from '@utils/Base64ToBlob'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
-import { fileToUrl } from '@utils/FileToUrl'
+import fileToUrl from '@utils/FileToUrl'
 import useWindowSize from '@hooks/UseWindowSize'
 import { PostService } from '@api/services/post/PostService'
 import CreatePostHeader from './CreatePostHeader'
