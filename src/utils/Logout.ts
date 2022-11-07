@@ -5,9 +5,7 @@ import { writeAtom } from './JotaiNexus'
 import { SaveToLocalStorage } from './LocalStorage'
 
 export const logout = () => {
-	console.log('before clear')
 	queryClient.clear()
-	console.log('after clear')
 	writeAtom(CredentialsAtom, null)
 	SaveToLocalStorage('email', undefined)
 	rootNavigate('/login')
