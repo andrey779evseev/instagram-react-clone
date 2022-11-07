@@ -10,6 +10,7 @@ export default defineConfig({
 	plugins: [
 		react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
 	],
+	base: 'https://insta-react-clone.vercel.app/',
 	resolve: {
 		alias: {
 			'@guards': path.resolve(__dirname, './src/guards'),
