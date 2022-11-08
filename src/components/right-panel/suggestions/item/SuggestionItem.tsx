@@ -16,7 +16,7 @@ const SuggestionItem = (props: PropsType) => {
 
 	const qc = useQueryClient()
 	const followMutation = useMutation(
-		(id: string) => FriendshipsService.Follow({ UserId: id }),
+		(id: string) => FriendshipsService.Follow(id),
 		{
 			onSuccess: () => {
 				qc.invalidateQueries(['suggestions'])

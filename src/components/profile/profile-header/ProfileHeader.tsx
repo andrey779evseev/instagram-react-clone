@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
@@ -8,6 +8,8 @@ import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import TextParser from '@components/common/text-parser/TextParser'
+import UserStatsModel from '@api/common/models/responses/UserStatsModel'
+import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
 import { UserService } from '@api/services/user/UserService'
 import FollowingFollowersModal from './modals/FollowingFollowersModal'
 
@@ -16,22 +18,66 @@ const ProfileHeader = () => {
 	const [isFollowersModal, setIsFollowersModal] = useState(false)
 	const navigate = useNavigate()
 	const { userId } = useParams()
+	const isMyProfile = useMemo(() => userId === 'me', [userId])
+	const qc = useQueryClient()
 
 	// prettier-ignore
 	const { data: user } =
-		userId === 'me'
-			? useQuery({
-				queryKey: ['user'],
-				queryFn: UserService.GetCurrentUser,
-			})
-			: useQuery({
-				queryKey: ['user', { id: userId }],
-				queryFn: () => UserService.GetUser(userId!),
-			})
-	const { data: stats, isLoading } = useQuery({
-		queryKey: ['stats', { user: userId }],
-		queryFn: () => UserService.GetStats(userId!),
+	isMyProfile
+		? useQuery({
+			queryKey: ['user'],
+			queryFn: UserService.GetCurrentUser,
+		})
+		: useQuery({
+			queryKey: ['user', { id: userId }],
+			queryFn: () => UserService.GetUser(userId!),
+		})
+	const profileUserId = useMemo(
+		() => (isMyProfile ? user?.Id : userId),
+		[userId, user]
+	)
+	const { data: stats, isLoading: isLoadingStats } = useQuery({
+		queryKey: ['stats', { user: profileUserId }],
+		queryFn: () => UserService.GetStats(profileUserId!),
+		enabled: !isMyProfile || !!user?.Id,
 	})
+	const { data: isFollowed, isLoading: isLoadingIsFollowed } = useQuery({
+		queryKey: ['is-followed', { user: userId }],
+		queryFn: () => FriendshipsService.IsFollowed(userId!),
+		enabled: !isMyProfile,
+	})
+	const followMutation = useMutation(() => FriendshipsService.Follow(userId!), {
+		onSuccess: () => refetch(true),
+	})
+	const unfollowMutation = useMutation(
+		() => FriendshipsService.Unfollow(userId!),
+		{
+			onSuccess: () => refetch(false),
+		}
+	)
+
+	const refetch = (follow: boolean) => {
+		// qc.invalidateQueries(['is-followed', { user: userId }])
+		// qc.invalidateQueries(['stats', { user: profileUserId }])
+		qc.setQueryData<boolean>(['is-followed', { user: userId }], (prev) => !prev)
+		qc.setQueryData<UserStatsModel>(
+			['stats', { user: profileUserId }],
+			(prev) => {
+				return {
+					...prev,
+					FollowersCount: follow
+						? prev!.FollowersCount + 1
+						: prev!.FollowersCount - 1,
+				} as UserStatsModel
+			}
+		)
+	}
+
+	const changeFriendship = () => {
+		if (isFollowed) unfollowMutation.mutate()
+		else followMutation.mutate()
+	}
+
 	const goToEditProfile = () => {
 		navigate('/settings/edit-profile')
 	}
@@ -40,7 +86,7 @@ const ProfileHeader = () => {
 		<div className='flex justify-center'>
 			<div className='flex items-center'>
 				<SkeletonWrapper
-					condition={isLoading}
+					condition={isLoadingStats}
 					skeleton={<Skeleton variant='circular' width={150} height={150} />}
 				>
 					<Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge} />
@@ -48,7 +94,7 @@ const ProfileHeader = () => {
 				<div className='ml-[100px]'>
 					<div className='flex items-center mb-6'>
 						<SkeletonWrapper
-							condition={isLoading}
+							condition={isLoadingStats}
 							skeleton={
 								<Skeleton variant='text' style={{ fontSize: '28px' }} />
 							}
@@ -59,19 +105,30 @@ const ProfileHeader = () => {
 							</div>
 						</SkeletonWrapper>
 						<SkeletonWrapper
-							condition={isLoading}
+							condition={isLoadingStats}
 							skeleton={<Skeleton variant='rounded' width={153} height={30} />}
 						>
 							<Button
-								theme={EnumButtonTheme.Secondary}
-								onClick={goToEditProfile}
+								theme={
+									isMyProfile
+										? EnumButtonTheme.Secondary
+										: EnumButtonTheme.Primary
+								}
+								onClick={isMyProfile ? goToEditProfile : changeFriendship}
 								width='max-content'
+								isLoading={
+									followMutation.isLoading || unfollowMutation.isLoading
+								}
 							>
-								Edit Profile
+								{isMyProfile
+									? 'Edit Profile'
+									: isFollowed
+										? 'Unfollow'
+										: 'Follow'}
 							</Button>
 						</SkeletonWrapper>
 						<SkeletonWrapper
-							condition={isLoading}
+							condition={isLoadingStats}
 							skeleton={<Skeleton variant='rounded' width={24} height={24} />}
 							className='ml-6'
 						>
@@ -80,7 +137,7 @@ const ProfileHeader = () => {
 					</div>
 					<SkeletonWrapper
 						skeleton={<Skeleton variant='text' style={{ fontSize: '16px' }} />}
-						condition={isLoading}
+						condition={isLoadingStats}
 					>
 						<div className='flex items-center'>
 							<div className='text-base whitespace-nowrap'>
@@ -104,14 +161,14 @@ const ProfileHeader = () => {
 						</div>
 					</SkeletonWrapper>
 					<SkeletonWrapper
-						condition={isLoading}
+						condition={isLoadingStats}
 						skeleton={<Skeleton variant='text' style={{ fontSize: '16px' }} />}
 						className='mt-6'
 					>
 						<div className='font-medium text-base'>{user?.Name}</div>
 					</SkeletonWrapper>
 					<SkeletonWrapper
-						condition={isLoading}
+						condition={isLoadingStats}
 						skeleton={<Skeleton variant='text' style={{ fontSize: '16px' }} />}
 					>
 						<div className='text-base'>

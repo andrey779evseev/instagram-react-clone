@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { useParams } from 'react-router'
 import InfinityList from '@components/common/infinity-list/InfinityList'
@@ -7,10 +7,19 @@ import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import useWindowSize from '@hooks/UseWindowSize'
 import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
 import { PostsService } from '@api/services/posts/PostsService'
+import { UserService } from '@api/services/user/UserService'
 
 const ProfilePosts = () => {
 	const { windowHeight } = useWindowSize()
 	const { userId } = useParams()
+
+	const isMyProfile = useMemo(() => userId === 'me', [userId])
+
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: UserService.GetCurrentUser,
+		enabled: isMyProfile,
+	})
 
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
@@ -19,13 +28,14 @@ const ProfilePosts = () => {
 				PostsService.GetMiniatures({
 					Cursor: pageParam,
 					Take: 27,
-					UserId: userId!,
+					UserId: isMyProfile ? (user?.Id as string) : userId!,
 				}),
 			{
 				getNextPageParam: (lastPage) =>
 					lastPage.length === 27
 						? lastPage[lastPage.length - 1].PostedAt
 						: undefined,
+				enabled: !isMyProfile || !!user?.Id,
 			}
 		)
 

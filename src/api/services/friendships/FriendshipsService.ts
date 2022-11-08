@@ -1,5 +1,4 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
-import FollowUnfollowRequest from '@api/common/models/requests/FollowUnfollowRequest'
 import GetSuggestionsRequest from '@api/common/models/requests/GetSuggestionsRequest'
 import SearchUsersRequest from '@api/common/models/requests/SearchUsersRequest'
 import PageResponse from '@api/common/models/responses/PageResponse'
@@ -26,17 +25,17 @@ export namespace FriendshipsService {
 		})
 	}
 
-	export const Follow = (req: FollowUnfollowRequest) => {
+	export const Follow = (userId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${req.UserId}/follow`,
+			Path: `${controllerName}/${userId}/follow`,
 		})
 	}
 
-	export const Unfollow = (req: FollowUnfollowRequest) => {
+	export const Unfollow = (userId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${req.UserId}/unfollow`,
+			Path: `${controllerName}/${userId}/unfollow`,
 		})
 	}
 
@@ -51,6 +50,13 @@ export namespace FriendshipsService {
 		return customFetch<UserMiniatureModel[]>({
 			Method: EnumHttpMethod.Get,
 			Path: `${controllerName}/get-following/${userId}`,
+		})
+	}
+
+	export const IsFollowed = (userId: string) => {
+		return customFetch<boolean>({
+			Method: EnumHttpMethod.Get,
+			Path: `${controllerName}/is-followed/${userId}`,
 		})
 	}
 }

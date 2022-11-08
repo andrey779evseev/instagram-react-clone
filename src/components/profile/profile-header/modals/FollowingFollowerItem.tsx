@@ -17,7 +17,7 @@ const FollowingItem = (props: PropsType) => {
 
 	const qc = useQueryClient()
 	const unfollowMutation = useMutation(
-		(id: string) => FriendshipsService.Unfollow({ UserId: id }),
+		(id: string) => FriendshipsService.Unfollow(id),
 		{
 			onSuccess: async () => {
 				const following = await qc.fetchQuery<UserMiniatureModel[]>([
