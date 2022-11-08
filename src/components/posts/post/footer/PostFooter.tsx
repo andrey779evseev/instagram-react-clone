@@ -1,23 +1,24 @@
 import { useQuery } from '@tanstack/react-query'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import addDotsToNumber from '@utils/AddDotsToNumber'
 import { fromDateToNow } from '@utils/date/FromDateToNow'
 import PostModel from '@api/common/models/responses/PostModel'
 import { PostService } from '@api/services/post/PostService'
 import PostFooterActions from './actions/PostFooterActions'
 import AddCommentForm from './add-comment-form/AddCommentForm'
 import PostFooterDescription from './description/PostFooterDescription'
+import LikesInfo from './likes-info/LikesInfo'
 
 type PropsType = {
 	post: PostModel
 	authorName: string | undefined
+	setVisibleModal: (value: boolean) => void
 }
 
 const PostFooter = (props: PropsType) => {
-	const { post, authorName } = props
+	const { post, authorName, setVisibleModal } = props
 
 	const { data: likesInfo, isLoading: isLoadingLikes } = useQuery({
 		queryKey: ['likes', { post: post.Id }],
@@ -27,11 +28,10 @@ const PostFooter = (props: PropsType) => {
 		queryKey: ['comments-count', { post: post.Id }],
 		queryFn: () => PostService.GetCommentsCount(post.Id),
 	})
-
-	const likesCount = useMemo(
-		() => (!isLoadingLikes ? addDotsToNumber(likesInfo!.LikesCount) : 0),
-		[likesInfo]
-	)
+	const { data: firstComment, isLoading: isLoadingFirstComment } = useQuery({
+		queryKey: ['first-comment', { post: post.Id }],
+		queryFn: () => PostService.GetFirstComment(post.Id),
+	})
 
 	return (
 		<div className='border-gray20 border border-t-0'>
@@ -42,12 +42,17 @@ const PostFooter = (props: PropsType) => {
 						condition={isLoadingLikes}
 						skeleton={<Skeleton variant='text' />}
 					>
-						{likesCount} likes
+						<LikesInfo
+							images={likesInfo?.Avatars}
+							count={likesInfo?.LikesCount ?? 0}
+							firstName={likesInfo?.FirstName}
+						/>
 					</SkeletonWrapper>
 				</div>
 				<PostFooterDescription
 					description={post.Description}
 					authorName={authorName}
+					setVisibleModal={setVisibleModal}
 				/>
 				<If condition={isLoadingCommentsCount || commentsCount !== 0}>
 					<SkeletonWrapper
@@ -55,8 +60,27 @@ const PostFooter = (props: PropsType) => {
 						skeleton={<Skeleton variant='text' />}
 						className='mt-1'
 					>
-						<div className='text-gray50 cursor-pointer'>
+						<div
+							className='text-gray50 cursor-pointer'
+							onClick={() => setVisibleModal(true)}
+						>
 							View all {commentsCount} comments
+						</div>
+					</SkeletonWrapper>
+				</If>
+				<If condition={!!firstComment}>
+					<SkeletonWrapper
+						condition={isLoadingFirstComment}
+						skeleton={<Skeleton variant='text' />}
+						className='mt-1'
+					>
+						<div className='flex items-center'>
+							<div className='author_name font-semibold'>
+								{firstComment?.AuthorName}
+							</div>
+							<div className='ml-2 w-full whitespace-nowrap overflow-hidden text-ellipsis'>
+								{firstComment?.Text}
+							</div>
 						</div>
 					</SkeletonWrapper>
 				</If>

@@ -3,11 +3,13 @@ export const removeScrollBarFromBody = () => {
 	document.body.style.position = 'fixed'
 	if (window.innerWidth > 768) {
 		document.body.style.paddingRight = '15px'
+		document.getElementById('header')!.style.paddingRight = '15px'
 		document.body.style.backgroundColor = '#F9F9F9'
 	}
 
 	return () => {
 		const scrollY = document.body.style.top
+		document.getElementById('header')!.style.paddingRight = ''
 		document.body.style.paddingRight = ''
 		document.body.style.position = ''
 		document.body.style.top = ''

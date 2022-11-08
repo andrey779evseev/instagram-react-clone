@@ -19,6 +19,8 @@ const AddCommentForm = (props: PropsType) => {
 		onSuccess: () => {
 			setCommentText('')
 			qc.invalidateQueries(['comments', { post: postId }])
+			qc.invalidateQueries(['comments-count', { post: postId }])
+			qc.invalidateQueries(['first-comment', { post: postId }])
 			qc.invalidateQueries(['mini-posts'])
 		},
 	})

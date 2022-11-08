@@ -21,7 +21,7 @@ const Header = () => {
 	const isSettingsPage = path.includes('settings')
 
 	return (
-		<div className={s.header_wrapper}>
+		<div className={s.header_wrapper} id='header'>
 			<div className={s.header_container}>
 				<InstagramTitle className='mt-2 mr-[150px]' />
 				<Search />

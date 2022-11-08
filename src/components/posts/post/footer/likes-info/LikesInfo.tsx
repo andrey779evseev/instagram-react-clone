@@ -35,7 +35,7 @@ const LikesInfo = (props: PropsType) => {
 			</If>
 			<div>
 				{firstName ? (
-					<span>
+					<span className='font-normal'>
 						Liked by
 						<span className='font-semibold'> {firstName} </span>
 						<If condition={count - 1 > 0}>

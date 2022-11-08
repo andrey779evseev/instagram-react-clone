@@ -3,6 +3,7 @@ import { FileTypeEnum } from '@api/common/models/enums/FileTypeEnum'
 import AddCommentRequest from '@api/common/models/requests/AddCommentRequest'
 import CreatePostRequest from '@api/common/models/requests/CreatePostRequest'
 import LikeUnlikePostRequest from '@api/common/models/requests/LikeUnlikePostRequest'
+import CommentMiniatureModel from '@api/common/models/responses/CommentMiniatureModel'
 import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
 import PostModel from '@api/common/models/responses/PostModel'
 import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
@@ -82,6 +83,13 @@ export namespace PostService {
 		return customFetch<UserMiniatureModel>({
 			Method: EnumHttpMethod.Get,
 			Path: `${controllerName}/get-author/${postId}`,
+		})
+	}
+
+	export const GetFirstComment = (postId: string) => {
+		return customFetch<CommentMiniatureModel>({
+			Method: EnumHttpMethod.Get,
+			Path: `${controllerName}/get-first-comment/${postId}`,
 		})
 	}
 }

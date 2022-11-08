@@ -59,7 +59,7 @@ const PostModal = (props: PropsType) => {
 			},
 			...commentsData!,
 		] as CommentModel[]
-	}, [commentsData, post])
+	}, [commentsData, post, isLoading])
 
 	const width = useMemo(() => {
 		return windowWidth > 1200 && windowWidth < 1600
