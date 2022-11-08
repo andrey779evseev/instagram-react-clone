@@ -28,7 +28,7 @@ const CurrentUser = () => {
 	})
 
 	const openProfile = () => {
-		navigate('/profile/me')
+		navigate('/profile/me/posts')
 	}
 
 	const openSettings = () => {

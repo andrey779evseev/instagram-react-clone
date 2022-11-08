@@ -3,6 +3,7 @@ import { FileTypeEnum } from '@api/common/models/enums/FileTypeEnum'
 import SetAvatarRequest from '@api/common/models/requests/SetAvatarRequest'
 import UpdateUserRequest from '@api/common/models/requests/UpdateUserRequest'
 import { customFetch } from '@api/services/BaseService'
+import ExpandedUserModel from '@models/user/ExpandedUserModel'
 import User from '@models/user/User'
 import UserStatsModel from '../../common/models/responses/UserStatsModel'
 import { MediaService } from '../media/MediaService'
@@ -17,7 +18,7 @@ export namespace UserService {
 		})
 	}
 	export const GetUser = (userId: string) => {
-		return customFetch<User>({
+		return customFetch<ExpandedUserModel>({
 			Method: EnumHttpMethod.Get,
 			Path: `${controllerName}/get-user/${userId}`,
 		})
