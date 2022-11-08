@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 export const formatDate = (date: Date | string | undefined, format: string) => {
 	if (!date) return ''
