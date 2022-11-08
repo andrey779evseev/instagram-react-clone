@@ -7,6 +7,7 @@ import {
 	useRef,
 } from 'react'
 import useScrollTop from '@hooks/UseScrollTop'
+import If from '../if/If'
 
 type PropsType<T> = {
 	Item: ElementType
@@ -14,7 +15,6 @@ type PropsType<T> = {
 	itemHeight: number
 	items: T[]
 	additionalItemsCount?: number
-	itemsCount?: number
 	onBottom?: () => void
 	loader?: JSX.Element
 	paddingForItem?: number
@@ -106,10 +106,18 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 				>
 					{visibleChildren}
 					<div className='relative'>
-						<div
-							className='absolute bottom-0 left-0 w-full pt-96 -z-10'
-							ref={bottomAnchor}
-						/>
+						<If
+							condition={
+								items.length >= visibleNodeCount &&
+								items.length !== 0 &&
+								visibleNodeCount !== 0
+							}
+						>
+							<div
+								className='absolute bottom-0 left-0 w-full pt-96 -z-10'
+								ref={bottomAnchor}
+							/>
+						</If>
 					</div>
 				</div>
 			</div>
