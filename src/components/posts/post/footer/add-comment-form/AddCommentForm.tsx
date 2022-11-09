@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { KeyboardEvent, memo, useMemo, useState } from 'react'
+import { CommentsService } from '@api/services/comments/CommentsService'
 import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
-import { PostService } from '@api/services/post/PostService'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { KeyboardEvent, memo, useMemo, useState } from 'react'
 import s from './AddCommentForm.module.scss'
 
 type PropsType = {
@@ -15,7 +15,7 @@ const AddCommentForm = (props: PropsType) => {
 	const isAvailablePost = useMemo(() => commentText !== '', [commentText])
 
 	const qc = useQueryClient()
-	const addCommentMutation = useMutation(PostService.AddComment, {
+	const addCommentMutation = useMutation(CommentsService.AddComment, {
 		onSuccess: () => {
 			setCommentText('')
 			qc.invalidateQueries(['comments', { post: postId }])
