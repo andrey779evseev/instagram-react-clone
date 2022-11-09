@@ -2,11 +2,11 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { memo, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
-import Avatar, { EnumAvatarSize } from '../avatar/Avatar'
-import Button from '../button/Button'
-import If from '../if/If'
-import LittleLoading from '../little-loading/LittleLoading'
-import s from './Search.module.scss'
+import Button from '../../button/Button'
+import If from '../../if/If'
+import LittleLoading from '../../little-loading/LittleLoading'
+import s from '../Search.module.scss'
+import SearchPopupItem from './SearchPopupItem'
 
 type PropsType = {
 	visible: boolean
@@ -78,19 +78,12 @@ const SearchPopup = (props: PropsType) => {
 			<div className='flex flex-col'>
 				<If condition={flatUsers.length !== 0}>
 					{flatUsers.map((user) => (
-						<div
+						<SearchPopupItem
+							user={user}
 							key={user.Id}
-							className={`flex items-center cursor-pointer mb-2 ${
-								!isShowButton && 'last:mb-0'
-							}`}
-							onClick={() => goToProfile(user.Id)}
-						>
-							<Avatar src={user.Avatar} size={EnumAvatarSize.Big} />
-							<div className='flex flex-col justify-between flex-1 ml-2'>
-								<div className='font-semibold'>{user.Nickname}</div>
-								<div className='text-gray50'>{user.Name}</div>
-							</div>
-						</div>
+							goToProfile={goToProfile}
+							isShowButton={isShowButton}
+						/>
 					))}
 				</If>
 				<If condition={isShowNobodyFound}>

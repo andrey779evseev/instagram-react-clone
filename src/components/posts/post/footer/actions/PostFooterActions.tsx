@@ -5,7 +5,7 @@ import CommentIcon from '@components/common/assets/icons/CommentIcon'
 import PlaneIcon from '@components/common/assets/icons/PlaneIcon'
 import LikeButton from '@components/common/like-button/LikeButton'
 import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
-import { PostService } from '@api/services/post/PostService'
+import { LikesService } from '@api/services/likes/LikesService'
 import s from './PostFooterActions.module.scss'
 
 type PropsType = {
@@ -18,12 +18,12 @@ const PostFooterActions = (props: PropsType) => {
 	const [isLiked, setIsLiked] = useState(liked)
 
 	const qc = useQueryClient()
-	const likeMutation = useMutation(PostService.LikePost, {
+	const likeMutation = useMutation(LikesService.LikePost, {
 		onSuccess: () => {
 			invalidateMiniPosts()
 		},
 	})
-	const unlikeMutation = useMutation(PostService.UnlikePost, {
+	const unlikeMutation = useMutation(LikesService.UnlikePost, {
 		onSuccess: () => {
 			invalidateMiniPosts()
 		},
@@ -38,16 +38,19 @@ const PostFooterActions = (props: PropsType) => {
 	}
 
 	const onLike = () => {
-		if (isLiked) unlikeMutation.mutate({ PostId: postId! })
-		else likeMutation.mutate({ PostId: postId! })
+		if (isLiked) unlikeMutation.mutate(postId!)
+		else likeMutation.mutate(postId!)
 
-		qc.setQueryData<LikesInfoModel>(['likes', { post: postId }], (prev) => {
-			return {
-				...prev,
-				Liked: !isLiked,
-				LikesCount: !isLiked ? prev!.LikesCount + 1 : prev!.LikesCount - 1,
-			} as LikesInfoModel
-		})
+		qc.setQueryData<LikesInfoModel>(
+			['likes-info', { post: postId }],
+			(prev) => {
+				return {
+					...prev,
+					Liked: !isLiked,
+					LikesCount: !isLiked ? prev!.LikesCount + 1 : prev!.LikesCount - 1,
+				} as LikesInfoModel
+			}
+		)
 
 		setIsLiked(!isLiked)
 	}

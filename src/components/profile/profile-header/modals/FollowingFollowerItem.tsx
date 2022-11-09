@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button, { EnumButtonTheme } from '@components/common/button/Button'
 import If from '@components/common/if/If'
@@ -10,10 +11,13 @@ import { FriendshipsService } from '@api/services/friendships/FriendshipsService
 type PropsType = {
 	user: UserMiniatureModel
 	isFollowing: boolean
+	onClose: () => void
 }
 
 const FollowingItem = (props: PropsType) => {
-	const { user, isFollowing } = props
+	const { user, isFollowing, onClose } = props
+
+	const navigate = useNavigate()
 
 	const qc = useQueryClient()
 	const unfollowMutation = useMutation(
@@ -30,8 +34,16 @@ const FollowingItem = (props: PropsType) => {
 		}
 	)
 
+	const goToProfile = (userId: string) => {
+		onClose()
+		navigate(`/profile/${userId}/posts`)
+	}
+
 	return (
-		<div className='flex items-center my-4'>
+		<div
+			className='flex items-center my-4 cursor-pointer'
+			onClick={() => goToProfile(user.Id)}
+		>
 			<Avatar src={user.Avatar} size={EnumAvatarSize.Medium} />
 			<span className='text-dark font-semibold w-full px-3 overflow-hidden'>
 				{user.Nickname}

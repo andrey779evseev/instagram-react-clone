@@ -5,6 +5,8 @@ import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import useWindowSize from '@hooks/UseWindowSize'
 import CommentModel from '@api/common/models/responses/CommentModel'
+import { CommentsService } from '@api/services/comments/CommentsService'
+import { LikesService } from '@api/services/likes/LikesService'
 import { PostService } from '@api/services/post/PostService'
 import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
 import PostCommentsList from './comments/PostCommentsList'
@@ -30,12 +32,12 @@ const PostModal = (props: PropsType) => {
 		queryFn: () => PostService.GetAuthor(postId),
 	})
 	const { data: likesInfo, isLoading: isLoadingLikesInfo } = useQuery({
-		queryKey: ['likes', { post: postId }],
-		queryFn: () => PostService.GetLikesInfo(postId),
+		queryKey: ['likes-info', { post: postId }],
+		queryFn: () => LikesService.GetLikesInfo(postId),
 	})
 	const { data: commentsData, isLoading: isLoadingComments } = useQuery({
 		queryKey: ['comments', { post: postId }],
-		queryFn: () => PostService.GetComments(postId),
+		queryFn: () => CommentsService.GetComments(postId),
 	})
 
 	const isLoading = useMemo(
@@ -100,11 +102,7 @@ const PostModal = (props: PropsType) => {
 					nickname={author?.Nickname}
 					avatar={author?.Avatar}
 				/>
-				<PostCommentsList
-					comments={comments}
-					avatar={author?.Avatar}
-					isLoading={isLoading}
-				/>
+				<PostCommentsList comments={comments} isLoading={isLoading} />
 				<PostModalFooter
 					postId={post?.Id}
 					postedAt={post?.PostedAt}

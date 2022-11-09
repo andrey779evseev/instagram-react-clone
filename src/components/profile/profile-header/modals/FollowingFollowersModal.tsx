@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { useParams } from 'react-router'
 import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
 import If from '@components/common/if/If'
@@ -8,6 +8,7 @@ import ModalHeader from '@components/common/modal/header/ModalHeader'
 import Spinner from '@components/common/spinner/Spinner'
 import useWindowSize from '@hooks/UseWindowSize'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
+import { UserService } from '@api/services/user/UserService'
 import FollowingFollowerItem from './FollowingFollowerItem'
 
 type PropsType = {
@@ -15,16 +16,29 @@ type PropsType = {
 	isFollowing: boolean
 }
 
-const FollowingModal = (props: PropsType) => {
+const FollowingFollowersModal = (props: PropsType) => {
 	const { onClose, isFollowing } = props
 	const { userId } = useParams()
 	const { windowHeight } = useWindowSize()
 
+	const isMyProfile = useMemo(() => userId === 'me', [userId])
+
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: UserService.GetCurrentUser,
+		enabled: isMyProfile,
+	})
+
+	const profileUserId = useMemo(
+		() => (isMyProfile ? user?.Id : userId),
+		[isMyProfile, userId, user]
+	)
+
 	const { data: following, isLoading } = useQuery({
 		queryKey: [isFollowing ? 'following' : 'followers', { user: userId }],
 		queryFn: isFollowing
-			? () => FriendshipsService.GetFollowing(userId!)
-			: () => FriendshipsService.GetFollowers(userId!),
+			? () => FriendshipsService.GetFollowing(profileUserId!)
+			: () => FriendshipsService.GetFollowers(profileUserId!),
 	})
 
 	return (
@@ -62,6 +76,7 @@ const FollowingModal = (props: PropsType) => {
 								user={user}
 								key={user.Id}
 								isFollowing={isFollowing}
+								onClose={onClose}
 							/>
 						))
 					)}
@@ -71,4 +86,4 @@ const FollowingModal = (props: PropsType) => {
 	)
 }
 
-export default memo(FollowingModal)
+export default memo(FollowingFollowersModal)

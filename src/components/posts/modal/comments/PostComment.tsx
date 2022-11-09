@@ -4,14 +4,13 @@ import CommentModel from '@api/common/models/responses/CommentModel'
 
 type PropsType = {
 	comment: CommentModel
-	avatar: string | undefined
 }
 
 const PostComment = (props: PropsType) => {
-	const { comment, avatar } = props
+	const { comment } = props
 	return (
 		<div className='flex items-center first:pt-0 pt-4'>
-			<Avatar src={avatar} size={EnumAvatarSize.Medium} />
+			<Avatar src={comment.Author.Avatar} size={EnumAvatarSize.Medium} />
 			<div className='ml-4'>
 				<div>
 					<span className='font-semibold'>{comment.Author?.Nickname} </span>

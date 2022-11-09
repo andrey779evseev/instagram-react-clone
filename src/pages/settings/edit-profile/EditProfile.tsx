@@ -117,8 +117,7 @@ const EditProfile = () => {
 			}),
 			new SettingsFormItem({
 				Type: EnumSettingsFormItemType.Description,
-				Value:
-					'In most cases, you will be able to change your username back to johndoe for an additional 14 days. More information',
+				Value: `In most cases, you will be able to change your username back to ${user?.Nickname} for an additional 14 days. More information`,
 			}),
 			new SettingsFormItem({
 				Type: EnumSettingsFormItemType.Textarea,

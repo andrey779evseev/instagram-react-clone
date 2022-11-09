@@ -26,6 +26,7 @@ const DetailPostFooter = (props: PropsType) => {
 					images={likesInfo?.Avatars}
 					count={likesInfo?.LikesCount ?? 0}
 					firstName={likesInfo?.FirstName}
+					postId={postId as string}
 				/>
 			</SkeletonWrapper>
 			<div className='text-gray50 text-s uppercase'>

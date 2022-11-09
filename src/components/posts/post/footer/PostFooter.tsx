@@ -5,7 +5,8 @@ import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import { fromDateToNow } from '@utils/date/FromDateToNow'
 import PostModel from '@api/common/models/responses/PostModel'
-import { PostService } from '@api/services/post/PostService'
+import { CommentsService } from '@api/services/comments/CommentsService'
+import { LikesService } from '@api/services/likes/LikesService'
 import PostFooterActions from './actions/PostFooterActions'
 import AddCommentForm from './add-comment-form/AddCommentForm'
 import PostFooterDescription from './description/PostFooterDescription'
@@ -21,16 +22,16 @@ const PostFooter = (props: PropsType) => {
 	const { post, authorName, setVisibleModal } = props
 
 	const { data: likesInfo, isLoading: isLoadingLikes } = useQuery({
-		queryKey: ['likes', { post: post.Id }],
-		queryFn: () => PostService.GetLikesInfo(post.Id),
+		queryKey: ['likes-info', { post: post.Id }],
+		queryFn: () => LikesService.GetLikesInfo(post.Id),
 	})
 	const { data: commentsCount, isLoading: isLoadingCommentsCount } = useQuery({
 		queryKey: ['comments-count', { post: post.Id }],
-		queryFn: () => PostService.GetCommentsCount(post.Id),
+		queryFn: () => CommentsService.GetCommentsCount(post.Id),
 	})
 	const { data: firstComment, isLoading: isLoadingFirstComment } = useQuery({
 		queryKey: ['first-comment', { post: post.Id }],
-		queryFn: () => PostService.GetFirstComment(post.Id),
+		queryFn: () => CommentsService.GetFirstComment(post.Id),
 	})
 
 	return (
@@ -46,6 +47,7 @@ const PostFooter = (props: PropsType) => {
 							images={likesInfo?.Avatars}
 							count={likesInfo?.LikesCount ?? 0}
 							firstName={likesInfo?.FirstName}
+							postId={post.Id}
 						/>
 					</SkeletonWrapper>
 				</div>

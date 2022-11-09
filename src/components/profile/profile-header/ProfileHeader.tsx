@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import If from '@components/common/if/If'
+import Skeleton from '@components/common/skeleton/Skeleton'
+import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import { UserService } from '@api/services/user/UserService'
 import ProfileHeaderStats from './ProfileHeaderStats'
 import FollowingFollowersModal from './modals/FollowingFollowersModal'
@@ -13,7 +15,7 @@ const ProfileHeader = () => {
 	const { userId } = useParams()
 
 	// prettier-ignore
-	const { data: user } =
+	const { data: user, isLoading } =
 		userId === 'me'
 			? useQuery({
 				queryKey: ['user'],
@@ -27,7 +29,12 @@ const ProfileHeader = () => {
 	return (
 		<div className='flex justify-center'>
 			<div className='flex items-center'>
-				<Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge} />
+				<SkeletonWrapper
+					skeleton={<Skeleton variant='circular' width={150} height={150} />}
+					condition={isLoading}
+				>
+					<Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge} />
+				</SkeletonWrapper>
 				<ProfileHeaderStats
 					setIsFollowersModal={setIsFollowersModal}
 					setIsFollowingModal={setIsFollowingModal}

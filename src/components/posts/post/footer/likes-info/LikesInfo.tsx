@@ -1,16 +1,20 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import If from '@components/common/if/If'
 import LikesFormatter from '@components/common/likes-formatter/LikesFormatter'
 import s from './LikesInfo.module.scss'
+import LikesListModal from './modal/LikesListModal'
 
 type PropsType = {
 	images?: string[]
 	firstName?: string
 	count: number
+	postId: string
 }
 
 const LikesInfo = (props: PropsType) => {
-	const { images = [], firstName, count } = props
+	const { images = [], firstName, count, postId } = props
+
+	const [visibleModal, setVisibleModal] = useState(false)
 
 	return (
 		<div className='flex'>
@@ -40,7 +44,10 @@ const LikesInfo = (props: PropsType) => {
 						<span className='font-semibold'> {firstName} </span>
 						<If condition={count - 1 > 0}>
 							and
-							<span className='font-semibold'>
+							<span
+								className='font-semibold cursor-pointer'
+								onClick={() => setVisibleModal(true)}
+							>
 								{' '}
 								{count - 1} {count === 1 ? 'other' : 'others'}
 							</span>
@@ -52,6 +59,12 @@ const LikesInfo = (props: PropsType) => {
 					</span>
 				)}
 			</div>
+			<If condition={visibleModal}>
+				<LikesListModal
+					onClose={() => setVisibleModal(false)}
+					postId={postId}
+				/>
+			</If>
 		</div>
 	)
 }

@@ -5,11 +5,10 @@ import CommentModel from '@api/common/models/responses/CommentModel'
 type PropsType = {
 	comments: CommentModel[]
 	isLoading: boolean
-	avatar: string | undefined
 }
 
 const PostCommentsList = (props: PropsType) => {
-	const { comments, isLoading, avatar } = props
+	const { comments, isLoading } = props
 	return (
 		<div className='p-4 h-full overflow-y-auto'>
 			{isLoading ? (
@@ -21,9 +20,7 @@ const PostCommentsList = (props: PropsType) => {
 					</div>
 				</div>
 			) : (
-				comments.map((comment, i) => (
-					<PostComment key={i} comment={comment} avatar={avatar} />
-				))
+				comments.map((comment, i) => <PostComment key={i} comment={comment} />)
 			)}
 		</div>
 	)

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import useClickOutside from '@hooks/UseClickOutside'
 import SearchIcon from '../assets/icons/SearchIcon'
 import s from './Search.module.scss'
-import SearchPopup from './SearchPopup'
+import SearchPopup from './popup/SearchPopup'
 
 const Search = () => {
 	const [value, setValue] = useState('')
