@@ -43,7 +43,7 @@ const Dropdown = (props: PropsType) => {
 									<div className={s.dropdown_item_title}>
 										{item.Name}
 										<If condition={item.IsLoading}>
-											<LittleLoading />
+											<LittleLoading color='cobalt'/>
 										</If>
 									</div>
 								</div>

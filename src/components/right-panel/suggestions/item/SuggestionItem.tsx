@@ -20,6 +20,7 @@ const SuggestionItem = (props: PropsType) => {
 		{
 			onSuccess: () => {
 				qc.invalidateQueries(['suggestions'])
+				qc.invalidateQueries(['feed'])
 			},
 		}
 	)
