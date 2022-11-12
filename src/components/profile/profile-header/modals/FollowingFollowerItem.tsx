@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button, { EnumButtonTheme } from '@components/common/button/Button'
 import If from '@components/common/if/If'
-import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
-import UserStatsModel from '@api/common/models/responses/UserStatsModel'
+import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
+import UserStatsModel from '@api/common/models/user/UserStatsModel'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
 
 type PropsType = {

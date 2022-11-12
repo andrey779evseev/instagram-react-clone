@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import If from '@components/common/if/If'
-import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
+import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
 import PostMiniature from './PostMiniature'
 
 type PropsType = {

@@ -3,7 +3,7 @@ import CommentFilledIcon from '@components/common/assets/icons/CommentFilledIcon
 import HeartFilledIcon from '@components/common/assets/icons/HeartFilledIcon'
 import If from '@components/common/if/If'
 import PostModal from '@components/posts/modal/PostModal'
-import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
+import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
 import s from './PostMiniature.module.scss'
 
 type PropsType = {

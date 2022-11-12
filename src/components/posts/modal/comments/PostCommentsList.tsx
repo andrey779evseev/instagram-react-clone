@@ -1,6 +1,6 @@
 import Skeleton from '@components/common/skeleton/Skeleton'
 import PostComment from '@components/posts/modal/comments/PostComment'
-import CommentModel from '@api/common/models/responses/CommentModel'
+import CommentModel from '@api/common/models/comment/CommentModel'
 
 type PropsType = {
 	comments: CommentModel[]

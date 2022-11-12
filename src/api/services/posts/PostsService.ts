@@ -1,8 +1,8 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
+import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
+import PostModel from '@api/common/models/post/PostModel'
 import GetFeedRequest from '@api/common/models/requests/GetFeedRequest'
-import PostModel from '@api/common/models/responses/PostModel'
 import GetMiniaturesRequest from '../../common/models/requests/GetMiniaturesRequest'
-import PostMiniatureModel from '../../common/models/responses/PostMiniatureModel'
 import { customFetch } from '../BaseService'
 
 export namespace PostsService {

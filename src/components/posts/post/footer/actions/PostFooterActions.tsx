@@ -4,7 +4,7 @@ import BookmarkIcon from '@components/common/assets/icons/BookmarkIcon'
 import CommentIcon from '@components/common/assets/icons/CommentIcon'
 import PlaneIcon from '@components/common/assets/icons/PlaneIcon'
 import LikeButton from '@components/common/like-button/LikeButton'
-import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
+import LikesInfoModel from '@api/common/models/like/LikesInfoModel'
 import { LikesService } from '@api/services/likes/LikesService'
 import s from './PostFooterActions.module.scss'
 

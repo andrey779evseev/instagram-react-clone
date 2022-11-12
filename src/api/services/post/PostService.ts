@@ -1,8 +1,8 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
 import { FileTypeEnum } from '@api/common/models/enums/FileTypeEnum'
+import PostModel from '@api/common/models/post/PostModel'
 import CreatePostRequest from '@api/common/models/requests/CreatePostRequest'
-import PostModel from '@api/common/models/responses/PostModel'
-import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
+import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
 import { customFetch } from '../BaseService'
 import { MediaService } from '../media/MediaService'
 

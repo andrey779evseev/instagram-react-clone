@@ -3,7 +3,7 @@ import { memo } from 'react'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button from '@components/common/button/Button'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
-import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
+import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
 
 type PropsType = {

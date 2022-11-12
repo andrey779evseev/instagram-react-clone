@@ -1,4 +1,4 @@
-import UserModel from './UserModel'
+import UserExtendedModel from '../user/UserExtendedModel'
 
 export default class LikeModel {
 	constructor(obj?: Partial<LikeModel>) {
@@ -6,5 +6,5 @@ export default class LikeModel {
 	}
 	Id: string
 	PostId: string
-	User: UserModel
+	User: UserExtendedModel
 }

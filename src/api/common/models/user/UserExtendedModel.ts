@@ -1,5 +1,5 @@
-export default class UserModel {
-	constructor(obj?: Partial<UserModel>) {
+export default class UserExtendedModel {
+	constructor(obj?: Partial<UserExtendedModel>) {
 		if (obj) Object.assign(this, obj)
 	}
 	Nickname: string

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
-import LikeModel from '@api/common/models/responses/LikeModel'
+import LikeModel from '@api/common/models/like/LikeModel'
 
 type PropsType = {
 	like: LikeModel

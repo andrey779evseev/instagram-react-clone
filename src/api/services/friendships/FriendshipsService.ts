@@ -1,16 +1,16 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
+import PageResponse from '@api/common/models/common/PageResponse'
 import GetSuggestionsRequest from '@api/common/models/requests/GetSuggestionsRequest'
 import SearchUsersRequest from '@api/common/models/requests/SearchUsersRequest'
-import PageResponse from '@api/common/models/responses/PageResponse'
-import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
-import UserModel from '@api/common/models/responses/UserModel'
+import UserExtendedModel from '@api/common/models/user/UserExtendedModel'
+import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
 import { customFetch } from '../BaseService'
 
 export namespace FriendshipsService {
 	const controllerName = 'friendships'
 
 	export const GetSuggestions = (req: GetSuggestionsRequest) => {
-		return customFetch<UserModel[]>({
+		return customFetch<UserExtendedModel[]>({
 			Method: EnumHttpMethod.Get,
 			Path: `${controllerName}/get-suggestions`,
 			QueryParams: req,
@@ -18,7 +18,7 @@ export namespace FriendshipsService {
 	}
 
 	export const SearchUsers = (req: SearchUsersRequest) => {
-		return customFetch<PageResponse<UserModel>>({
+		return customFetch<PageResponse<UserExtendedModel>>({
 			Method: EnumHttpMethod.Post,
 			Path: `${controllerName}/search-users`,
 			Body: req,
@@ -28,14 +28,14 @@ export namespace FriendshipsService {
 	export const Follow = (userId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${userId}/follow`,
+			Path: `${controllerName}/follow/${userId}`,
 		})
 	}
 
 	export const Unfollow = (userId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${userId}/unfollow`,
+			Path: `${controllerName}/unfollow/${userId}`,
 		})
 	}
 

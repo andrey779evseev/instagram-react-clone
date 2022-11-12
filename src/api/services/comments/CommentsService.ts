@@ -1,7 +1,7 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
+import CommentMiniatureModel from '@api/common/models/comment/CommentMiniatureModel'
+import CommentModel from '@api/common/models/comment/CommentModel'
 import AddCommentRequest from '@api/common/models/requests/AddCommentRequest'
-import CommentMiniatureModel from '@api/common/models/responses/CommentMiniatureModel'
-import CommentModel from '../../common/models/responses/CommentModel'
 import { customFetch } from '../BaseService'
 
 export namespace CommentsService {
@@ -10,8 +10,8 @@ export namespace CommentsService {
 	export const AddComment = (req: AddCommentRequest) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${req.PostId}/add-comment`,
-			Body: { Text: req.Text },
+			Path: `${controllerName}/add-comment/${req.PostId}`,
+			Body: req.Text,
 		})
 	}
 

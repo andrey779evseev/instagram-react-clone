@@ -1,9 +1,9 @@
 import { memo } from 'react'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
-import UserModel from '@api/common/models/responses/UserModel'
+import UserExtendedModel from '@api/common/models/user/UserExtendedModel'
 
 type PropsType = {
-	user: UserModel
+	user: UserExtendedModel
 	goToProfile: (userId: string) => void
 	isShowButton: boolean
 }

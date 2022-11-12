@@ -6,11 +6,11 @@ import Button, { EnumButtonTheme } from '@components/common/button/Button'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import TextParser from '@components/common/text-parser/TextParser'
-import UserStatsModel from '@api/common/models/responses/UserStatsModel'
+import ExpandedUserModel from '@api/common/models/user/ExpandedUserModel'
+import User from '@api/common/models/user/User'
+import UserStatsModel from '@api/common/models/user/UserStatsModel'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
 import { UserService } from '@api/services/user/UserService'
-import ExpandedUserModel from '@models/user/ExpandedUserModel'
-import User from '@models/user/User'
 
 type PropsType = {
 	user: User | ExpandedUserModel | undefined

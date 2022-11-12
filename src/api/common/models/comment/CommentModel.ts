@@ -1,4 +1,4 @@
-import UserMiniatureModel from '@api/common/models/responses/UserMiniatureModel'
+import UserMiniatureModel from '../user/UserMiniatureModel'
 
 export default class CommentModel {
 	constructor(obj?: Partial<CommentModel>) {

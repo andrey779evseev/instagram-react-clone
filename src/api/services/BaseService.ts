@@ -1,14 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { readAtom } from '@utils/JotaiNexus'
 import { logout } from '@utils/Logout'
-import { BASE_URL } from '@api/common/ApiConstants'
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
 import SendParams from '@api/common/SendParams'
 import { refreshAccessToken } from '@api/utils/RefreshToken'
 import { AccessTokenAtom } from '@store/atoms/AccessTokenAtom'
 
 const instance = axios.create({
-	baseURL: BASE_URL,
+	baseURL: import.meta.env.VITE_API_URL,
 	validateStatus: (status) => {
 		return status < 300
 	},

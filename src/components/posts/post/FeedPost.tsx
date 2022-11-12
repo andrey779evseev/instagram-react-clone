@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { memo, useState } from 'react'
 import If from '@components/common/if/If'
-import PostModel from '@api/common/models/responses/PostModel'
+import PostModel from '@api/common/models/post/PostModel'
 import { PostService } from '@api/services/post/PostService'
 import PostModal from '../modal/PostModal'
 import PostFooter from './footer/PostFooter'

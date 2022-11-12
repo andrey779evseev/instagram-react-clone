@@ -5,7 +5,7 @@ import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import useWindowSize from '@hooks/UseWindowSize'
-import PostMiniatureModel from '@api/common/models/responses/PostMiniatureModel'
+import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
 import { PostsService } from '@api/services/posts/PostsService'
 import { UserService } from '@api/services/user/UserService'
 

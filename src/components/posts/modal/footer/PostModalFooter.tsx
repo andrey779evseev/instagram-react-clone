@@ -3,7 +3,7 @@ import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import PostFooterActions from '@components/posts/post/footer/actions/PostFooterActions'
 import LikesInfo from '@components/posts/post/footer/likes-info/LikesInfo'
 import { formatDate } from '@utils/date/FormatDate'
-import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
+import LikesInfoModel from '@api/common/models/like/LikesInfoModel'
 
 type PropsType = {
 	isLoading: boolean

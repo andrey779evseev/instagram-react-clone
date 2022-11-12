@@ -2,12 +2,12 @@ import { queryClient } from '@providers/QueryProvider'
 import { readAtom, writeAtom } from '@utils/JotaiNexus'
 import { GetFromLocalStorage } from '@utils/LocalStorage'
 import { logout } from '@utils/Logout'
-import CredentialsModel from '@api/common/models/responses/CredentialsModel'
+import CredentialsModel from '@api/common/models/credentials/CredentialsModel'
+import User from '@api/common/models/user/User'
 import { AuthService } from '@api/services/auth/AuthService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import { IsFetchingRefreshTokenAtom } from '@store/atoms/IsFetchingRefreshToken'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
-import User from '@models/user/User'
 
 export const refreshAccessToken = async () => {
 	const refreshToken = readAtom(RefreshTokenAtom)

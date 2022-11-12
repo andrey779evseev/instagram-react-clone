@@ -1,8 +1,8 @@
-import { CommentsService } from '@api/services/comments/CommentsService'
-import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
-import LittleLoading from '@components/common/little-loading/LittleLoading'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { KeyboardEvent, memo, useMemo, useState } from 'react'
+import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
+import LittleLoading from '@components/common/little-loading/LittleLoading'
+import { CommentsService } from '@api/services/comments/CommentsService'
 import s from './AddCommentForm.module.scss'
 
 type PropsType = {

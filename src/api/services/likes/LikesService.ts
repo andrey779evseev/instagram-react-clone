@@ -1,6 +1,6 @@
 import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
-import LikeModel from '@api/common/models/responses/LikeModel'
-import LikesInfoModel from '@api/common/models/responses/LikesInfoModel'
+import LikeModel from '@api/common/models/like/LikeModel'
+import LikesInfoModel from '@api/common/models/like/LikesInfoModel'
 import { customFetch } from '../BaseService'
 
 export namespace LikesService {
@@ -9,14 +9,14 @@ export namespace LikesService {
 	export const UnlikePost = (postId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${postId}/unlike`,
+			Path: `${controllerName}/unlike/${postId}`,
 		})
 	}
 
 	export const LikePost = (postId: string) => {
 		return customFetch({
 			Method: EnumHttpMethod.Post,
-			Path: `${controllerName}/${postId}/like`,
+			Path: `${controllerName}/like/${postId}`,
 		})
 	}
 

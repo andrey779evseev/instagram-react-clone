@@ -2,10 +2,10 @@ import { EnumHttpMethod } from '@api/common/EnumHttpMethod'
 import { FileTypeEnum } from '@api/common/models/enums/FileTypeEnum'
 import SetAvatarRequest from '@api/common/models/requests/SetAvatarRequest'
 import UpdateUserRequest from '@api/common/models/requests/UpdateUserRequest'
+import ExpandedUserModel from '@api/common/models/user/ExpandedUserModel'
+import User from '@api/common/models/user/User'
+import UserStatsModel from '@api/common/models/user/UserStatsModel'
 import { customFetch } from '@api/services/BaseService'
-import ExpandedUserModel from '@models/user/ExpandedUserModel'
-import User from '@models/user/User'
-import UserStatsModel from '../../common/models/responses/UserStatsModel'
 import { MediaService } from '../media/MediaService'
 
 export namespace UserService {
