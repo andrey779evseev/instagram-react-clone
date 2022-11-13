@@ -21,7 +21,7 @@ const PeoplesIcon = () => {
 			/>
 			<path
 				d='M40 66C45.1282 47.0473 74.359 47.6216 80 66'
-				stroke='black'
+				stroke='#262626'
 				strokeWidth='2'
 				strokeLinecap='round'
 			/>

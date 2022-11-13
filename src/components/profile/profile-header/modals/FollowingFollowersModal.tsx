@@ -77,6 +77,7 @@ const FollowingFollowersModal = (props: PropsType) => {
 								key={user.Id}
 								isFollowing={isFollowing}
 								onClose={onClose}
+								isMyProfile={isMyProfile}
 							/>
 						))
 					)}

@@ -3,7 +3,7 @@
 	display: flex;
 	justify-content: center;
 	height: 60px;
-	border-bottom: 1px solid $gray10;
+	border-bottom: 2px solid $gray10;
 	background: #fff;
 	position: fixed;
 	top: 0;
@@ -24,7 +24,7 @@
 				&.profile {
 					height: fit-content;
 					width: fit-content;
-					border: 1px solid $dark;
+					border: 2px solid $dark;
 					border-radius: 50%;
 					display: flex;
 					justify-content: center;

@@ -9,7 +9,7 @@ const LikesFormatter = (props: PropsType) => {
 
 	return (
 		<span>
-			{new Intl.NumberFormat(undefined, {
+			{new Intl.NumberFormat('en-GB', {
 				notation: 'compact',
 			}).format(count)}
 			&nbsp;

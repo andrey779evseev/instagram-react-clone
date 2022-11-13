@@ -11,7 +11,7 @@ export enum EnumButtonTheme {
 type PropsType = PropsWithChildren<{
 	width?: string
 	disabled?: boolean
-	onClick?: () => void
+	onClick?: (() => void) | ((e: React.MouseEvent) => void)
 	isLoading?: boolean
 	theme?: EnumButtonTheme
 }>
@@ -26,8 +26,8 @@ const Button = (props: PropsType) => {
 		theme = EnumButtonTheme.Primary,
 	} = props
 
-	const click = () => {
-		if (!isLoading && !disabled && onClick) onClick()
+	const click = (e: React.MouseEvent) => {
+		if (!isLoading && !disabled && onClick) onClick(e)
 	}
 	return (
 		<button

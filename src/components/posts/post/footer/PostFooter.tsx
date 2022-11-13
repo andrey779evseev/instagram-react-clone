@@ -35,7 +35,7 @@ const PostFooter = (props: PropsType) => {
 	})
 
 	return (
-		<div className='border-gray20 border border-t-0'>
+		<div>
 			<div className='p-4'>
 				<PostFooterActions postId={post.Id} liked={likesInfo?.Liked} />
 				<div className='font-bold mt-4'>

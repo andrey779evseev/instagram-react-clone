@@ -13,7 +13,7 @@ type PropsType = {
 const PostHeader = (props: PropsType) => {
 	const { authorAvatar, authorName, isLoading } = props
 	return (
-		<div className='border-gray10 bg-white w-full flex items-center justify-between px-4 py-[9px] border'>
+		<div className='bg-white w-full flex items-center justify-between px-4 py-[9px] rounded-t-lg'>
 			<div className='flex items-center'>
 				<ImageBox image={authorAvatar} isSmall={true} isLoading={isLoading} />
 				<SkeletonWrapper
@@ -21,7 +21,7 @@ const PostHeader = (props: PropsType) => {
 					skeleton={<Skeleton variant='text' />}
 					className='ml-4'
 				>
-					<span>{authorName}</span>
+					<span className='font-semibold'>{authorName}</span>
 				</SkeletonWrapper>
 			</div>
 			<MoreButton />

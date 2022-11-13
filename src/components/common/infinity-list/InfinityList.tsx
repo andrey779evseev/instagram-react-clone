@@ -72,10 +72,21 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 		[scrollTop, itemHeight, additionalItemsCount]
 	)
 
+	const maxItemsOnScreen = useMemo(
+		() => Math.ceil(height / itemHeight) + 2 * additionalItemsCount,
+		[height, itemHeight, additionalItemsCount]
+	)
+
 	const visibleNodeCount = useMemo(() => {
-		const value = Math.ceil(height / itemHeight) + 2 * additionalItemsCount
-		return Math.min(items.length - startNode, value)
-	}, [height, itemHeight, additionalItemsCount, items, startNode])
+		return Math.min(items.length - startNode, maxItemsOnScreen)
+	}, [
+		height,
+		itemHeight,
+		additionalItemsCount,
+		items,
+		startNode,
+		maxItemsOnScreen,
+	])
 
 	//necessary for keeping offsetY when modals open and body became fixed
 	const offsetY = useMemo(() => {
@@ -108,7 +119,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 					<div className='relative'>
 						<If
 							condition={
-								items.length >= visibleNodeCount &&
+								items.length >= maxItemsOnScreen &&
 								items.length !== 0 &&
 								visibleNodeCount !== 0
 							}

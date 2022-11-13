@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { memo } from 'react'
+import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
 import Button, { EnumButtonTheme } from '@components/common/button/Button'
@@ -12,10 +12,11 @@ type PropsType = {
 	user: UserMiniatureModel
 	isFollowing: boolean
 	onClose: () => void
+	isMyProfile: boolean
 }
 
 const FollowingItem = (props: PropsType) => {
-	const { user, isFollowing, onClose } = props
+	const { user, isFollowing, onClose, isMyProfile } = props
 
 	const navigate = useNavigate()
 
@@ -39,6 +40,11 @@ const FollowingItem = (props: PropsType) => {
 		navigate(`/profile/${userId}/posts`)
 	}
 
+	const onClickUnfollow = (e: React.MouseEvent) => {
+		e.stopPropagation()
+		unfollowMutation.mutate(user.Id)
+	}
+
 	return (
 		<div
 			className='flex items-center my-4 cursor-pointer'
@@ -48,10 +54,10 @@ const FollowingItem = (props: PropsType) => {
 			<span className='text-dark font-semibold w-full px-3 overflow-hidden'>
 				{user.Nickname}
 			</span>
-			<If condition={isFollowing}>
+			<If condition={isFollowing && isMyProfile}>
 				<Button
 					isLoading={unfollowMutation.isLoading}
-					onClick={() => unfollowMutation.mutate(user.Id)}
+					onClick={onClickUnfollow}
 					theme={EnumButtonTheme.Secondary}
 				>
 					Unfollow

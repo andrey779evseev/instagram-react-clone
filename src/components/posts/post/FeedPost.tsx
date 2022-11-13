@@ -21,14 +21,14 @@ const FeedPost = (props: PropsType) => {
 	})
 
 	return (
-		<div className='post_container flex w-full h-fit flex-col mt-2 last:mb-2'>
+		<div className='border-gray10 flex w-full h-fit flex-col mt-2 last:mb-2 rounded-lg border-2'>
 			<PostHeader
 				authorAvatar={author?.Avatar}
 				authorName={author?.Nickname}
 				isLoading={isLoading}
 			/>
 			<div
-				className='bg-dark h-[470px] bg-contain bg-no-repeat bg-center'
+				className='bg-dark h-[466px] bg-contain bg-no-repeat bg-center'
 				style={{ backgroundImage: `url('${post.Photo}')` }}
 			></div>
 			<PostFooter

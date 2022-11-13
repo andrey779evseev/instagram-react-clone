@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
+import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import useWindowSize from '@hooks/UseWindowSize'
@@ -34,9 +35,21 @@ const FeedPosts = () => {
 
 	return (
 		<div>
-			{isLoading ? (
-				<div className='py-8'>
-					<Spinner full />
+			{isLoading || flatPosts.length === 0 ? (
+				<div className='flex-center border-gray10 flex-col w-full h-full bg-white rounded-lg border-2 mt-2 py-20'>
+					{isLoading ? (
+						<div className='py-8'>
+							<Spinner full />
+						</div>
+					) : (
+						<>
+							<PeoplesIcon />
+							<div className='text-xxl font-light pt-4 pb-1'>Posts</div>
+							<div className='text-sm'>
+								You'll see posts the people who you follow, here.
+							</div>
+						</>
+					)}
 				</div>
 			) : (
 				<InfinityList
