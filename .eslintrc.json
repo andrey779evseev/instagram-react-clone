@@ -7,7 +7,8 @@
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:tailwindcss/recommended"
+		"plugin:tailwindcss/recommended",
+		"plugin:storybook/recommended"
 	],
 	"overrides": [],
 	"parser": "@typescript-eslint/parser",
@@ -23,9 +24,21 @@
 		"@tanstack/query"
 	],
 	"rules": {
-		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
 		"linebreak-style": ["error", "unix"],
-		"quotes": ["error", "single", { "allowTemplateLiterals": true }],
+		"quotes": [
+			"error",
+			"single",
+			{
+				"allowTemplateLiterals": true
+			}
+		],
 		"semi": ["error", "never"],
 		"react/react-in-jsx-scope": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",

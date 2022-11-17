@@ -1,4 +1,3 @@
-import withClassName from '@hoc/WithClassName'
 import { PropsWithChildren } from 'react'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
@@ -10,12 +9,14 @@ type PropsType = PropsWithChildren<{
 	onClick?: (() => void) | ((e: React.MouseEvent) => void)
 	isLoading?: boolean
 	theme?: EnumButtonTheme
+	className?: string
 }>
 
 const Button = (props: PropsType) => {
 	const {
 		children,
 		onClick,
+		className = '',
 		width = '100%',
 		disabled = false,
 		isLoading = false,
@@ -27,7 +28,9 @@ const Button = (props: PropsType) => {
 	}
 	return (
 		<button
-			className={`${s.button} ${disabled && s.disabled} ${s[theme]}`}
+			className={`${s.button} ${disabled && s.disabled} ${
+				s[theme]
+			} ${className}`}
 			style={{ width }}
 			onClick={click}
 		>
@@ -42,4 +45,4 @@ const Button = (props: PropsType) => {
 	)
 }
 
-export default withClassName(Button)
+export default Button
