@@ -35,6 +35,7 @@ const getConfig = async (
 	if (!params.WithToken) return undefined
 	const token = await readAtom(AccessTokenAtom)
 	if (token) config.headers!.Authorization = `Bearer ${token}`
+	if (typeof params.Body === 'string') config.headers!['Content-Type'] = 'application/json-patch+json'
 	if (params.QueryParams !== null) config.params = params.QueryParams
 	return config
 }

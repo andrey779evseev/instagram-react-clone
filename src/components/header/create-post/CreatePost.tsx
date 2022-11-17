@@ -14,6 +14,7 @@ import CreatePostStepFour from './steps/CreatePostStepFour'
 import CreatePostStepOne from './steps/CreatePostStepOne'
 import CreatePostStepThree from './steps/CreatePostStepThree'
 import CreatePostStepTwo from './steps/CreatePostStepTwo'
+import { useMatch } from 'react-router'
 
 type PropsType = {
 	onClose: () => void
@@ -61,11 +62,13 @@ const CreatePost = (props: PropsType) => {
 	const [croppedImageBlob, setCroppedImageBlob] = useState<Blob | null>(null)
 	const { windowHeight } = useWindowSize()
 	const qc = useQueryClient()
+	const match = useMatch('/profile/:userId/posts')
 
 	const createPostMutation = useMutation(PostService.CreatePost, {
 		onSuccess: () => {
 			setCurrentStep((step) => step + 1)
-			qc.invalidateQueries(['mini-posts'])
+			if(match !== null)
+				qc.invalidateQueries(['mini-posts'])
 		},
 	})
 
@@ -146,7 +149,7 @@ const CreatePost = (props: PropsType) => {
 			onClose={onClose}
 			rounded
 		>
-			<div className='w-full h-full flex flex-col'>
+			<div className='flex h-full w-full flex-col'>
 				<CreatePostHeader
 					back={back}
 					next={next}
