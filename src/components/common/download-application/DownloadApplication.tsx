@@ -6,8 +6,16 @@ const DownloadApplication = () => {
 		<div className='w-full flex flex-col items-center'>
 			<div className='download_tip'>Download the application</div>
 			<div className='flex mt-5 w-full justify-center'>
-				<img src={appStoreBadge} className='mr-2 cursor-pointer' />
-				<img src={googlePlayBadge} className='w-[120px] cursor-pointer' />
+				<img
+					src={appStoreBadge}
+					className='mr-2 cursor-pointer'
+					alt='app_store_badge'
+				/>
+				<img
+					src={googlePlayBadge}
+					className='w-[120px] cursor-pointer'
+					alt='google_play_badge'
+				/>
 			</div>
 		</div>
 	)

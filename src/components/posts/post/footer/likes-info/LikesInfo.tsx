@@ -32,7 +32,7 @@ const LikesInfo = (props: PropsType) => {
 							}}
 							key={i}
 						>
-							<img src={image} />
+							<img src={image} alt={`likes_info_user_№${i + 1}`} />
 						</div>
 					))}
 				</span>

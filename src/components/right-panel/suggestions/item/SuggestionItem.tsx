@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo } from 'react'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import Button from '@components/common/button/Button'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	suggestion: UserMiniatureModel

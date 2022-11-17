@@ -12,9 +12,6 @@ const App = () => {
 			<QueryProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<JotaiNexus />
-				{/* <RouterProvider>
-					<Router />
-				</RouterProvider> */}
 				<RouterProvider router={router} fallbackElement={<PagePreloader />} />
 			</QueryProvider>
 			<div id='modals-root'></div>

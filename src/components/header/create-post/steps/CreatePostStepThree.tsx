@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
 import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import { UserService } from '@api/services/user/UserService'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	value: number

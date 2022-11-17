@@ -1,12 +1,8 @@
 import withClassName from '@hoc/WithClassName'
 import { PropsWithChildren } from 'react'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
+import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
 import s from './Button.module.scss'
-
-export enum EnumButtonTheme {
-	Primary = 'primary',
-	Secondary = 'secondary',
-}
 
 type PropsType = PropsWithChildren<{
 	width?: string

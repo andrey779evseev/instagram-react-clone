@@ -1,5 +1,6 @@
 import { memo } from 'react'
-import Avatar, { EnumAvatarSize } from '../avatar/Avatar'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
+import Avatar from '../avatar/Avatar'
 import Skeleton from '../skeleton/Skeleton'
 import SkeletonWrapper from '../skeleton/SkeletonWrapper'
 import s from './ImageBox.module.scss'

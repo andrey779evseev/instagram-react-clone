@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default class DropdownItem {
-	constructor(obj?: Partial<DropdownItem>) {
+export default class DropdownItemModel {
+	constructor(obj?: Partial<DropdownItemModel>) {
 		if (obj) Object.assign(this, obj)
 	}
 	Name: string

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { memo, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
-import Button, { EnumButtonTheme } from '@components/common/button/Button'
+import Button from '@components/common/button/Button'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import TextParser from '@components/common/text-parser/TextParser'
@@ -11,6 +11,7 @@ import User from '@api/common/models/user/User'
 import UserStatsModel from '@api/common/models/user/UserStatsModel'
 import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
 import { UserService } from '@api/services/user/UserService'
+import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
 
 type PropsType = {
 	user: User | ExpandedUserModel | undefined

@@ -21,11 +21,11 @@ const Header = () => {
 	const isSettingsPage = path.includes('settings')
 
 	return (
-		<div className={s.header_wrapper} id='header'>
+		<header className={s.header_wrapper} id='header'>
 			<div className={s.header_container}>
 				<InstagramTitle className='mt-2 mr-[150px]' />
 				<Search />
-				<div className='w-100 flex ml-[150px] items-center justify-between'>
+				<nav className='w-100 flex ml-[150px] items-center justify-between'>
 					<NavLink to='/feed' className={s.header_icon_container}>
 						{({ isActive }: { isActive: boolean }) =>
 							isActive ? <HomeFilledIcon /> : <HomeIcon />
@@ -53,12 +53,12 @@ const Header = () => {
 					>
 						<CurrentUser />
 					</div>
-				</div>
+				</nav>
 			</div>
 			<If condition={isCreatePostModal}>
 				<CreatePost onClose={() => setIsCreatePostModal(false)} />
 			</If>
-		</div>
+		</header>
 	)
 }
 

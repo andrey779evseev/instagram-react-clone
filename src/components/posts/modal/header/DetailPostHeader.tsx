@@ -1,7 +1,8 @@
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import MoreButton from '@components/common/more-button/MoreButton'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	avatar: string | undefined

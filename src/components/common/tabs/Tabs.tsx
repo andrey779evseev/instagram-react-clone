@@ -26,7 +26,7 @@ const Tabs = (props: PropsType) => {
 					<NavLink to={tab.Route} key={tab.Route} className={s.tab_item}>
 						<If condition={!!tab.Icon}>
 							{typeof tab.Icon === 'string' ? (
-								<img src={tab.Icon} />
+								<img src={tab.Icon} alt={tab.Name} />
 							) : (
 								<tab.Icon />
 							)}

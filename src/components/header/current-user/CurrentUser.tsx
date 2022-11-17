@@ -5,13 +5,14 @@ import { useGoogleLogout } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import ProfileIcon from '@components/common/assets/icons/ProfileIcon'
 import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import Dropdown from '@components/common/dropdown/Dropdown'
 import { logout } from '@utils/Logout'
 import { AuthService } from '@api/services/auth/AuthService'
 import { UserService } from '@api/services/user/UserService'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
-import DropdownItem from '@models/dropdown/DropdownItem'
+import DropdownItemModel from '@models/dropdown/DropdownItemModel'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 const CurrentUser = () => {
 	const { data: user } = useQuery({
@@ -37,18 +38,18 @@ const CurrentUser = () => {
 
 	const dropdownItems = useMemo(
 		() => [
-			new DropdownItem({
+			new DropdownItemModel({
 				Image: ProfileIcon,
 				Name: 'Profile',
 				Callback: openProfile,
 			}),
-			new DropdownItem({
+			new DropdownItemModel({
 				Image: SettingsIcon,
 				Name: 'Settings',
 				Callback: openSettings,
 			}),
-			new DropdownItem({ IsDivider: true }),
-			new DropdownItem({
+			new DropdownItemModel({ IsDivider: true }),
+			new DropdownItemModel({
 				Name: 'Log out',
 				Callback: () => revokeMutation.mutate({ RefreshToken: refreshToken! }),
 				IsLoading: revokeMutation.isLoading,

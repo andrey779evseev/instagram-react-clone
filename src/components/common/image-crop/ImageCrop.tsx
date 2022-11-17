@@ -24,7 +24,12 @@ const ImageCrop = (props: PropsType) => {
 			ruleOfThirds={true}
 			style={style}
 		>
-			<img src={image} className='h-full' onLoad={onLoadImage} />
+			<img
+				src={image}
+				className='h-full'
+				onLoad={onLoadImage}
+				alt='crop_image'
+			/>
 		</ReactCrop>
 	)
 }

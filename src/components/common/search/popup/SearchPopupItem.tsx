@@ -1,6 +1,7 @@
 import { memo } from 'react'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import UserExtendedModel from '@api/common/models/user/UserExtendedModel'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	user: UserExtendedModel

@@ -3,12 +3,12 @@ import Header from '@components/header/Header'
 
 const Layout = () => {
 	return (
-		<main className='flex flex-col items-center'>
+		<div className='flex flex-col items-center'>
 			<Header />
-			<div className='content mt-[60px]'>
+			<main className='content mt-[60px]'>
 				<Outlet />
-			</div>
-		</main>
+			</main>
+		</div>
 	)
 }
 

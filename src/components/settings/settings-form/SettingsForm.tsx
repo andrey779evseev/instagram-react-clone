@@ -1,11 +1,12 @@
 import { PropsWithChildren, memo } from 'react'
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import If from '@components/common/if/If'
 import Input from '@components/common/input/Input'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import Textarea from '@components/common/teaxtarea/Textarea'
+import Textarea from '@components/common/textarea/Textarea'
 import UploadImage from '@components/common/upload-image/UploadImage'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'

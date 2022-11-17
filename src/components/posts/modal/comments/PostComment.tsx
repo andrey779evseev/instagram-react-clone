@@ -1,6 +1,7 @@
-import Avatar, { EnumAvatarSize } from '@components/common/avatar/Avatar'
+import Avatar from '@components/common/avatar/Avatar'
 import { fromDateToNow } from '@utils/date/FromDateToNow'
 import CommentModel from '@api/common/models/comment/CommentModel'
+import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	comment: CommentModel
