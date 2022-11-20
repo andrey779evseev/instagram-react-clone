@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo, useMemo, useState } from 'react'
 import { Crop } from 'react-image-crop'
+import { useMatch } from 'react-router'
 import Modal from '@components/common/modal/Modal'
 import ConfirmationModal from '@components/common/modal/confirmation-modal/ConfirmationModal'
 import Switch from '@components/common/switch/Switch'
 import { base64ToBlob } from '@utils/Base64ToBlob'
 import { cropImageViaCanvas } from '@utils/CropImageViaCanvas'
 import useWindowSize from '@hooks/UseWindowSize'
-import { PostService } from '@api/services/post/PostService'
+import { CreatePostAsync } from '@api/services/post/PostService'
 import { fileToUrl } from '../../../utils/FileToUrl'
 import CreatePostHeader from './CreatePostHeader'
 import CreatePostStepFour from './steps/CreatePostStepFour'
 import CreatePostStepOne from './steps/CreatePostStepOne'
 import CreatePostStepThree from './steps/CreatePostStepThree'
 import CreatePostStepTwo from './steps/CreatePostStepTwo'
-import { useMatch } from 'react-router'
 
 type PropsType = {
 	onClose: () => void
@@ -64,11 +64,10 @@ const CreatePost = (props: PropsType) => {
 	const qc = useQueryClient()
 	const match = useMatch('/profile/:userId/posts')
 
-	const createPostMutation = useMutation(PostService.CreatePost, {
+	const createPostMutation = useMutation(CreatePostAsync, {
 		onSuccess: () => {
 			setCurrentStep((step) => step + 1)
-			if(match !== null)
-				qc.invalidateQueries(['mini-posts'])
+			if (match !== null) qc.invalidateQueries(['mini-posts'])
 		},
 	})
 

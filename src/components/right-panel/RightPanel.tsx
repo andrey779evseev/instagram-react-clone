@@ -3,7 +3,7 @@ import Suggestions from './suggestions/Suggestions'
 
 const RightPanel = () => {
 	return (
-		<aside className='border-gray10 pt-[18px] w-[292px] h-fit flex flex-col border-2 rounded-lg bg-white px-5'>
+		<aside className='border-gray10 flex h-fit w-[292px] flex-col rounded-lg border-2 bg-white px-5 pt-[18px]'>
 			<AccountInfo />
 			<Suggestions />
 		</aside>

@@ -10,8 +10,8 @@ import Error from '@components/common/error/Error'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import Input from '@components/common/input/Input'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
-import { AuthService } from '@api/services/auth/AuthService'
-import { UserService } from '@api/services/user/UserService'
+import { LoginUserAsync } from '@api/services/auth/AuthService'
+import { GetCurrentUserAsync } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 
 const LoginCard = () => {
@@ -27,7 +27,7 @@ const LoginCard = () => {
 	)
 	const { refetch } = useQuery({
 		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
+		queryFn: GetCurrentUserAsync,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {
@@ -35,7 +35,7 @@ const LoginCard = () => {
 			setIsLoading(false)
 		},
 	})
-	const loginMutation = useMutation(AuthService.Login, {
+	const loginMutation = useMutation(LoginUserAsync, {
 		onSuccess: async (res) => {
 			setCredentials(res)
 			await refetch()
@@ -84,7 +84,7 @@ const LoginCard = () => {
 				<Error error={errMsg} />
 				<DividerWithText text='OR' />
 				<GoogleSignInBtn setIsLoading={setIsLoading} setErrMsg={setErrMsg} />
-				<div className='text-cobalt text-xs mt-5'>You forgot the password?</div>
+				<div className='text-cobalt mt-5 text-xs'>You forgot the password?</div>
 			</div>
 		</div>
 	)

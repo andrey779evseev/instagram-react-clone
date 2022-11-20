@@ -4,7 +4,7 @@ import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import useWindowSize from '@hooks/UseWindowSize'
-import { PostsService } from '@api/services/posts/PostsService'
+import { GetFeedAsync } from '@api/services/posts/PostsService'
 import FeedPost from './post/FeedPost'
 
 const FeedPosts = () => {
@@ -19,7 +19,7 @@ const FeedPosts = () => {
 	} = useInfiniteQuery({
 		queryKey: ['feed'],
 		queryFn: ({ pageParam = null }) =>
-			PostsService.GetFeed({ Cursor: pageParam, Take: 5 }),
+			GetFeedAsync({ Cursor: pageParam, Take: 5 }),
 		getNextPageParam: (lastPage) =>
 			lastPage.length === 5
 				? lastPage[lastPage.length - 1].PostedAt
@@ -36,7 +36,7 @@ const FeedPosts = () => {
 	return (
 		<div>
 			{isLoading || flatPosts.length === 0 ? (
-				<div className='flex-center border-gray10 flex-col w-full h-full bg-white rounded-lg border-2 mt-2 py-20'>
+				<div className='flex-center border-gray10 mt-2 h-full w-full flex-col rounded-lg border-2 bg-white py-20'>
 					{isLoading ? (
 						<div className='py-8'>
 							<Spinner full />
@@ -44,7 +44,7 @@ const FeedPosts = () => {
 					) : (
 						<>
 							<PeoplesIcon />
-							<div className='text-xxl font-light pt-4 pb-1'>Posts</div>
+							<div className='text-xxl pt-4 pb-1 font-light'>Posts</div>
 							<div className='text-sm'>
 								You'll see posts the people who you follow, here.
 							</div>

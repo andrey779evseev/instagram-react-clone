@@ -10,14 +10,14 @@ type PropsType = {
 const PostComment = (props: PropsType) => {
 	const { comment } = props
 	return (
-		<div className='flex items-center first:pt-0 pt-4'>
+		<div className='flex items-center pt-4 first:pt-0'>
 			<Avatar src={comment.Author.Avatar} size={EnumAvatarSize.Medium} />
 			<div className='ml-4'>
 				<div>
 					<span className='font-semibold'>{comment.Author?.Nickname} </span>
 					{comment.Text}
 				</div>
-				<div className='text-gray50 text-xs mt-2'>
+				<div className='text-gray50 mt-2 text-xs'>
 					{fromDateToNow(comment?.CommentedAt)}
 				</div>
 			</div>

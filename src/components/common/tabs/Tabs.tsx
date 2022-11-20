@@ -31,7 +31,7 @@ const Tabs = (props: PropsType) => {
 								<tab.Icon />
 							)}
 						</If>
-						<span className='text-xs font-medium ml-2'>{tab.Name}</span>
+						<span className='ml-2 text-xs font-medium'>{tab.Name}</span>
 					</NavLink>
 				))}
 			</div>

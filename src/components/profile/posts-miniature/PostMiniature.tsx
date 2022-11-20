@@ -28,13 +28,13 @@ const PostMiniature = (props: PropsType) => {
 
 	return (
 		<div
-			className='relative text-white cursor-pointer'
+			className='relative cursor-pointer text-white'
 			onMouseEnter={() => setIsVisibleHover(true)}
 			onMouseLeave={() => setIsVisibleHover(false)}
 			onClick={openModal}
 		>
 			<div
-				className='bg-center bg-cover'
+				className='bg-cover bg-center'
 				style={{
 					backgroundImage: `url('${post.Photo}')`,
 					width: size + 'px',

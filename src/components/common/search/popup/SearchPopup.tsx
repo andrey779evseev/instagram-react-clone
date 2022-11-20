@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { memo, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
+import { SearchUsersAsync } from '@api/services/friendships/FriendshipsService'
 import Button from '../../button/Button'
 import If from '../../if/If'
 import LittleLoading from '../../little-loading/LittleLoading'
@@ -28,7 +28,7 @@ const SearchPopup = (props: PropsType) => {
 	} = useInfiniteQuery(
 		['users', { searchTerm: deferredValue }],
 		({ pageParam = null }) =>
-			FriendshipsService.SearchUsers({
+			SearchUsersAsync({
 				Cursor: pageParam,
 				Take: 2,
 				Search: deferredValue,
@@ -87,7 +87,7 @@ const SearchPopup = (props: PropsType) => {
 					))}
 				</If>
 				<If condition={isShowNobodyFound}>
-					<div className='flex-center w-full my-4 text-lg font-light'>
+					<div className='flex-center my-4 w-full text-lg font-light'>
 						Nobody found
 					</div>
 				</If>

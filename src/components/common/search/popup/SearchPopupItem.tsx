@@ -14,13 +14,13 @@ const SearchPopupItem = (props: PropsType) => {
 	return (
 		<div
 			key={user.Id}
-			className={`flex items-center cursor-pointer mb-2 ${
+			className={`mb-2 flex cursor-pointer items-center ${
 				!isShowButton && 'last:mb-0'
 			}`}
 			onClick={() => goToProfile(user.Id)}
 		>
 			<Avatar src={user.Avatar} size={EnumAvatarSize.Big} />
-			<div className='flex flex-col justify-between flex-1 ml-2'>
+			<div className='ml-2 flex flex-1 flex-col justify-between'>
 				<div className='font-semibold'>{user.Nickname}</div>
 				<div className='text-gray50'>{user.Name}</div>
 			</div>

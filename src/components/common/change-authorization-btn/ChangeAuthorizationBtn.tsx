@@ -8,7 +8,7 @@ type PropsType = {
 const ChangeAuthorizationBtn = (props: PropsType) => {
 	const { signIn = false } = props
 	return (
-		<div className='flex-center border-gray10 w-full h-16 rounded-sm border'>
+		<div className='flex-center border-gray10 h-16 w-full rounded-sm border'>
 			<div>
 				<span className='mr-[6px]'>
 					{signIn ? 'You an account?' : `You don't an account?`}

@@ -13,7 +13,7 @@ type PropsType = {
 const DetailPostHeader = (props: PropsType) => {
 	const { avatar, nickname, isLoading } = props
 	return (
-		<div className='border-b-gray10 flex h-[60px] w-full items-center justify-between p-4 border-b'>
+		<div className='border-b-gray10 flex h-[60px] w-full items-center justify-between border-b p-4'>
 			<div className='flex items-center'>
 				<SkeletonWrapper
 					condition={isLoading}

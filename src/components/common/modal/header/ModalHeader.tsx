@@ -9,7 +9,7 @@ type PropsType = {
 const ModalHeader = (props: PropsType) => {
 	const { title, onClose } = props
 	return (
-		<div className='min-h-10 border-b-gray20 flex-center h-10 border-b w-full text-base font-semibold relative'>
+		<div className='min-h-10 border-b-gray20 flex-center relative h-10 w-full border-b text-base font-semibold'>
 			{title}
 			<div className='absolute right-4 mt-px cursor-pointer' onClick={onClose}>
 				<CloseIcon color='dark' />

@@ -3,9 +3,9 @@ import googlePlayBadge from '@assets/img/common/google-play-badge.png'
 
 const DownloadApplication = () => {
 	return (
-		<div className='w-full flex flex-col items-center'>
+		<div className='flex w-full flex-col items-center'>
 			<div className='download_tip'>Download the application</div>
-			<div className='flex mt-5 w-full justify-center'>
+			<div className='mt-5 flex w-full justify-center'>
 				<img
 					src={appStoreBadge}
 					className='mr-2 cursor-pointer'

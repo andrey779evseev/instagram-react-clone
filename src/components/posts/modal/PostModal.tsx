@@ -1,13 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
 import { memo, useMemo } from 'react'
 import Modal from '@components/common/modal/Modal'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import useWindowSize from '@hooks/UseWindowSize'
 import CommentModel from '@api/common/models/comment/CommentModel'
-import { CommentsService } from '@api/services/comments/CommentsService'
-import { LikesService } from '@api/services/likes/LikesService'
-import { PostService } from '@api/services/post/PostService'
+import { usePostCommentsQuery } from '@api/services/comments/CommentsService'
+import { usePostLikesInfoQuery } from '@api/services/likes/LikesService'
+import {
+	usePostAuthorQuery,
+	usePostQuery,
+} from '@api/services/post/PostService'
 import AddCommentForm from '../post/footer/add-comment-form/AddCommentForm'
 import PostCommentsList from './comments/PostCommentsList'
 import PostModalFooter from './footer/PostModalFooter'
@@ -23,22 +25,13 @@ const PostModal = (props: PropsType) => {
 
 	const { windowWidth, windowHeight } = useWindowSize()
 
-	const { data: post, isLoading: isLoadingPost } = useQuery({
-		queryKey: ['post', { post: postId }],
-		queryFn: () => PostService.GetPost(postId),
-	})
-	const { data: author, isLoading: isLoadingAuthor } = useQuery({
-		queryKey: ['author', { post: postId }],
-		queryFn: () => PostService.GetAuthor(postId),
-	})
-	const { data: likesInfo, isLoading: isLoadingLikesInfo } = useQuery({
-		queryKey: ['likes-info', { post: postId }],
-		queryFn: () => LikesService.GetLikesInfo(postId),
-	})
-	const { data: commentsData, isLoading: isLoadingComments } = useQuery({
-		queryKey: ['comments', { post: postId }],
-		queryFn: () => CommentsService.GetComments(postId),
-	})
+	const { data: post, isLoading: isLoadingPost } = usePostQuery(postId)
+	const { data: author, isLoading: isLoadingAuthor } =
+		usePostAuthorQuery(postId)
+	const { data: likesInfo, isLoading: isLoadingLikesInfo } =
+		usePostLikesInfoQuery(postId)
+	const { data: commentsData, isLoading: isLoadingComments } =
+		usePostCommentsQuery(postId)
 
 	const isLoading = useMemo(
 		() =>
@@ -91,12 +84,12 @@ const PostModal = (props: PropsType) => {
 					full
 				>
 					<div
-						className='bg-image-contain w-full h-full bg-black'
+						className='bg-image-contain h-full w-full bg-black'
 						style={{ backgroundImage: `url('${post?.Photo}')` }}
 					/>
 				</SkeletonWrapper>
 			</div>
-			<div className='w-1/2 h-full flex flex-col justify-between'>
+			<div className='flex h-full w-1/2 flex-col justify-between'>
 				<DetailPostHeader
 					isLoading={isLoading}
 					nickname={author?.Nickname}

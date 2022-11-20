@@ -1,11 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import Button from '@components/common/button/Button'
 import If from '@components/common/if/If'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
 import { base64ToBlob } from '@utils/Base64ToBlob'
 import useDebounce from '@hooks/UseDebounce'
-import { UserService } from '@api/services/user/UserService'
+import {
+	SetAvatarAsync,
+	UpdateUserAsync,
+	useCheckNicknameQuery,
+	useCurrentUserQuery,
+} from '@api/services/user/UserService'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'
@@ -13,10 +18,7 @@ import { ObjectUrlFileType, fileToUrl } from '../../../utils/FileToUrl'
 import AvatarCrop from './avatar-crop/AvatarCrop'
 
 const EditProfile = () => {
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 	const qc = useQueryClient()
 	const [avatar, setAvatar] = useState('')
 	const [name, setName] = useState('')
@@ -30,7 +32,7 @@ const EditProfile = () => {
 	const debouncedNickname = useDebounce(nickname, 500)
 
 	const setAvatarMutation = useMutation(
-		(data: FormData) => UserService.SetAvatar({ Data: data }),
+		(data: FormData) => SetAvatarAsync({ Data: data }),
 		{
 			onSuccess: async (res) => {
 				setAvatar(res)
@@ -39,16 +41,15 @@ const EditProfile = () => {
 			},
 		}
 	)
-	const updateUserMutation = useMutation(UserService.UpdateUser, {
+	const updateUserMutation = useMutation(UpdateUserAsync, {
 		onSuccess: (res) => {
 			qc.setQueryData(['user'], res)
 		},
 	})
-	const { data: validNickname } = useQuery({
-		queryKey: ['check-nickname', debouncedNickname],
-		queryFn: () => UserService.CheckNickname(debouncedNickname),
-		enabled: debouncedNickname !== '' && debouncedNickname !== user?.Nickname,
-	})
+	const { data: validNickname } = useCheckNicknameQuery(
+		debouncedNickname,
+		debouncedNickname !== '' && debouncedNickname !== user?.Nickname
+	)
 
 	useEffect(() => {
 		if (!user) return
@@ -193,9 +194,9 @@ const EditProfile = () => {
 	}
 
 	return (
-		<div className='w-full h-full py-8 pr-[150px] pl-20'>
+		<div className='h-full w-full py-8 pr-[150px] pl-20'>
 			<SettingsForm items={items}>
-				<div className='flex mt-[29px] justify-between items-center'>
+				<div className='mt-[29px] flex items-center justify-between'>
 					<Button
 						isLoading={updateUserMutation.isLoading}
 						disabled={disabledSendButton}
@@ -205,7 +206,7 @@ const EditProfile = () => {
 						Send
 					</Button>
 					<span
-						className='text-cobalt font-medium cursor-pointer'
+						className='text-cobalt cursor-pointer font-medium'
 						onClick={deactivateAccount}
 					>
 						Temporarily deactivate my account

@@ -17,7 +17,7 @@ const CreatePostHeader = (props: PropsType) => {
 	const { currentStep, back, next, step, isDisabled, isLoading } = props
 	return (
 		<div
-			className={`min-h-11 border-b-gray20 flex-center w-full h-11 px-4 pt-1 border-b select-none ${
+			className={`min-h-11 border-b-gray20 flex-center h-11 w-full select-none border-b px-4 pt-1 ${
 				currentStep !== 1 && currentStep !== 4 && '!justify-between'
 			}`}
 		>
@@ -29,7 +29,7 @@ const CreatePostHeader = (props: PropsType) => {
 			<span className='text-base font-semibold'>{step.Title}</span>
 			<If condition={step.NextTitle !== null}>
 				<span
-					className={`text-cobalt font-semibold cursor-pointer p-2 ${
+					className={`text-cobalt cursor-pointer p-2 font-semibold ${
 						isDisabled && 'opacity-50'
 					}`}
 					onClick={next}

@@ -10,14 +10,14 @@ const Error = (props: PropsType) => {
 	return (
 		<div className='mt-2.5'>
 			{typeof error === 'string' ? (
-				<div className='text-red w-full text-center text-xs mt-[10px] px-5'>
+				<div className='text-red mt-[10px] w-full px-5 text-center text-xs'>
 					{error}
 				</div>
 			) : (
 				<>
 					{error.map((err, i) => (
 						<div
-							className='text-red w-full text-center text-xs mt-[10px] px-5 !m-0'
+							className='text-red !m-0 mt-[10px] w-full px-5 text-center text-xs'
 							key={err}
 						>
 							{i + 1}) {err}

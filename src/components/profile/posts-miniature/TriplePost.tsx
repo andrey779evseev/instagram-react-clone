@@ -11,7 +11,7 @@ type PropsType = {
 const TriplePost = (props: PropsType) => {
 	const { item, size } = props
 	return (
-		<div className='triple_post flex gap-[29px] mb-[29px]'>
+		<div className='triple_post mb-[29px] flex gap-[29px]'>
 			<If condition={!!item[0]}>
 				<PostMiniature post={item[0]} size={size} />
 			</If>

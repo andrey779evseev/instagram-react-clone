@@ -4,7 +4,7 @@ import { GetFromLocalStorage } from '@utils/LocalStorage'
 import { logout } from '@utils/Logout'
 import CredentialsModel from '@api/common/models/credentials/CredentialsModel'
 import User from '@api/common/models/user/User'
-import { AuthService } from '@api/services/auth/AuthService'
+import { RefreshTokenAsync } from '@api/services/auth/AuthService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import { IsFetchingRefreshTokenAtom } from '@store/atoms/IsFetchingRefreshToken'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
@@ -21,7 +21,7 @@ export const refreshAccessToken = async () => {
 	const isFetchingRefreshToken = readAtom(IsFetchingRefreshTokenAtom)
 	if (isFetchingRefreshToken) return
 	writeAtom(IsFetchingRefreshTokenAtom, true)
-	await AuthService.RefreshToken({
+	await RefreshTokenAsync({
 		RefreshToken: refreshToken,
 		Email: user?.Email ?? (email as string),
 	}).then((res) => {

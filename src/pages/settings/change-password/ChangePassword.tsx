@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -6,24 +6,21 @@ import Button from '@components/common/button/Button'
 import Error from '@components/common/error/Error'
 import Success from '@components/common/success/Success'
 import SettingsForm from '@components/settings/settings-form/SettingsForm'
-import { AuthService } from '@api/services/auth/AuthService'
-import { UserService } from '@api/services/user/UserService'
+import { ChangeUserPasswordAsync } from '@api/services/auth/AuthService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'
 
 const ChangePassword = () => {
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 	const [oldPassword, setOldPassword] = useState('')
 	const [newPassword, setNewPassword] = useState('')
 	const [confirmNewPassword, setConfirmNewPassword] = useState('')
 	const [errMsg, setErrMsg] = useState('')
 	const [successMessage, setSuccessMessage] = useState('')
 	const navigate = useNavigate()
-	const changePasswordMutation = useMutation(AuthService.ChangePassword, {
+	const changePasswordMutation = useMutation(ChangeUserPasswordAsync, {
 		onSuccess: () => {
 			setOldPassword('')
 			setNewPassword('')
@@ -107,7 +104,7 @@ const ChangePassword = () => {
 	}
 
 	return (
-		<div className='px-16 py-8 w-full h-full'>
+		<div className='h-full w-full px-16 py-8'>
 			<SettingsForm items={items}>
 				<div>
 					<Button
@@ -118,7 +115,7 @@ const ChangePassword = () => {
 					>
 						Change Password
 					</Button>
-					<div className='text-cobalt font-medium mt-7 cursor-pointer'>
+					<div className='text-cobalt mt-7 cursor-pointer font-medium'>
 						You forgot your password?
 					</div>
 				</div>

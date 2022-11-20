@@ -1,15 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import If from '@components/common/if/If'
-import { UserService } from '@api/services/user/UserService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 import s from './SettingsSidebarRoutes.module.scss'
 
 const SettingsSidebarRoutes = () => {
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 	const isAvailableChangePassword = useMemo(() => !user?.GoogleId, [user])
 	return (
 		<div className={s.sidebar_routes_container}>

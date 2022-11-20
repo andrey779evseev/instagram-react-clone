@@ -1,10 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
 import Modal from '@components/common/modal/Modal'
 import ModalHeader from '@components/common/modal/header/ModalHeader'
 import Spinner from '@components/common/spinner/Spinner'
 import useWindowSize from '@hooks/UseWindowSize'
-import { LikesService } from '@api/services/likes/LikesService'
+import { usePostLikesQuery } from '@api/services/likes/LikesService'
 import LikesListItem from './LikesListItem'
 
 type PropsType = {
@@ -17,10 +16,7 @@ const LikesListModal = (props: PropsType) => {
 
 	const { windowHeight } = useWindowSize()
 
-	const { data: likes, isLoading } = useQuery({
-		queryKey: ['likes', { post: postId }],
-		queryFn: () => LikesService.GetLikes(postId),
-	})
+	const { data: likes, isLoading } = usePostLikesQuery(postId)
 
 	return (
 		<Modal
@@ -31,9 +27,9 @@ const LikesListModal = (props: PropsType) => {
 			aspectRatio={2 / 1}
 			rounded={true}
 		>
-			<div className='w-full h-full flex flex-col'>
+			<div className='flex h-full w-full flex-col'>
 				<ModalHeader title='Likes' onClose={onClose} />
-				<div className='flex-1 px-4 mt-2'>
+				<div className='mt-2 flex-1 px-4'>
 					{isLoading ? (
 						<Spinner full />
 					) : (

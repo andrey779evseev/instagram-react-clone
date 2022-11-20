@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
 import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
 import Avatar from '@components/common/avatar/Avatar'
-import { UserService } from '@api/services/user/UserService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
@@ -15,26 +14,23 @@ type PropsType = {
 const CreatePostStepThree = (props: PropsType) => {
 	const { description, setDescription, symbolsCount } = props
 
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 
 	return (
-		<div className='p-4 w-[300px] flex-1 flex flex-col'>
-			<div className='flex items-center mb-3'>
-				<div className='border-gray50 border rounded-full'>
+		<div className='flex w-[300px] flex-1 flex-col p-4'>
+			<div className='mb-3 flex items-center'>
+				<div className='border-gray50 rounded-full border'>
 					<Avatar src={user?.Avatar} size={EnumAvatarSize.Small} />
 				</div>
-				<span className='font-semibold text-base ml-3'>{user?.Nickname}</span>
+				<span className='ml-3 text-base font-semibold'>{user?.Nickname}</span>
 			</div>
 			<textarea
-				className='placeholder:text-gray50 resize-none w-full flex-1 text-base outline-none'
+				className='placeholder:text-gray50 w-full flex-1 resize-none text-base outline-none'
 				placeholder='Write a caption...'
 				value={description}
 				onChange={(e) => setDescription(e.target.value)}
 			/>
-			<div className='flex items-center justify-between mt-3'>
+			<div className='mt-3 flex items-center justify-between'>
 				<SmileEmojiIcon size={20} color='gray50' />
 				<span
 					className={`text-gray50 text-xs ${

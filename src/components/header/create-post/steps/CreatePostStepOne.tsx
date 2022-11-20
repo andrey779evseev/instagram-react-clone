@@ -13,7 +13,7 @@ const CreatePostStepOne = (props: PropsType) => {
 	return (
 		<div className='flex-center w-full grow flex-col px-10'>
 			<AssetsIcon />
-			<div className='text-xxl font-light mt-4'>
+			<div className='text-xxl mt-4 font-light'>
 				Drag photos and videos here
 			</div>
 			<UploadImage onUpload={onUpload}>

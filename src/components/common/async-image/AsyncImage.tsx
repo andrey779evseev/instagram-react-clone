@@ -42,7 +42,7 @@ const AsyncImage = (props: PropsType) => {
 		<div style={styles}>
 			{src ? (
 				<div
-					className='bg-center bg-cover'
+					className='bg-cover bg-center'
 					style={{ backgroundImage: `url('${src}')`, ...styles }}
 				/>
 			) : (

@@ -13,7 +13,7 @@ type PropsType = {
 const PostHeader = (props: PropsType) => {
 	const { authorAvatar, authorName, isLoading } = props
 	return (
-		<div className='bg-white w-full flex items-center justify-between px-4 py-[9px] rounded-t-lg'>
+		<div className='flex w-full items-center justify-between rounded-t-lg bg-white px-4 py-[9px]'>
 			<div className='flex items-center'>
 				<ImageBox image={authorAvatar} isSmall={true} isLoading={isLoading} />
 				<SkeletonWrapper

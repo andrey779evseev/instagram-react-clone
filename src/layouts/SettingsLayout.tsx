@@ -3,7 +3,7 @@ import SettingsSidebar from '@components/settings/settings-sidebar/SettingsSideb
 
 const SettingsLayout = () => {
 	return (
-		<div className='border-gray10 w-[928px] flex border bg-white'>
+		<div className='border-gray10 flex w-[928px] border bg-white'>
 			<SettingsSidebar />
 			<Outlet />
 		</div>

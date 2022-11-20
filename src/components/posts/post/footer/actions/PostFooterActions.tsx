@@ -1,17 +1,20 @@
-import LikesInfoModel from '@api/common/models/like/LikesInfoModel'
-import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
-import { LikesService } from '@api/services/likes/LikesService'
+import {
+	InfiniteData,
+	useMutation,
+	useQueryClient,
+} from '@tanstack/react-query'
+import { memo, useEffect, useState } from 'react'
+import { useMatch } from 'react-router'
 import BookmarkIcon from '@components/common/assets/icons/BookmarkIcon'
 import CommentIcon from '@components/common/assets/icons/CommentIcon'
 import PlaneIcon from '@components/common/assets/icons/PlaneIcon'
 import LikeButton from '@components/common/like-button/LikeButton'
+import LikesInfoModel from '@api/common/models/like/LikesInfoModel'
+import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
 import {
-	InfiniteData,
-	useMutation,
-	useQueryClient
-} from '@tanstack/react-query'
-import { memo, useEffect, useState } from 'react'
-import { useMatch } from 'react-router'
+	LikePostAsync,
+	UnlikePostAsync,
+} from '@api/services/likes/LikesService'
 import s from './PostFooterActions.module.scss'
 
 type PropsType = {
@@ -24,12 +27,12 @@ const PostFooterActions = (props: PropsType) => {
 	const [isLiked, setIsLiked] = useState(liked)
 	const match = useMatch('/profile/:userId/posts')
 	const qc = useQueryClient()
-	const likeMutation = useMutation(LikesService.LikePost, {
+	const likeMutation = useMutation(LikePostAsync, {
 		onSuccess: () => {
 			invalidateMiniPosts(true)
 		},
 	})
-	const unlikeMutation = useMutation(LikesService.UnlikePost, {
+	const unlikeMutation = useMutation(UnlikePostAsync, {
 		onSuccess: () => {
 			invalidateMiniPosts(false)
 		},
@@ -42,14 +45,18 @@ const PostFooterActions = (props: PropsType) => {
 	const invalidateMiniPosts = (isLiked: boolean) => {
 		if (match !== null) {
 			qc.setQueryData<InfiniteData<PostMiniatureModel[]>>(
-				['mini-posts', {user: match.params.userId}],
+				['mini-posts', { user: match.params.userId }],
 				(prev) => {
-					const data: InfiniteData<PostMiniatureModel[]> = JSON.parse(JSON.stringify(prev))
+					const data: InfiniteData<PostMiniatureModel[]> = JSON.parse(
+						JSON.stringify(prev)
+					)
 					for (let i = 0; i < data.pages.length; i++) {
 						for (let j = 0; j < data.pages[i].length; j++) {
 							const item = data.pages[i][j]
-							if(item.Id === postId)
-								item.LikesCount = isLiked ? item.LikesCount + 1 : item.LikesCount - 1
+							if (item.Id === postId)
+								item.LikesCount = isLiked
+									? item.LikesCount + 1
+									: item.LikesCount - 1
 						}
 					}
 					return data

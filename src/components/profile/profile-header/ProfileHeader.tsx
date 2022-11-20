@@ -1,11 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Avatar from '@components/common/avatar/Avatar'
 import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import { UserService } from '@api/services/user/UserService'
+import {
+	useCurrentUserQuery,
+	useUserQuery,
+} from '@api/services/user/UserService'
 import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import ProfileHeaderStats from './ProfileHeaderStats'
 import FollowingFollowersModal from './modals/FollowingFollowersModal'
@@ -15,17 +17,8 @@ const ProfileHeader = () => {
 	const [isFollowersModal, setIsFollowersModal] = useState(false)
 	const { userId } = useParams()
 
-	// prettier-ignore
 	const { data: user, isLoading } =
-		userId === 'me'
-			? useQuery({
-				queryKey: ['user'],
-				queryFn: UserService.GetCurrentUser,
-			})
-			: useQuery({
-				queryKey: ['user', { id: userId }],
-				queryFn: () => UserService.GetUser(userId!),
-			})
+		userId === 'me' ? useCurrentUserQuery() : useUserQuery(userId!)
 
 	return (
 		<div className='flex justify-center'>

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { useUpdateAtom } from 'jotai/utils'
 import { useMemo, useState } from 'react'
@@ -10,8 +10,8 @@ import Error from '@components/common/error/Error'
 import GoogleSignInBtn from '@components/common/google-sign-in-btn/GoogleSignInBtn'
 import Input from '@components/common/input/Input'
 import useDebounce from '@hooks/UseDebounce'
-import { AuthService } from '@api/services/auth/AuthService'
-import { UserService } from '@api/services/user/UserService'
+import { RegisterUserAsync } from '@api/services/auth/AuthService'
+import { useCheckNicknameQuery } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import s from './RegistrationCard.module.scss'
 
@@ -26,7 +26,7 @@ const RegistrationCard = () => {
 	const navigate = useNavigate()
 	const debouncedNickname = useDebounce(nickname, 500)
 
-	const registerMutation = useMutation(AuthService.Register, {
+	const registerMutation = useMutation(RegisterUserAsync, {
 		onSuccess: async (res) => {
 			setCredentials(res)
 			navigate('/login')
@@ -35,11 +35,10 @@ const RegistrationCard = () => {
 			setErrMsg(error.response?.data as string)
 		},
 	})
-	const { data: validNickname } = useQuery({
-		queryKey: ['check-nickname', debouncedNickname],
-		queryFn: () => UserService.CheckNickname(debouncedNickname),
-		enabled: debouncedNickname !== '',
-	})
+	const { data: validNickname } = useCheckNicknameQuery(
+		debouncedNickname,
+		debouncedNickname !== ''
+	)
 
 	const disabledBtn = useMemo(() => {
 		return (

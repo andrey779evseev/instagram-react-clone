@@ -39,13 +39,13 @@ const ConfirmationModal = (props: PropsType) => {
 			onClose={onClose}
 			rounded
 		>
-			<div className='w-full h-full flex flex-col'>
-				<div className='flex-center flex-col grow p-8 pb-4'>
+			<div className='flex h-full w-full flex-col'>
+				<div className='flex-center grow flex-col p-8 pb-4'>
 					<div className='text-lg font-semibold'>{title}</div>
-					<div className='text-gray50 text-sm mt-1'>{description}</div>
+					<div className='text-gray50 mt-1 text-sm'>{description}</div>
 				</div>
 				<div
-					className='flex-center hover:bg-gray10 border-y-gray20 cursor-pointer font-bold transition-colors h-12 border-y'
+					className='flex-center hover:bg-gray10 border-y-gray20 h-12 cursor-pointer border-y font-bold transition-colors'
 					style={{ color }}
 					onClick={firstAction}
 				>

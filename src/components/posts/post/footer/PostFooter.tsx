@@ -1,12 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
 import If from '@components/common/if/If'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import { fromDateToNow } from '@utils/date/FromDateToNow'
 import PostModel from '@api/common/models/post/PostModel'
-import { CommentsService } from '@api/services/comments/CommentsService'
-import { LikesService } from '@api/services/likes/LikesService'
+import {
+	usePostCommentsCountQuery,
+	usePostFirstCommentQuery,
+} from '@api/services/comments/CommentsService'
+import { usePostLikesInfoQuery } from '@api/services/likes/LikesService'
 import PostFooterActions from './actions/PostFooterActions'
 import AddCommentForm from './add-comment-form/AddCommentForm'
 import PostFooterDescription from './description/PostFooterDescription'
@@ -21,24 +23,19 @@ type PropsType = {
 const PostFooter = (props: PropsType) => {
 	const { post, authorName, setVisibleModal } = props
 
-	const { data: likesInfo, isLoading: isLoadingLikes } = useQuery({
-		queryKey: ['likes-info', { post: post.Id }],
-		queryFn: () => LikesService.GetLikesInfo(post.Id),
-	})
-	const { data: commentsCount, isLoading: isLoadingCommentsCount } = useQuery({
-		queryKey: ['comments-count', { post: post.Id }],
-		queryFn: () => CommentsService.GetCommentsCount(post.Id),
-	})
-	const { data: firstComment, isLoading: isLoadingFirstComment } = useQuery({
-		queryKey: ['first-comment', { post: post.Id }],
-		queryFn: () => CommentsService.GetFirstComment(post.Id),
-	})
+	const { data: likesInfo, isLoading: isLoadingLikes } = usePostLikesInfoQuery(
+		post.Id
+	)
+	const { data: commentsCount, isLoading: isLoadingCommentsCount } =
+		usePostCommentsCountQuery(post.Id)
+	const { data: firstComment, isLoading: isLoadingFirstComment } =
+		usePostFirstCommentQuery(post.Id)
 
 	return (
 		<div>
 			<div className='p-4'>
 				<PostFooterActions postId={post.Id} liked={likesInfo?.Liked} />
-				<div className='font-bold mt-4'>
+				<div className='mt-4 font-bold'>
 					<SkeletonWrapper
 						condition={isLoadingLikes}
 						skeleton={<Skeleton variant='text' />}
@@ -80,13 +77,13 @@ const PostFooter = (props: PropsType) => {
 							<div className='author_name font-semibold'>
 								{firstComment?.AuthorName}
 							</div>
-							<div className='ml-2 w-full whitespace-nowrap overflow-hidden text-ellipsis'>
+							<div className='ml-2 w-full overflow-hidden text-ellipsis whitespace-nowrap'>
 								{firstComment?.Text}
 							</div>
 						</div>
 					</SkeletonWrapper>
 				</If>
-				<div className='text-s text-gray50 uppercase mt-1'>
+				<div className='text-s text-gray50 mt-1 uppercase'>
 					{fromDateToNow(post.PostedAt)}
 				</div>
 			</div>

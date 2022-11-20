@@ -18,7 +18,7 @@ const PostFooterDescription = (props: PropsType) => {
 			>
 				<div className='author_name font-semibold'>{authorName}</div>
 			</SkeletonWrapper>
-			<div className='ml-2 w-full whitespace-nowrap overflow-hidden text-ellipsis'>
+			<div className='ml-2 w-full overflow-hidden text-ellipsis whitespace-nowrap'>
 				{description}
 			</div>
 			<div

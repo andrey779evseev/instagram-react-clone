@@ -9,8 +9,8 @@ import {
 } from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
-import { AuthService } from '@api/services/auth/AuthService'
-import { UserService } from '@api/services/user/UserService'
+import { GoogleLoginAsync } from '@api/services/auth/AuthService'
+import { GetCurrentUserAsync } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import s from './GoogleSignInBtn.module.scss'
@@ -27,7 +27,7 @@ const GoogleSignInBtn = (props: PropsType) => {
 	const [isButtonClicked, setIsButtonClicked] = useState(false)
 	const [googleUser, setGoogleUser] = useState<GoogleLoginResponse | null>(null)
 
-	const googleLoginMutation = useMutation(AuthService.GoogleLogin, {
+	const googleLoginMutation = useMutation(GoogleLoginAsync, {
 		onSuccess: async (res) => {
 			setCredentials(res)
 			await refetch()
@@ -41,7 +41,7 @@ const GoogleSignInBtn = (props: PropsType) => {
 
 	const { refetch } = useQuery({
 		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
+		queryFn: GetCurrentUserAsync,
 		enabled: false,
 		retry: false,
 		onSuccess: (res) => {

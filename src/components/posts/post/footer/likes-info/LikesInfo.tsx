@@ -20,7 +20,7 @@ const LikesInfo = (props: PropsType) => {
 		<div className='flex'>
 			<If condition={images && images.length > 0}>
 				<span
-					className='flex h-5 relative overflow-hidden mr-1'
+					className='relative mr-1 flex h-5 overflow-hidden'
 					style={{ width: Math.max(images.length * 17.5, 20) }}
 				>
 					{images.map((image, i) => (
@@ -45,7 +45,7 @@ const LikesInfo = (props: PropsType) => {
 						<If condition={count - 1 > 0}>
 							and
 							<span
-								className='font-semibold cursor-pointer'
+								className='cursor-pointer font-semibold'
 								onClick={() => setVisibleModal(true)}
 							>
 								{' '}

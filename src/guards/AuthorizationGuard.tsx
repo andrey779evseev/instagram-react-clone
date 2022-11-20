@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import Preloader from '@components/common/page-preloader/PagePreloader'
 import { SaveToLocalStorage } from '@utils/LocalStorage'
-import { UserService } from '@api/services/user/UserService'
+import { GetCurrentUserAsync } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 
 const AuthorizationGuard = () => {
@@ -21,7 +21,7 @@ const AuthorizationGuard = () => {
 			setIsLoading(false)
 		} else {
 			(async () => {
-				const user = await UserService.GetCurrentUser()
+				const user = await GetCurrentUserAsync()
 				qc.setQueryData(['user'], () => user)
 				if (user) {
 					SaveToLocalStorage('email', user.Email)

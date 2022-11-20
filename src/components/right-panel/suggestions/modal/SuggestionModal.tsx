@@ -1,10 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
 import { memo } from 'react'
+import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
+import If from '@components/common/if/If'
 import Modal from '@components/common/modal/Modal'
 import ModalHeader from '@components/common/modal/header/ModalHeader'
 import Spinner from '@components/common/spinner/Spinner'
 import useWindowSize from '@hooks/UseWindowSize'
-import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
+import { useUsersSuggestionsQuery } from '@api/services/friendships/FriendshipsService'
 import SuggestionItem from '../item/SuggestionItem'
 
 type PropsType = {
@@ -16,10 +17,7 @@ const SuggestionModal = (props: PropsType) => {
 
 	const { windowHeight } = useWindowSize()
 
-	const { data: suggestions, isLoading } = useQuery({
-		queryKey: ['suggestions', { take: 20 }],
-		queryFn: () => FriendshipsService.GetSuggestions({ Take: 20 }),
-	})
+	const { data: suggestions, isLoading } = useUsersSuggestionsQuery(20)
 
 	return (
 		<Modal
@@ -30,9 +28,18 @@ const SuggestionModal = (props: PropsType) => {
 			aspectRatio={2 / 1}
 			rounded={true}
 		>
-			<div className='w-full h-full flex flex-col'>
+			<div className='flex h-full w-full flex-col'>
 				<ModalHeader title='Suggestions' onClose={onClose} />
 				<div className='flex-1 px-4'>
+					<If condition={suggestions?.length === 0}>
+						<div className='flex-center h-full w-full flex-col'>
+							<PeoplesIcon />
+							<div className='text-xxl pt-4 pb-1 font-light'>Suggestions</div>
+							<div className='text-sm'>
+								We don't have any suggestions for you.
+							</div>
+						</div>
+					</If>
 					{isLoading ? (
 						<Spinner full />
 					) : (

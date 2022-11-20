@@ -10,7 +10,7 @@ type PropsType = PropsWithChildren<{
 const SkeletonWrapper = (props: PropsType) => {
 	const { condition, skeleton, children, className, full = false } = props
 	return (
-		<div className={`${className} ${full ? 'w-full h-full' : 'w-auto h-auto'}`}>
+		<div className={`${className} ${full ? 'h-full w-full' : 'h-auto w-auto'}`}>
 			{!condition ? children : skeleton}
 		</div>
 	)

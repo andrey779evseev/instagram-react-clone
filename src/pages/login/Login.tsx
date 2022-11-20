@@ -7,7 +7,7 @@ const Login = () => {
 	return (
 		<div className='flex'>
 			<PhoneScreens />
-			<div className='flex flex-col w-[350px]'>
+			<div className='flex w-[350px] flex-col'>
 				<LoginCard />
 				<div className='mt-2.5'>
 					<ChangeAuthorizationBtn />

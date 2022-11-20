@@ -10,7 +10,7 @@ const Spinner = (props: PropsType) => {
 	return (
 		<div
 			className={`w-full ${
-				full ? 'items-center h-full' : 'h-fit'
+				full ? 'h-full items-center' : 'h-fit'
 			} flex justify-center ${className}`}
 		>
 			<div className={s.lds_spinner}>

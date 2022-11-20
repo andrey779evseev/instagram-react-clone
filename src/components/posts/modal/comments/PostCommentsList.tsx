@@ -10,9 +10,9 @@ type PropsType = {
 const PostCommentsList = (props: PropsType) => {
 	const { comments, isLoading } = props
 	return (
-		<div className='p-4 h-full overflow-y-auto'>
+		<div className='h-full overflow-y-auto p-4'>
 			{isLoading ? (
-				<div className='flex items-center first:pt-0 pt-4'>
+				<div className='flex items-center pt-4 first:pt-0'>
 					<Skeleton variant='circular' width={32} height={32} />
 					<div className='ml-4'>
 						<Skeleton variant='text' width='300%' />

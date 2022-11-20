@@ -42,7 +42,7 @@ const Search = () => {
 	}
 
 	return (
-		<div className='relative w-fit h-fit' ref={clickOutsideRef}>
+		<div className='relative h-fit w-fit' ref={clickOutsideRef}>
 			<form autoComplete='off'>
 				<input
 					ref={inputRef}

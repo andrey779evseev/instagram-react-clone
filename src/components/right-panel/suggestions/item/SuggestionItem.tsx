@@ -4,7 +4,7 @@ import Avatar from '@components/common/avatar/Avatar'
 import Button from '@components/common/button/Button'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
 import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
-import { FriendshipsService } from '@api/services/friendships/FriendshipsService'
+import { FollowUserAsync } from '@api/services/friendships/FriendshipsService'
 import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
@@ -16,20 +16,17 @@ const SuggestionItem = (props: PropsType) => {
 	const { suggestion, isSmall = true } = props
 
 	const qc = useQueryClient()
-	const followMutation = useMutation(
-		(id: string) => FriendshipsService.Follow(id),
-		{
-			onSuccess: () => {
-				qc.invalidateQueries(['suggestions'])
-				qc.invalidateQueries(['feed'])
-			},
-		}
-	)
+	const followMutation = useMutation((id: string) => FollowUserAsync(id), {
+		onSuccess: () => {
+			qc.invalidateQueries(['suggestions'])
+			qc.invalidateQueries(['feed'])
+		},
+	})
 
 	return (
 		<div className={`flex items-center ${isSmall ? 'my-2' : 'my-4'}`}>
 			<Avatar src={suggestion.Avatar} size={EnumAvatarSize.Medium} />
-			<div className='items-between flex flex-col w-full px-3 overflow-hidden'>
+			<div className='items-between flex w-full flex-col overflow-hidden px-3'>
 				<span className='text-dark font-semibold'>{suggestion.Nickname}</span>
 				<div className='text-gray50 overflow-hidden text-ellipsis whitespace-nowrap text-xs'>
 					Popular
@@ -37,7 +34,7 @@ const SuggestionItem = (props: PropsType) => {
 			</div>
 			{isSmall ? (
 				<span
-					className='text-cobalt cursor-pointer font-semibold text-xs mt-px'
+					className='text-cobalt mt-px cursor-pointer text-xs font-semibold'
 					onClick={() => followMutation.mutate(suggestion.Id)}
 				>
 					{followMutation.isLoading ? (

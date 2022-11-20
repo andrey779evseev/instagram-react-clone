@@ -20,7 +20,7 @@ const LikesListItem = (props: PropsType) => {
 
 	return (
 		<div
-			className='flex items-center cursor-pointer'
+			className='flex cursor-pointer items-center'
 			onClick={() => goToProfile(like.User.Id)}
 		>
 			<Avatar src={like.User.Avatar} size={EnumAvatarSize.Medium} />

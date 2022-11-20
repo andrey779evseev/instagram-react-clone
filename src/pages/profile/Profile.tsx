@@ -1,10 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import TableIcon from '@components/common/assets/icons/TableIcon'
 import Tabs from '@components/common/tabs/Tabs'
 import ProfileHeader from '@components/profile/profile-header/ProfileHeader'
-import { UserService } from '@api/services/user/UserService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 import TabItem from '@models/tabs/TabItem'
 
 const Profile = () => {
@@ -14,10 +13,7 @@ const Profile = () => {
 		return [new TabItem({ Name: 'posts', Route: 'posts', Icon: TableIcon })]
 	}, [])
 
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 
 	useEffect(() => {
 		if (user?.Id === userId) navigate('/profile/me/posts')

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useAtomValue } from 'jotai'
 import { useMemo } from 'react'
 import { useGoogleLogout } from 'react-google-login'
@@ -8,20 +8,17 @@ import SettingsIcon from '@components/common/assets/icons/SettingsIcon'
 import Avatar from '@components/common/avatar/Avatar'
 import Dropdown from '@components/common/dropdown/Dropdown'
 import { logout } from '@utils/Logout'
-import { AuthService } from '@api/services/auth/AuthService'
-import { UserService } from '@api/services/user/UserService'
+import { RevokeTokenAsync } from '@api/services/auth/AuthService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import DropdownItemModel from '@models/dropdown/DropdownItemModel'
 import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 const CurrentUser = () => {
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-	})
+	const { data: user } = useCurrentUserQuery()
 	const refreshToken = useAtomValue(RefreshTokenAtom)
 	const navigate = useNavigate()
-	const revokeMutation = useMutation(AuthService.RevokeToken, {
+	const revokeMutation = useMutation(RevokeTokenAsync, {
 		onSuccess: () => {
 			if (!!user?.GoogleId) signOut()
 			logout()

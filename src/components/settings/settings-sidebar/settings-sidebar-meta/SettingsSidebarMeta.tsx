@@ -2,7 +2,7 @@ import MetaTitle from '@components/common/assets/MetaTitle'
 
 const SettingsSidebarMeta = () => {
 	return (
-		<div className='border-t-gray10 py-[47px] px-8 min-h-[240px] border-t'>
+		<div className='border-t-gray10 min-h-[240px] border-t py-[47px] px-8'>
 			<MetaTitle />
 			<div className='text-cobalt mt-[10px] mb-2 text-base font-medium'>
 				Accounts Center

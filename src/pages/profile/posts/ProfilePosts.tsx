@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { useParams } from 'react-router'
 import InfinityList from '@components/common/infinity-list/InfinityList'
@@ -6,8 +6,8 @@ import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'
 import useWindowSize from '@hooks/UseWindowSize'
 import PostMiniatureModel from '@api/common/models/post/PostMiniatureModel'
-import { PostsService } from '@api/services/posts/PostsService'
-import { UserService } from '@api/services/user/UserService'
+import { GetMiniaturesAsync } from '@api/services/posts/PostsService'
+import { useCurrentUserQuery } from '@api/services/user/UserService'
 
 const ProfilePosts = () => {
 	const { windowHeight } = useWindowSize()
@@ -15,17 +15,13 @@ const ProfilePosts = () => {
 
 	const isMyProfile = useMemo(() => userId === 'me', [userId])
 
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: UserService.GetCurrentUser,
-		enabled: isMyProfile,
-	})
+	const { data: user } = useCurrentUserQuery(isMyProfile)
 
 	const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
 			['mini-posts', { user: userId }],
 			({ pageParam = null }) =>
-				PostsService.GetMiniatures({
+				GetMiniaturesAsync({
 					Cursor: pageParam,
 					Take: 27,
 					UserId: isMyProfile ? (user?.Id as string) : userId!,

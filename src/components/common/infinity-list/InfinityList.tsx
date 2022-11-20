@@ -108,7 +108,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 	return (
 		<>
 			<div
-				className='will-change-transform relative'
+				className='relative will-change-transform'
 				style={{ height: totalHeight }}
 			>
 				<div
@@ -125,7 +125,7 @@ const InfinityList = <T extends object>(props: PropsType<T>) => {
 							}
 						>
 							<div
-								className='absolute bottom-0 left-0 w-full pt-96 -z-10'
+								className='absolute bottom-0 left-0 -z-10 w-full pt-96'
 								ref={bottomAnchor}
 							/>
 						</If>
