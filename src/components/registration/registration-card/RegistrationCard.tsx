@@ -33,6 +33,7 @@ const RegistrationCard = () => {
 		},
 		onError: (error: AxiosError) => {
 			setErrMsg(error.response?.data as string)
+			setIsLoading(false)
 		},
 	})
 	const { data: validNickname } = useCheckNicknameQuery(
