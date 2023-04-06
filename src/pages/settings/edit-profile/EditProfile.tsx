@@ -31,21 +31,14 @@ const EditProfile = () => {
 	const [isVisibleCrop, setIsVisibleCrop] = useState(false)
 	const debouncedNickname = useDebounce(nickname, 500)
 
-	const setAvatarMutation = useMutation(
-		(data: FormData) => SetAvatarAsync({ Data: data }),
-		{
-			onSuccess: async (res) => {
-				setAvatar(res)
-				qc.setQueryData(['user'], { ...user!, Avatar: res })
-				closeCrop()
-			},
-		}
-	)
-	const updateUserMutation = useMutation(UpdateUserAsync, {
-		onSuccess: (res) => {
-			qc.setQueryData(['user'], res)
-		},
-	})
+	const setAvatarMutation = useMutation({ mutationFn: (data: FormData) => SetAvatarAsync({ Data: data }), onSuccess: async (res) => {
+		setAvatar(res)
+		qc.setQueryData(['user'], { ...user!, Avatar: res })
+		closeCrop()
+	} })
+	const updateUserMutation = useMutation({ mutationFn: UpdateUserAsync, onSuccess: (res) => {
+		qc.setQueryData(['user'], res)
+	} })
 	const { data: validNickname } = useCheckNicknameQuery(
 		debouncedNickname,
 		debouncedNickname !== '' && debouncedNickname !== user?.Nickname
@@ -194,7 +187,7 @@ const EditProfile = () => {
 	}
 
 	return (
-		<div className='h-full w-full py-8 pr-[150px] pl-20'>
+		<div className='h-full w-full py-8 pl-20 pr-[150px]'>
 			<SettingsForm items={items}>
 				<div className='mt-[29px] flex items-center justify-between'>
 					<Button

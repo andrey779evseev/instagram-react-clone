@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { memo, useMemo, useState } from 'react'
 import { Crop } from 'react-image-crop'
-import { useMatch } from 'react-router'
+import { useMatch } from 'react-router-dom'
 import Modal from '@components/common/modal/Modal'
 import ConfirmationModal from '@components/common/modal/confirmation-modal/ConfirmationModal'
 import Switch from '@components/common/switch/Switch'
@@ -64,12 +64,10 @@ const CreatePost = (props: PropsType) => {
 	const qc = useQueryClient()
 	const match = useMatch('/profile/:userId/posts')
 
-	const createPostMutation = useMutation(CreatePostAsync, {
-		onSuccess: () => {
-			setCurrentStep((step) => step + 1)
-			if (match !== null) qc.invalidateQueries(['mini-posts'])
-		},
-	})
+	const createPostMutation = useMutation({ mutationFn: CreatePostAsync, onSuccess: () => {
+		setCurrentStep((step) => step + 1)
+		if (match !== null) qc.invalidateQueries(['mini-posts'])
+	} })
 
 	const symbolsCount = useMemo(() => description.length, [description])
 	const step = useMemo(() => steps[currentStep - 1], [currentStep])

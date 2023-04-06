@@ -21,31 +21,29 @@ const AddCommentForm = (props: PropsType) => {
 	const isAvailablePost = useMemo(() => commentText !== '', [commentText])
 	const match = useMatch('/profile/:userId/posts')
 	const qc = useQueryClient()
-	const addCommentMutation = useMutation(AddPostCommentAsync, {
-		onSuccess: () => {
-			setCommentText('')
-			qc.invalidateQueries(['comments', { post: postId }])
-			qc.invalidateQueries(['comments-count', { post: postId }])
-			qc.invalidateQueries(['first-comment', { post: postId }])
-			if (match !== null) {
-				qc.setQueryData<InfiniteData<PostMiniatureModel[]>>(
-					['mini-posts', { user: match.params.userId }],
-					(prev) => {
-						const data: InfiniteData<PostMiniatureModel[]> = JSON.parse(
-							JSON.stringify(prev)
-						)
-						for (let i = 0; i < data.pages.length; i++) {
-							for (let j = 0; j < data.pages[i].length; j++) {
-								const item = data.pages[i][j]
-								if (item.Id === postId) item.CommentsCount += 1
-							}
+	const addCommentMutation = useMutation({ mutationFn: AddPostCommentAsync, onSuccess: () => {
+		setCommentText('')
+		qc.invalidateQueries(['comments', { post: postId }])
+		qc.invalidateQueries(['comments-count', { post: postId }])
+		qc.invalidateQueries(['first-comment', { post: postId }])
+		if (match !== null) {
+			qc.setQueryData<InfiniteData<PostMiniatureModel[]>>(
+				['mini-posts', { user: match.params.userId }],
+				(prev) => {
+					const data: InfiniteData<PostMiniatureModel[]> = JSON.parse(
+						JSON.stringify(prev)
+					)
+					for (let i = 0; i < data.pages.length; i++) {
+						for (let j = 0; j < data.pages[i].length; j++) {
+							const item = data.pages[i][j]
+							if (item.Id === postId) item.CommentsCount += 1
 						}
-						return data
 					}
-				)
-			}
-		},
-	})
+					return data
+				}
+			)
+		}
+	} })
 
 	const onKeyUp = (e: KeyboardEvent) => {
 		if (e.code === 'Enter') addComment()

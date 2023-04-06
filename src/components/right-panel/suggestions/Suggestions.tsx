@@ -9,7 +9,7 @@ const Suggestions = () => {
 	const { data: suggestions } = useUsersSuggestionsQuery(5)
 
 	return (
-		<div className='mt-6 mb-2 flex flex-col'>
+		<div className='mb-2 mt-6 flex flex-col'>
 			<div className='mb-2 flex items-center justify-between'>
 				<span className='text-gray50 font-semibold'>Suggestions For You</span>
 				<span

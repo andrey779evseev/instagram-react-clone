@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { useUpdateAtom } from 'jotai/utils'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InstagramTitle from '@components/common/assets/InstagramTitle'
@@ -13,13 +12,14 @@ import { SaveToLocalStorage } from '@utils/LocalStorage'
 import { LoginUserAsync } from '@api/services/auth/AuthService'
 import { GetCurrentUserAsync } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
+import { useSetAtom } from 'jotai'
 
 const LoginCard = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [errMsg, setErrMsg] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
-	const setCredentials = useUpdateAtom(CredentialsAtom)
+	const setCredentials = useSetAtom(CredentialsAtom)
 	const navigate = useNavigate()
 	const isAllowedSubmit = useMemo(
 		() => email !== '' && password !== '',
@@ -35,17 +35,14 @@ const LoginCard = () => {
 			setIsLoading(false)
 		},
 	})
-	const loginMutation = useMutation(LoginUserAsync, {
-		onSuccess: async (res) => {
-			setCredentials(res)
-			await refetch()
-			navigate('/feed')
-		},
-		onError: (error: AxiosError) => {
-			setErrMsg(error.response?.data as string)
-			setIsLoading(false)
-		},
-	})
+	const loginMutation = useMutation({ mutationFn: LoginUserAsync, onSuccess: async (res) => {
+		setCredentials(res)
+		await refetch()
+		navigate('/feed')
+	}, onError: (error: AxiosError) => {
+		setErrMsg(error.response?.data as string)
+		setIsLoading(false)
+	} })
 
 	const login = () => {
 		setIsLoading(true)
@@ -56,7 +53,7 @@ const LoginCard = () => {
 	}
 
 	return (
-		<div className='border-gray10 border py-6 px-10'>
+		<div className='border-gray10 border px-10 py-6'>
 			<div className='flex flex-col items-center'>
 				<InstagramTitle className='mb-6' width={183} height={57} />
 				<div className='mb-3.5 w-full'>

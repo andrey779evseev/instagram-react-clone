@@ -18,12 +18,10 @@ const CurrentUser = () => {
 	const { data: user } = useCurrentUserQuery()
 	const refreshToken = useAtomValue(RefreshTokenAtom)
 	const navigate = useNavigate()
-	const revokeMutation = useMutation(RevokeTokenAsync, {
-		onSuccess: () => {
-			if (!!user?.GoogleId) signOut()
-			logout()
-		},
-	})
+	const revokeMutation = useMutation({ mutationFn: RevokeTokenAsync, onSuccess: () => {
+		if (!!user?.GoogleId) signOut()
+		logout()
+	} })
 
 	const openProfile = () => {
 		navigate('/profile/me/posts')

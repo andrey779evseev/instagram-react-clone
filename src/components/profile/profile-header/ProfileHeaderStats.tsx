@@ -39,12 +39,8 @@ const ProfileHeaderStats = (props: PropsType) => {
 		!isMyProfile || !!user?.Id
 	)
 	const { data: isFollowed } = useIsFollowedUserQuery(userId!, !isMyProfile)
-	const followMutation = useMutation(() => FollowUserAsync(userId!), {
-		onSuccess: () => refetch(true),
-	})
-	const unfollowMutation = useMutation(() => UnfollowUserAsync(userId!), {
-		onSuccess: () => refetch(false),
-	})
+	const followMutation = useMutation({ mutationFn: () => FollowUserAsync(userId!), onSuccess: () => refetch(true) })
+	const unfollowMutation = useMutation({ mutationFn: () => UnfollowUserAsync(userId!), onSuccess: () => refetch(false) })
 
 	const refetch = (follow: boolean) => {
 		if (!isMyProfile)

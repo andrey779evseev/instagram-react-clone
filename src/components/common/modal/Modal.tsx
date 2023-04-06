@@ -153,7 +153,7 @@ const Modal = (props: PropsType) => {
 				onMouseDown={close}
 			>
 				<div
-					className='absolute top-4 right-4 cursor-pointer'
+					className='absolute right-4 top-4 cursor-pointer'
 					id='close-icon'
 					onClick={(e) => close(e, true)}
 				>

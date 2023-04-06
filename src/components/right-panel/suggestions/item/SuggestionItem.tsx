@@ -16,12 +16,10 @@ const SuggestionItem = (props: PropsType) => {
 	const { suggestion, isSmall = true } = props
 
 	const qc = useQueryClient()
-	const followMutation = useMutation((id: string) => FollowUserAsync(id), {
-		onSuccess: () => {
-			qc.invalidateQueries(['suggestions'])
-			qc.invalidateQueries(['feed'])
-		},
-	})
+	const followMutation = useMutation({ mutationFn: (id: string) => FollowUserAsync(id), onSuccess: () => {
+		qc.invalidateQueries(['suggestions'])
+		qc.invalidateQueries(['feed'])
+	} })
 
 	return (
 		<div className={`flex items-center ${isSmall ? 'my-2' : 'my-4'}`}>

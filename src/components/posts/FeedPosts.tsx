@@ -44,7 +44,7 @@ const FeedPosts = () => {
 					) : (
 						<>
 							<PeoplesIcon />
-							<div className='text-xxl pt-4 pb-1 font-light'>Posts</div>
+							<div className='text-xxl pb-1 pt-4 font-light'>Posts</div>
 							<div className='text-sm'>
 								You'll see posts the people who you follow, here.
 							</div>

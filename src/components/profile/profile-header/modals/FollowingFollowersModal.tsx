@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import PeoplesIcon from '@components/common/assets/icons/PeoplesIcon'
 import If from '@components/common/if/If'
 import Modal from '@components/common/modal/Modal'
@@ -54,7 +54,7 @@ const FollowingFollowersModal = (props: PropsType) => {
 					<If condition={following?.length === 0}>
 						<div className='flex-center h-full w-full flex-col'>
 							<PeoplesIcon />
-							<div className='text-xxl pt-4 pb-1 font-light'>
+							<div className='text-xxl pb-1 pt-4 font-light'>
 								{isFollowing ? 'Following' : 'Followers'}
 							</div>
 							<div className='text-sm'>

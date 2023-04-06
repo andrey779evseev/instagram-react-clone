@@ -16,7 +16,11 @@ const DetailPostFooter = (props: PropsType) => {
 	const { isLoading, postedAt, likesInfo, postId } = props
 	return (
 		<div className='border-t-gray10 mt-auto border-t p-4'>
-			<PostFooterActions postId={postId} liked={likesInfo?.Liked} />
+			<PostFooterActions
+				postId={postId}
+				liked={likesInfo?.Liked}
+				isHideCommentBtn
+			/>
 			<SkeletonWrapper
 				condition={isLoading}
 				skeleton={<Skeleton variant='text' width='50%' />}

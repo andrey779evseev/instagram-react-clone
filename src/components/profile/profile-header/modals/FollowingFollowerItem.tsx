@@ -23,14 +23,12 @@ const FollowingItem = (props: PropsType) => {
 	const navigate = useNavigate()
 
 	const qc = useQueryClient()
-	const unfollowMutation = useMutation((id: string) => UnfollowUserAsync(id), {
-		onSuccess: async () => {
-			const following = await qc.fetchQuery<UserMiniatureModel[]>(['following'])
-			qc.setQueryData<UserStatsModel>(['stats'], (prev) => {
-				return { ...prev, FollowersCount: following.length } as UserStatsModel
-			})
-		},
-	})
+	const unfollowMutation = useMutation({ mutationFn: (id: string) => UnfollowUserAsync(id), onSuccess: async () => {
+		const following = await qc.fetchQuery<UserMiniatureModel[]>(['following'])
+		qc.setQueryData<UserStatsModel>(['stats'], (prev) => {
+			return { ...prev, FollowersCount: following.length } as UserStatsModel
+		})
+	} })
 
 	const goToProfile = (userId: string) => {
 		onClose()

@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { useUpdateAtom } from 'jotai/utils'
 import { memo, useEffect, useState } from 'react'
 import {
 	GoogleLoginResponse,
@@ -14,6 +13,7 @@ import { GetCurrentUserAsync } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import s from './GoogleSignInBtn.module.scss'
+import { useSetAtom } from 'jotai'
 
 type PropsType = {
 	setIsLoading: (value: boolean) => void
@@ -22,22 +22,19 @@ type PropsType = {
 
 const GoogleSignInBtn = (props: PropsType) => {
 	const { setIsLoading, setErrMsg } = props
-	const setCredentials = useUpdateAtom(CredentialsAtom)
+	const setCredentials = useSetAtom(CredentialsAtom)
 	const navigate = useNavigate()
 	const [isButtonClicked, setIsButtonClicked] = useState(false)
 	const [googleUser, setGoogleUser] = useState<GoogleLoginResponse | null>(null)
 
-	const googleLoginMutation = useMutation(GoogleLoginAsync, {
-		onSuccess: async (res) => {
-			setCredentials(res)
-			await refetch()
-			navigate('/feed')
-		},
-		onError: (error: AxiosError) => {
-			setErrMsg(error.response?.data as string)
-			setIsLoading(false)
-		},
-	})
+	const googleLoginMutation = useMutation({ mutationFn: GoogleLoginAsync, onSuccess: async (res) => {
+		setCredentials(res)
+		await refetch()
+		navigate('/feed')
+	}, onError: (error: AxiosError) => {
+		setErrMsg(error.response?.data as string)
+		setIsLoading(false)
+	} })
 
 	const { refetch } = useQuery({
 		queryKey: ['user'],

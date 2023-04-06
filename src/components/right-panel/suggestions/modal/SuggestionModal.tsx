@@ -34,7 +34,7 @@ const SuggestionModal = (props: PropsType) => {
 					<If condition={suggestions?.length === 0}>
 						<div className='flex-center h-full w-full flex-col'>
 							<PeoplesIcon />
-							<div className='text-xxl pt-4 pb-1 font-light'>Suggestions</div>
+							<div className='text-xxl pb-1 pt-4 font-light'>Suggestions</div>
 							<div className='text-sm'>
 								We don't have any suggestions for you.
 							</div>

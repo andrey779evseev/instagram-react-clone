@@ -23,7 +23,7 @@ const Header = () => {
 	return (
 		<header className={s.header_wrapper} id='header'>
 			<div className={s.header_container}>
-				<InstagramTitle className='mt-2 mr-[150px]' />
+				<InstagramTitle className='mr-[150px] mt-2' />
 				<Search />
 				<nav className='w-100 ml-[150px] flex items-center justify-between'>
 					<NavLink to='/feed' className={s.header_icon_container}>

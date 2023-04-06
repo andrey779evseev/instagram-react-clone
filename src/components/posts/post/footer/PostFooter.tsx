@@ -34,7 +34,11 @@ const PostFooter = (props: PropsType) => {
 	return (
 		<div>
 			<div className='p-4'>
-				<PostFooterActions postId={post.Id} liked={likesInfo?.Liked} />
+				<PostFooterActions
+					postId={post.Id}
+					liked={likesInfo?.Liked}
+					setVisibleModal={setVisibleModal}
+				/>
 				<div className='mt-4 font-bold'>
 					<SkeletonWrapper
 						condition={isLoadingLikes}

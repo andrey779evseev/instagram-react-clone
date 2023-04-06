@@ -20,20 +20,17 @@ const ChangePassword = () => {
 	const [errMsg, setErrMsg] = useState('')
 	const [successMessage, setSuccessMessage] = useState('')
 	const navigate = useNavigate()
-	const changePasswordMutation = useMutation(ChangeUserPasswordAsync, {
-		onSuccess: () => {
-			setOldPassword('')
-			setNewPassword('')
-			setConfirmNewPassword('')
-			setSuccessMessage('Password successfully changed')
-			setTimeout(() => {
-				setSuccessMessage('')
-			}, 5000)
-		},
-		onError: (error: AxiosError) => {
-			setErrMsg(error.response?.data as string)
-		},
-	})
+	const changePasswordMutation = useMutation({ mutationFn: ChangeUserPasswordAsync, onSuccess: () => {
+		setOldPassword('')
+		setNewPassword('')
+		setConfirmNewPassword('')
+		setSuccessMessage('Password successfully changed')
+		setTimeout(() => {
+			setSuccessMessage('')
+		}, 5000)
+	}, onError: (error: AxiosError) => {
+		setErrMsg(error.response?.data as string)
+	} })
 
 	useEffect(() => {
 		if (!!user?.GoogleId) navigate('/settings/edit-profile')

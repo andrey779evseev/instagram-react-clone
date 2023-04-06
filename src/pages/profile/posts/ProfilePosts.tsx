@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import InfinityList from '@components/common/infinity-list/InfinityList'
 import Spinner from '@components/common/spinner/Spinner'
 import TriplePost from '@components/profile/posts-miniature/TriplePost'

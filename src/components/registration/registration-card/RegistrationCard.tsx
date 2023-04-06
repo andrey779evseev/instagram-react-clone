@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { useUpdateAtom } from 'jotai/utils'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InstagramTitle from '@components/common/assets/InstagramTitle'
@@ -14,9 +13,10 @@ import { RegisterUserAsync } from '@api/services/auth/AuthService'
 import { useCheckNicknameQuery } from '@api/services/user/UserService'
 import { CredentialsAtom } from '@store/atoms/AuthenticationAtom'
 import s from './RegistrationCard.module.scss'
+import { useSetAtom } from 'jotai'
 
 const RegistrationCard = () => {
-	const setCredentials = useUpdateAtom(CredentialsAtom)
+	const setCredentials = useSetAtom(CredentialsAtom)
 	const [email, setEmail] = useState('')
 	const [fullName, setFullName] = useState('')
 	const [nickname, setNickname] = useState('')
@@ -26,16 +26,13 @@ const RegistrationCard = () => {
 	const navigate = useNavigate()
 	const debouncedNickname = useDebounce(nickname, 500)
 
-	const registerMutation = useMutation(RegisterUserAsync, {
-		onSuccess: async (res) => {
-			setCredentials(res)
-			navigate('/login')
-		},
-		onError: (error: AxiosError) => {
-			setErrMsg(error.response?.data as string)
-			setIsLoading(false)
-		},
-	})
+	const registerMutation = useMutation({ mutationFn: RegisterUserAsync, onSuccess: async (res) => {
+		setCredentials(res)
+		navigate('/login')
+	}, onError: (error: AxiosError) => {
+		setErrMsg(error.response?.data as string)
+		setIsLoading(false)
+	} })
 	const { data: validNickname } = useCheckNicknameQuery(
 		debouncedNickname,
 		debouncedNickname !== ''
