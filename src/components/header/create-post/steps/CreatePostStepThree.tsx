@@ -2,7 +2,6 @@ import { memo } from 'react'
 import SmileEmojiIcon from '@components/common/assets/icons/SmileEmojiIcon'
 import Avatar from '@components/common/avatar/Avatar'
 import { useCurrentUserQuery } from '@api/services/user/UserService'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	value: number
@@ -20,7 +19,7 @@ const CreatePostStepThree = (props: PropsType) => {
 		<div className='flex w-[300px] flex-1 flex-col p-4'>
 			<div className='mb-3 flex items-center'>
 				<div className='border-gray50 rounded-full border'>
-					<Avatar src={user?.Avatar} size={EnumAvatarSize.Small} />
+					<Avatar src={user?.Avatar} size='small' />
 				</div>
 				<span className='ml-3 text-base font-semibold'>{user?.Nickname}</span>
 			</div>

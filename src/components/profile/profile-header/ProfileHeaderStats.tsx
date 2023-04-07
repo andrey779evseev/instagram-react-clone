@@ -15,7 +15,6 @@ import {
 	useIsFollowedUserQuery,
 } from '@api/services/friendships/FriendshipsService'
 import { useUserStatsQuery } from '@api/services/user/UserService'
-import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
 
 type PropsType = {
 	user: User | ExpandedUserModel | undefined
@@ -88,7 +87,7 @@ const ProfileHeaderStats = (props: PropsType) => {
 				>
 					<Button
 						theme={
-							isMyProfile ? EnumButtonTheme.Secondary : EnumButtonTheme.Primary
+							isMyProfile ? 'secondary' : 'primary'
 						}
 						onClick={isMyProfile ? goToEditProfile : changeFriendship}
 						width='max-content'

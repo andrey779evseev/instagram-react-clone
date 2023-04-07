@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react'
 import LittleLoading from '@components/common/little-loading/LittleLoading'
-import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
 import s from './Button.module.scss'
 
 type PropsType = PropsWithChildren<{
@@ -8,7 +7,7 @@ type PropsType = PropsWithChildren<{
 	disabled?: boolean
 	onClick?: (() => void) | ((e: React.MouseEvent) => void)
 	isLoading?: boolean
-	theme?: EnumButtonTheme
+	theme?: 'primary' | 'secondary'
 	className?: string
 }>
 
@@ -20,7 +19,7 @@ const Button = (props: PropsType) => {
 		width = '100%',
 		disabled = false,
 		isLoading = false,
-		theme = EnumButtonTheme.Primary,
+		theme = 'primary',
 	} = props
 
 	const click = (e: React.MouseEvent) => {
@@ -36,7 +35,7 @@ const Button = (props: PropsType) => {
 		>
 			{isLoading ? (
 				<LittleLoading
-					color={theme === EnumButtonTheme.Primary ? 'white' : 'cobalt'}
+					color={theme === 'primary' ? 'white' : 'cobalt'}
 				/>
 			) : (
 				children

@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import Avatar from '../avatar/Avatar'
 import Skeleton from '../skeleton/Skeleton'
 import SkeletonWrapper from '../skeleton/SkeletonWrapper'
@@ -28,7 +27,7 @@ const ImageBox = (props: PropsType) => {
 				>
 					<Avatar
 						src={image}
-						size={isSmall ? EnumAvatarSize.Small : EnumAvatarSize.Large}
+						size={isSmall ? 'small' : 'large'}
 					/>
 				</SkeletonWrapper>
 			</div>

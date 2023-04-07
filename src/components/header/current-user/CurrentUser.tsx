@@ -12,7 +12,6 @@ import { RevokeTokenAsync } from '@api/services/auth/AuthService'
 import { useCurrentUserQuery } from '@api/services/user/UserService'
 import { RefreshTokenAtom } from '@store/atoms/RefreshTokenAtom'
 import DropdownItemModel from '@models/dropdown/DropdownItemModel'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 const CurrentUser = () => {
 	const { data: user } = useCurrentUserQuery()
@@ -62,7 +61,7 @@ const CurrentUser = () => {
 	return (
 		<>
 			<Dropdown items={dropdownItems}>
-				<Avatar src={user?.Avatar} size={EnumAvatarSize.Small} />
+				<Avatar src={user?.Avatar} size='small' />
 			</Dropdown>
 		</>
 	)

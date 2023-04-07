@@ -7,8 +7,6 @@ import If from '@components/common/if/If'
 import UserMiniatureModel from '@api/common/models/user/UserMiniatureModel'
 import UserStatsModel from '@api/common/models/user/UserStatsModel'
 import { UnfollowUserAsync } from '@api/services/friendships/FriendshipsService'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
-import { EnumButtonTheme } from '@models/enums/EnumButtonTheme'
 
 type PropsType = {
 	user: UserMiniatureModel
@@ -45,7 +43,7 @@ const FollowingItem = (props: PropsType) => {
 			className='my-4 flex cursor-pointer items-center'
 			onClick={() => goToProfile(user.Id)}
 		>
-			<Avatar src={user.Avatar} size={EnumAvatarSize.Medium} />
+			<Avatar src={user.Avatar} size='medium' />
 			<span className='text-dark w-full overflow-hidden px-3 font-semibold'>
 				{user.Nickname}
 			</span>
@@ -53,7 +51,7 @@ const FollowingItem = (props: PropsType) => {
 				<Button
 					isLoading={unfollowMutation.isLoading}
 					onClick={onClickUnfollow}
-					theme={EnumButtonTheme.Secondary}
+					theme='secondary'
 				>
 					Unfollow
 				</Button>

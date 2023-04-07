@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '@components/common/avatar/Avatar'
 import LikeModel from '@api/common/models/like/LikeModel'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	like: LikeModel
@@ -23,7 +22,7 @@ const LikesListItem = (props: PropsType) => {
 			className='flex cursor-pointer items-center'
 			onClick={() => goToProfile(like.User.Id)}
 		>
-			<Avatar src={like.User.Avatar} size={EnumAvatarSize.Medium} />
+			<Avatar src={like.User.Avatar} size='medium' />
 			<div className='ml-2 flex flex-col justify-between'>
 				<div className='font-semibold'>{like.User.Nickname}</div>
 				<div className='text-gray50'>{like.User.Name}</div>

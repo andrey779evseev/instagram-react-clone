@@ -2,7 +2,6 @@ import Avatar from '@components/common/avatar/Avatar'
 import MoreButton from '@components/common/more-button/MoreButton'
 import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	avatar: string | undefined
@@ -19,7 +18,7 @@ const DetailPostHeader = (props: PropsType) => {
 					condition={isLoading}
 					skeleton={<Skeleton variant='circular' width={32} height={32} />}
 				>
-					<Avatar src={avatar} size={EnumAvatarSize.Medium} />
+					<Avatar src={avatar} size='medium' />
 				</SkeletonWrapper>
 				<SkeletonWrapper
 					condition={isLoading}

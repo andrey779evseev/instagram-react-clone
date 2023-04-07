@@ -8,7 +8,6 @@ import {
 	useCurrentUserQuery,
 	useUserQuery,
 } from '@api/services/user/UserService'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import ProfileHeaderStats from './ProfileHeaderStats'
 import FollowingFollowersModal from './modals/FollowingFollowersModal'
 
@@ -27,7 +26,7 @@ const ProfileHeader = () => {
 					skeleton={<Skeleton variant='circular' width={150} height={150} />}
 					condition={isLoading}
 				>
-					<Avatar src={user?.Avatar} size={EnumAvatarSize.ExtraLarge} />
+					<Avatar src={user?.Avatar} size='extra-large' />
 				</SkeletonWrapper>
 				<ProfileHeaderStats
 					setIsFollowersModal={setIsFollowersModal}

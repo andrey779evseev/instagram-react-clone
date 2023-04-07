@@ -1,15 +1,14 @@
 import defaultAvatar from '@assets/img/common/default-avatar.jpg'
 import { memo, useMemo } from 'react'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import AsyncImage from '../async-image/AsyncImage'
 
 type PropsType = {
 	src: string | undefined | null
-	size?: EnumAvatarSize
+	size?: 'small' | 'medium' | 'big' | 'large' | 'extra-large'
 }
 
 const Avatar = (props: PropsType) => {
-	const { src, size = EnumAvatarSize.Large } = props
+	const { src, size = 'large' } = props
 
 	const avatar = useMemo(() => {
 		return src ? src : defaultAvatar
@@ -17,13 +16,13 @@ const Avatar = (props: PropsType) => {
 
 	const imgSize = useMemo(() => {
 		switch (size) {
-			case EnumAvatarSize.ExtraLarge:
+			case 'extra-large':
 				return 150
-			case EnumAvatarSize.Large:
+			case 'large':
 				return 56
-			case EnumAvatarSize.Big:
+			case 'big':
 				return 38
-			case EnumAvatarSize.Medium:
+			case 'medium':
 				return 32
 			default:
 				return 25

@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import Avatar from '@components/common/avatar/Avatar'
 import UserExtendedModel from '@api/common/models/user/UserExtendedModel'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	user: UserExtendedModel
@@ -19,7 +18,7 @@ const SearchPopupItem = (props: PropsType) => {
 			}`}
 			onClick={() => goToProfile(user.Id)}
 		>
-			<Avatar src={user.Avatar} size={EnumAvatarSize.Big} />
+			<Avatar src={user.Avatar} size='big' />
 			<div className='ml-2 flex flex-1 flex-col justify-between'>
 				<div className='font-semibold'>{user.Nickname}</div>
 				<div className='text-gray50'>{user.Name}</div>

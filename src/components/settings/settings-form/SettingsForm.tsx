@@ -6,7 +6,6 @@ import Skeleton from '@components/common/skeleton/Skeleton'
 import SkeletonWrapper from '@components/common/skeleton/SkeletonWrapper'
 import Textarea from '@components/common/textarea/Textarea'
 import UploadImage from '@components/common/upload-image/UploadImage'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 import SettingsFormItem, {
 	EnumSettingsFormItemType,
 } from '@models/settings-form/SettingsFormItem'
@@ -60,7 +59,7 @@ const SettingsForm = (props: PropsType) => {
 						}`}
 					>
 						<If condition={isAvatar(item)}>
-							<Avatar src={item.Value} size={EnumAvatarSize.Big} />
+							<Avatar src={item.Value} size='big' />
 						</If>
 						<If condition={isShowLabel(item)}>
 							<div className={s.label_name}>{item.Label}</div>

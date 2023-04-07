@@ -1,7 +1,6 @@
 import Avatar from '@components/common/avatar/Avatar'
 import { fromDateToNow } from '@utils/date/FromDateToNow'
 import CommentModel from '@api/common/models/comment/CommentModel'
-import { EnumAvatarSize } from '@models/enums/EnumAvatarSize'
 
 type PropsType = {
 	comment: CommentModel
@@ -11,7 +10,7 @@ const PostComment = (props: PropsType) => {
 	const { comment } = props
 	return (
 		<div className='flex items-center pt-4 first:pt-0'>
-			<Avatar src={comment.Author.Avatar} size={EnumAvatarSize.Medium} />
+			<Avatar src={comment.Author.Avatar} size='medium' />
 			<div className='ml-4'>
 				<div>
 					<span className='font-semibold'>{comment.Author?.Nickname} </span>
